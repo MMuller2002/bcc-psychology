@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 Psychology — Week 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2e4a;
+    --blue: #2563eb;
+    --blue-light: #dbeafe;
+    --green: #15803d;
+    --green-light: #dcfce7;
+    --orange: #c2410c;
+    --orange-light: #fff7ed;
+    --purple: #7c3aed;
+    --purple-light: #ede9fe;
+    --slate: #64748b;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #0f172a;
+    --muted: #94a3b8;
+    --border: #e2e8f0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    color: white;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(37,99,235,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(124,58,237,0.15) 0%, transparent 60%);
+  }
+  .hero-inner {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 32px 56px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .unit-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #93c5fd;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: #94a3b8;
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 540px;
+    margin-bottom: 24px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .meta-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #cbd5e1;
+  }
+  .meta-chip .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #60a5fa;
+  }
+  .hero-badge {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 20px 24px;
+    text-align: center;
+    min-width: 140px;
+  }
+  .hero-badge .num {
+    font-family: 'Syne', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: #60a5fa;
+    line-height: 1;
+  }
+  .hero-badge .lbl {
+    font-size: 12px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 4px;
+  }
+
+  /* ── BIG QUESTION BANNER ── */
+  .bq-banner {
+    background: linear-gradient(135deg, #1e3a5f 0%, #1a2e4a 100%);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+  }
+  .bq-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #60a5fa;
+    white-space: nowrap;
+  }
+  .bq-text {
+    font-size: 16px;
+    color: #e2e8f0;
+    font-style: italic;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 32px 0;
+  }
+  .progress-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .progress-track {
+    height: 8px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2563eb, #7c3aed);
+    border-radius: 99px;
+    width: 0%;
+    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .lesson-dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+  .lesson-dot {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+  }
+  .lesson-dot.active { border-color: var(--blue); color: var(--blue); }
+  .lesson-dot.done { background: var(--blue); border-color: var(--blue); color: white; }
+
+  /* ── MAIN LAYOUT ── */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 32px 80px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: sticky;
+    top: 24px;
+  }
+  .sidebar-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .sidebar-card-header {
+    padding: 14px 18px;
+    background: var(--navy);
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #94a3b8;
+  }
+  .lesson-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .lesson-nav-item:last-child { border-bottom: none; }
+  .lesson-nav-item:hover { background: #f8fafc; }
+  .lesson-nav-item.active { background: var(--blue-light); }
+  .nav-num {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .nav-l1 .nav-num { background: #dbeafe; color: #2563eb; }
+  .nav-l2 .nav-num { background: #dcfce7; color: #15803d; }
+  .nav-l3 .nav-num { background: #fff7ed; color: #c2410c; }
+  .nav-l1.active .nav-num { background: #2563eb; color: white; }
+  .nav-l2.active .nav-num { background: #15803d; color: white; }
+  .nav-l3.active .nav-num { background: #c2410c; color: white; }
+  .nav-text { flex: 1; }
+  .nav-text .t { font-size: 13px; font-weight: 500; line-height: 1.3; }
+  .nav-text .s { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .nav-check { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .nav-check.done { background: #22c55e; border-color: #22c55e; }
+
+  .vocab-list { padding: 14px 18px; }
+  .vocab-item { margin-bottom: 12px; }
+  .vocab-term { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.04em; }
+  .vocab-def { font-size: 12px; color: var(--slate); line-height: 1.5; margin-top: 2px; }
+
+  /* ── LESSON CONTENT PANELS ── */
+  .lesson-panels { position: relative; }
+  .lesson-panel { display: none; }
+  .lesson-panel.active { display: block; }
+
+  /* Lesson header */
+  .lesson-header {
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .l1-header { background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%); }
+  .l2-header { background: linear-gradient(135deg, #14532d 0%, #15803d 100%); }
+  .l3-header { background: linear-gradient(135deg, #7c2d12 0%, #c2410c 100%); }
+  .lesson-header::after {
+    content: attr(data-num);
+    position: absolute;
+    right: -10px;
+    top: -20px;
+    font-family: 'Syne', sans-serif;
+    font-size: 140px;
+    font-weight: 800;
+    opacity: 0.07;
+    color: white;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .lesson-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border-radius: 999px;
+    padding: 3px 12px;
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 10px;
+    font-family: 'Syne', sans-serif;
+  }
+  .lesson-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .lesson-goal {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    max-width: 580px;
+  }
+  .lesson-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .chip {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* ── PHASE CARDS ── */
+  .phases { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+  .phase-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .phase-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .phase-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .phase-icon {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .phase-meta { flex: 1; }
+  .phase-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; }
+  .phase-time { font-size: 12px; color: var(--slate); margin-top: 2px; }
+  .phase-toggle {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    transition: transform 0.25s;
+  }
+  .phase-card.open .phase-toggle { transform: rotate(180deg); }
+  .phase-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .phase-card.open .phase-body { display: block; }
+  .phase-body p { font-size: 14px; line-height: 1.7; color: #374151; margin-bottom: 10px; }
+  .phase-body strong { color: var(--text); }
+
+  .step-list { list-style: none; margin: 12px 0; }
+  .step-list li {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-num {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    background: var(--blue-light);
+    color: var(--blue);
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* activity box */
+  .activity-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 12px 0;
+  }
+  .activity-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* reflection textarea */
+  .reflect-box {
+    margin-top: 16px;
+  }
+  .reflect-label {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+  }
+  textarea {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 90px;
+    color: var(--text);
+    background: white;
+    transition: border-color 0.2s;
+  }
+  textarea:focus { outline: none; border-color: var(--blue); }
+
+  /* resource links */
+  .resource-links {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .resource-links h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .resource-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text);
+    margin-bottom: 8px;
+    transition: all 0.15s;
+  }
+  .resource-link:hover { background: var(--blue-light); border-color: var(--blue); }
+  .resource-link:last-child { margin-bottom: 0; }
+  .link-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .link-meta { flex: 1; }
+  .link-meta .lt { font-size: 13px; font-weight: 500; }
+  .link-meta .ls { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .link-arrow { font-size: 14px; color: var(--muted); }
+
+  /* complete button */
+  .complete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    background: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 16px;
+  }
+  .complete-btn:hover { background: var(--blue-light); border-color: var(--blue); color: var(--blue); }
+  .complete-btn.done { background: #f0fdf4; border-color: #22c55e; color: #15803d; }
+
+  /* ── COLOURS PER LESSON ── */
+  .l1 .phase-icon.hook { background: #dbeafe; }
+  .l1 .phase-icon.direct { background: #bfdbfe; }
+  .l1 .phase-icon.practice { background: #93c5fd; }
+  .l1 .phase-icon.discuss { background: #60a5fa; }
+  .l1 .phase-icon.exit { background: #2563eb; }
+  .l1 .phase-title { color: #1e40af; }
+
+  .l2 .phase-icon.hook { background: #dcfce7; }
+  .l2 .phase-icon.direct { background: #bbf7d0; }
+  .l2 .phase-icon.practice { background: #86efac; }
+  .l2 .phase-icon.discuss { background: #4ade80; }
+  .l2 .phase-icon.exit { background: #16a34a; }
+  .l2 .phase-title { color: #14532d; }
+
+  .l3 .phase-icon.hook { background: #fff7ed; }
+  .l3 .phase-icon.direct { background: #fed7aa; }
+  .l3 .phase-icon.practice { background: #fdba74; }
+  .l3 .phase-icon.discuss { background: #fb923c; }
+  .l3 .phase-icon.exit { background: #ea580c; }
+  .l3 .phase-title { color: #7c2d12; }
+
+  /* quiz */
+  .quiz-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .quiz-q { font-size: 15px; font-weight: 500; margin-bottom: 14px; }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-opt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 14px;
+  }
+  .quiz-opt:hover { background: var(--blue-light); border-color: #93c5fd; }
+  .quiz-opt.correct { background: #f0fdf4; border-color: #22c55e; color: #15803d; }
+  .quiz-opt.wrong { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
+  .quiz-opt input { accent-color: var(--blue); }
+  .quiz-feedback { font-size: 13px; margin-top: 10px; padding: 10px 14px; border-radius: 8px; display: none; }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.ok { background: #f0fdf4; color: #15803d; }
+  .quiz-feedback.err { background: #fef2f2; color: #991b1b; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .main { grid-template-columns: 1fr; }
+    .sidebar { position: static; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-badge { display: none; }
+  }
+
+  /* animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .lesson-panel.active { animation: fadeUp 0.3s ease; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="unit-tag">📚 Year 10 Psychology · Unit 2</div>
+      <h1>Individual Behaviour<br>Stress, Sleep & the Teenage Mind</h1>
+      <p class="hero-sub">Week 1 — Three lessons exploring why people act the way they do, what stress does to your body, and how we cope.</p>
+      <div class="hero-meta">
+        <span class="meta-chip"><span class="dot"></span> 3 Lessons · 70 min each</span>
+        <span class="meta-chip"><span class="dot" style="background:#a78bfa"></span> AC9S10H03 · AC9S10H04</span>
+        <span class="meta-chip"><span class="dot" style="background:#34d399"></span> Term 2 · Week 1</span>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <div class="num">3</div>
+      <div class="lbl">Lessons</div>
+    </div>
+  </div>
+  <div class="bq-banner">
+    <span class="bq-label">🔍 Big Question</span>
+    <span class="bq-text">Why do people behave the way they do — and how much of that is biology versus choice?</span>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-section">
+  <div class="progress-label">
+    <span>Week 1 Progress</span>
+    <span id="prog-pct">0% complete</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">Lessons</div>
+      <a class="lesson-nav-item nav-l1 active" onclick="switchLesson(1)" href="#">
+        <div class="nav-num">1</div>
+        <div class="nav-text">
+          <div class="t">Intro to Individual Behaviour</div>
+          <div class="s">Describe · 70 min</div>
+        </div>
+        <div class="nav-check" id="check-1"></div>
+      </a>
+      <a class="lesson-nav-item nav-l2" onclick="switchLesson(2)" href="#">
+        <div class="nav-num">2</div>
+        <div class="nav-text">
+          <div class="t">The Stress Response</div>
+          <div class="s">Explain · 70 min</div>
+        </div>
+        <div class="nav-check" id="check-2"></div>
+      </a>
+      <a class="lesson-nav-item nav-l3" onclick="switchLesson(3)" href="#">
+        <div class="nav-num">3</div>
+        <div class="nav-text">
+          <div class="t">Stress & Coping</div>
+          <div class="s">Analyse · 70 min</div>
+        </div>
+        <div class="nav-check" id="check-3"></div>
+      </a>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">Key Vocabulary</div>
+      <div class="vocab-list">
+        <div class="vocab-item">
+          <div class="vocab-term">Bio-Psycho-Social Model</div>
+          <div class="vocab-def">A framework explaining behaviour through biological, psychological, and social factors.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Fight-Flight-Freeze</div>
+          <div class="vocab-def">The body's automatic response to perceived threat — preparing to fight, run, or become still.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">HPA Axis</div>
+          <div class="vocab-def">Hypothalamus–Pituitary–Adrenal axis: the hormone pathway activated during stress.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Cortisol</div>
+          <div class="vocab-def">A stress hormone released by the adrenal cortex that regulates energy and immune response.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Adaptive Coping</div>
+          <div class="vocab-def">Strategies that help manage stress effectively without causing harm.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Maladaptive Coping</div>
+          <div class="vocab-def">Strategies that provide short-term relief but worsen wellbeing over time.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">Assessment Reminder</div>
+      <div class="vocab-list">
+        <p style="font-size:13px;color:#475569;line-height:1.6;">Your <strong>Research Investigation</strong> (podcast/webcast/seminar) is due <strong>Week 8</strong>. The questions and skills in Week 1 will directly help you design your investigation topic.</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- LESSON PANELS -->
+  <div class="lesson-panels">
+
+    <!-- ══════════════════ LESSON 1 ══════════════════ -->
+    <div class="lesson-panel l1 active" id="panel-1">
+
+      <div class="lesson-header l1-header" data-num="1">
+        <div class="lesson-tag">Lesson 1 · AC9S10H03</div>
+        <h2>Introduction to Individual Behaviour</h2>
+        <p class="lesson-goal">By the end of this lesson, you'll be able to <strong>describe</strong> biological, psychological, and social influences on individual behaviour — and explain why it's rarely just one thing.</p>
+        <div class="lesson-chips">
+          <span class="chip">⏱ 70 minutes</span>
+          <span class="chip">🎯 Describe</span>
+          <span class="chip">👥 Pairs + Class</span>
+        </div>
+      </div>
+
+      <div class="phases l1">
+
+        <div class="phase-card open">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon hook">🎲</div>
+            <div class="phase-meta">
+              <div class="phase-title">Hook — Behaviour Bingo</div>
+              <div class="phase-time">0–10 min · Whole class</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>Your teacher will display <strong>nine behaviour scenarios</strong> on the board — things like 'a student freezes during an exam' or 'a teenager eats junk food at midnight'. Your job is to match each one to a cause on your bingo card.</p>
+            <div class="activity-box">
+              <div class="activity-label" style="color:#2563eb">🎯 Your Bingo Card Causes</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px">
+                <div style="background:#dbeafe;padding:10px;border-radius:8px;text-align:center;font-size:13px;font-weight:500">Genetics</div>
+                <div style="background:#dbeafe;padding:10px;border-radius:8px;text-align:center;font-size:13px;font-weight:500">Hormones</div>
+                <div style="background:#dbeafe;padding:10px;border-radius:8px;text-align:center;font-size:13px;font-weight:500">Brain chemistry</div>
+                <div style="background:#dbeafe;padding:10px;border-radius:8px;text-align:center;font-size:13px;font-weight:500">Fear</div>
+                <div style="background:#dbeafe;padding:10px;border-radius:8px;text-align:center;font-size:13px;font-weight:500">Habit</div>
+                <div style="background:#dbeafe;padding:10px;border-radius:8px;text-align:center;font-size:13px;font-weight:500">Social pressure</div>
+                <div style="background:#dbeafe;padding:10px;border-radius:8px;text-align:center;font-size:13px;font-weight:500">Culture</div>
+                <div style="background:#dbeafe;padding:10px;border-radius:8px;text-align:center;font-size:13px;font-weight:500">Upbringing</div>
+                <div style="background:#dbeafe;padding:10px;border-radius:8px;text-align:center;font-size:13px;font-weight:500">Mood</div>
+              </div>
+            </div>
+            <div class="reflect-box">
+              <label class="reflect-label">💬 Quick reflection: Was there a scenario that could fit multiple squares? Which one, and why?</label>
+              <textarea placeholder="Type your thoughts here..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon direct">📖</div>
+            <div class="phase-meta">
+              <div class="phase-title">Direct Instruction — The Bio-Psycho-Social Model</div>
+              <div class="phase-time">10–25 min · Notes</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>Your teacher will build a diagram on the board. Take notes as each circle is filled in. The key insight: <strong>most real behaviour sits in the overlap.</strong></p>
+            <div class="activity-box">
+              <div class="activity-label" style="color:#1e40af">📝 Three Lenses for Understanding Behaviour</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px">
+                <div style="border:2px solid #2563eb;border-radius:10px;padding:14px">
+                  <div style="font-family:Syne,sans-serif;font-weight:700;color:#2563eb;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px">🧬 Biological</div>
+                  <ul style="font-size:13px;color:#374151;padding-left:16px;line-height:1.8">
+                    <li>Brain structure</li>
+                    <li>Genetics & DNA</li>
+                    <li>Hormones</li>
+                    <li>Nervous system</li>
+                  </ul>
+                </div>
+                <div style="border:2px solid #15803d;border-radius:10px;padding:14px">
+                  <div style="font-family:Syne,sans-serif;font-weight:700;color:#15803d;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px">🧠 Psychological</div>
+                  <ul style="font-size:13px;color:#374151;padding-left:16px;line-height:1.8">
+                    <li>Thoughts & emotions</li>
+                    <li>Learning history</li>
+                    <li>Personality</li>
+                    <li>Mental health</li>
+                  </ul>
+                </div>
+                <div style="border:2px solid #c2410c;border-radius:10px;padding:14px">
+                  <div style="font-family:Syne,sans-serif;font-weight:700;color:#c2410c;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px">🌍 Social/Cultural</div>
+                  <ul style="font-size:13px;color:#374151;padding-left:16px;line-height:1.8">
+                    <li>Family & peers</li>
+                    <li>Media & culture</li>
+                    <li>Socioeconomic context</li>
+                    <li>Social norms</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="reflect-box">
+              <label class="reflect-label">📝 Add your own example: Name a behaviour that involves all three factors, and briefly explain how.</label>
+              <textarea placeholder="e.g. Eating disorders involve biological vulnerability, psychological thought patterns, and social media pressure..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon practice">🔬</div>
+            <div class="phase-meta">
+              <div class="phase-title">Guided Practice — Case Study Analysis</div>
+              <div class="phase-time">25–45 min · Pairs</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>Work in pairs using <strong>Resource Sheet 1</strong>. Read each case study and sort evidence into the three categories using the T-chart.</p>
+            <div style="display:flex;flex-direction:column;gap:10px;margin:12px 0">
+              <div style="background:#eff6ff;border-left:4px solid #2563eb;padding:14px;border-radius:0 10px 10px 0">
+                <strong style="font-size:13px;color:#1e40af">Case A: Maya, 16</strong>
+                <p style="font-size:13px;color:#374151;margin-top:6px;line-height:1.6">Has been top of her class her whole life. Since starting Year 10, she's been unable to sleep before any test. On exam day, her mind goes blank even when she knows the material.</p>
+              </div>
+              <div style="background:#f0fdf4;border-left:4px solid #15803d;padding:14px;border-radius:0 10px 10px 0">
+                <strong style="font-size:13px;color:#14532d">Case B: Luca, 15</strong>
+                <p style="font-size:13px;color:#374151;margin-top:6px;line-height:1.6">Moved from a country town to the city last year. Now snaps at classmates, refuses group work, and has had three detentions. His parents separated two months ago.</p>
+              </div>
+              <div style="background:#fff7ed;border-left:4px solid #c2410c;padding:14px;border-radius:0 10px 10px 0">
+                <strong style="font-size:13px;color:#7c2d12">Case C: Zara, 17</strong>
+                <p style="font-size:13px;color:#374151;margin-top:6px;line-height:1.6">Sleeping 12+ hours a day. Stopped attending netball. Eating less. Says she feels 'nothing'. Has cancelled plans with friends four weekends in a row.</p>
+              </div>
+            </div>
+            <p>For each case, complete the T-chart on your resource sheet, then write one sentence using: <em>"This behaviour can be described as influenced by ________ because ________."</em></p>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon discuss">💬</div>
+            <div class="phase-meta">
+              <div class="phase-title">Discussion — Nature vs Nurture Spectrum</div>
+              <div class="phase-time">45–58 min · Class</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>Your teacher will draw a line on the board: <strong>Biology ←→ Environment</strong>. You'll place sticky notes on where two behaviours sit on this spectrum and explain your reasoning.</p>
+            <div class="activity-box">
+              <div class="activity-label" style="color:#7c3aed">🤔 Thinking Prompts</div>
+              <ul class="step-list">
+                <li><span class="step-num">1</span><span>A person is shy and avoids social situations — where does this sit? Why?</span></li>
+                <li><span class="step-num">2</span><span>An adolescent takes up smoking because their friends do — where does this sit? Why?</span></li>
+              </ul>
+            </div>
+            <div class="reflect-box">
+              <label class="reflect-label">🔗 Connection: How does this link to AC9S10H03? (How do scientific findings about behaviour get adopted by society?)</label>
+              <textarea placeholder="Think about: how does the media explain behaviour? Who benefits from biological explanations vs psychological ones?"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon exit">✅</div>
+            <div class="phase-meta">
+              <div class="phase-title">Exit — 3-2-1 Reflection</div>
+              <div class="phase-time">58–70 min · Individual</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>Complete the 3-2-1 exit reflection on your resource sheet, or type your answers below:</p>
+            <div class="reflect-box">
+              <label class="reflect-label">3️⃣ Three factors that influence individual behaviour (at least one from each category):</label>
+              <textarea placeholder="Biological: ...   Psychological: ...   Social: ..."></textarea>
+            </div>
+            <div class="reflect-box">
+              <label class="reflect-label">2️⃣ Two things you noticed about how society labels or judges behaviour:</label>
+              <textarea placeholder="1. ...   2. ..."></textarea>
+            </div>
+            <div class="reflect-box">
+              <label class="reflect-label">1️⃣ One question you still have:</label>
+              <textarea placeholder="I'm still wondering..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resources -->
+      <div class="resource-links">
+        <h3>📚 Lesson Resources</h3>
+        <a class="resource-link" href="https://www.khanacademy.org/science/health-and-medicine" target="_blank">
+          <div class="link-icon" style="background:#fff3e0">🎥</div>
+          <div class="link-meta"><div class="lt">Khan Academy — Human Biology & Behaviour</div><div class="ls">Video overview of biological influences · khanacademy.org</div></div>
+          <span class="link-arrow">↗</span>
+        </a>
+        <a class="resource-link" href="https://www.apa.org/topics/brain-and-behavior" target="_blank">
+          <div class="link-icon" style="background:#e8f5e9">📰</div>
+          <div class="link-meta"><div class="lt">APA — Brain and Behaviour</div><div class="ls">American Psychological Association overview · apa.org</div></div>
+          <span class="link-arrow">↗</span>
+        </a>
+        <a class="resource-link" href="https://www.qcaa.qld.edu.au/p-10/aciq/version-9/cognitive-verbs-in-version-9.0/cognitive-verb-resources" target="_blank">
+          <div class="link-icon" style="background:#e3f2fd">📋</div>
+          <div class="link-meta"><div class="lt">QCAA — What does 'Describe' mean?</div><div class="ls">Cognitive verb guide for AC v9 · qcaa.qld.edu.au</div></div>
+          <span class="link-arrow">↗</span>
+        </a>
+      </div>
+
+      <button class="complete-btn" id="btn-1" onclick="markDone(1)">Mark Lesson 1 Complete ✓</button>
+    </div>
+
+    <!-- ══════════════════ LESSON 2 ══════════════════ -->
+    <div class="lesson-panel l2" id="panel-2">
+
+      <div class="lesson-header l2-header" data-num="2">
+        <div class="lesson-tag">Lesson 2 · AC9S10H03</div>
+        <h2>The Stress Response<br>Your Body on High Alert</h2>
+        <p class="lesson-goal">By the end of this lesson, you'll be able to <strong>explain</strong> the fight-flight-freeze response, name the key stress hormones, and trace the HPA axis pathway from stressor to body reaction.</p>
+        <div class="lesson-chips">
+          <span class="chip">⏱ 70 minutes</span>
+          <span class="chip">🎯 Explain</span>
+          <span class="chip">🖊 Body Mapping</span>
+        </div>
+      </div>
+
+      <div class="phases l2">
+
+        <div class="phase-card open">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon hook">⚡</div>
+            <div class="phase-meta">
+              <div class="phase-title">Hook — Freeze Frame Experience</div>
+              <div class="phase-time">0–10 min · Whole class</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>Your teacher gave you 45 seconds to list capital cities. Now reflect on what your body actually did during that moment:</p>
+            <div class="activity-box">
+              <div class="activity-label" style="color:#15803d">🫀 Body Check-In</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px;background:#f0fdf4;border-radius:8px"><input type="checkbox"> My heart rate increased</label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px;background:#f0fdf4;border-radius:8px"><input type="checkbox"> My palms felt sweaty</label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px;background:#f0fdf4;border-radius:8px"><input type="checkbox"> My mind went blank</label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px;background:#f0fdf4;border-radius:8px"><input type="checkbox"> I felt a burst of energy</label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px;background:#f0fdf4;border-radius:8px"><input type="checkbox"> I felt my breath change</label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px;background:#f0fdf4;border-radius:8px"><input type="checkbox"> I felt tense or tight</label>
+              </div>
+            </div>
+            <p style="margin-top:12px">You just experienced a mild <strong>stress response</strong>. Today's lesson explains exactly what your body just did — and why.</p>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon direct">🔬</div>
+            <div class="phase-meta">
+              <div class="phase-title">Direct Instruction — HPA Axis & Hormones</div>
+              <div class="phase-time">10–28 min · Notes</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>The stress response involves two pathways — one <strong>fast</strong> (seconds) and one <strong>slower</strong> (minutes). Both start in the brain.</p>
+            <div class="activity-box">
+              <div class="activity-label" style="color:#15803d">🧪 The Two Pathways</div>
+              <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+                <div style="background:#dcfce7;padding:12px;border-radius:8px;border-left:4px solid #15803d">
+                  <strong style="font-size:13px;color:#14532d">⚡ FAST PATH (seconds): Sympathetic Nervous System</strong>
+                  <p style="font-size:13px;margin-top:6px;color:#374151">Stressor → Amygdala → Hypothalamus → Adrenal medulla → <strong>Adrenaline + Noradrenaline</strong></p>
+                  <p style="font-size:12px;color:#16a34a;margin-top:4px">Effects: ↑ heart rate, ↑ breathing, ↑ blood pressure, dilated pupils, muscle blood flow</p>
+                </div>
+                <div style="background:#bbf7d0;padding:12px;border-radius:8px;border-left:4px solid #16a34a">
+                  <strong style="font-size:13px;color:#14532d">🐢 SLOW PATH (minutes): HPA Axis</strong>
+                  <p style="font-size:13px;margin-top:6px;color:#374151">Hypothalamus → Pituitary gland → Adrenal cortex → <strong>Cortisol</strong></p>
+                  <p style="font-size:12px;color:#16a34a;margin-top:4px">Effects: releases glucose, suppresses immune system (short term), impairs memory under chronic stress</p>
+                </div>
+              </div>
+            </div>
+            <div class="activity-box" style="margin-top:12px">
+              <div class="activity-label" style="color:#7c2d12">🧊 Don't Forget: The FREEZE Response</div>
+              <p style="font-size:13px;color:#374151;line-height:1.6;margin-top:4px">The freeze response is high adrenaline combined with motor system shutdown — like a 'play dead' reflex. This is why people freeze during exams, panic attacks, or traumatic experiences. <strong>Your brain cannot tell the difference between a lion and an exam.</strong></p>
+            </div>
+            <div class="reflect-box">
+              <label class="reflect-label">📝 In your own words: What is the difference between the fast and slow stress pathways?</label>
+              <textarea placeholder="The fast pathway uses... while the slow pathway (HPA axis) uses..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon practice">🎨</div>
+            <div class="phase-meta">
+              <div class="phase-title">Guided Practice — Body Mapping Activity</div>
+              <div class="phase-time">28–48 min · Individual then pairs</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>Using <strong>Resource Sheet 2</strong>, annotate the body outline with coloured pens:</p>
+            <ul class="step-list">
+              <li><span class="step-num" style="background:#fee2e2;color:#dc2626">🔴</span><span><strong>RED:</strong> Adrenaline effects — heart, lungs, blood vessels, pupils, skin</span></li>
+              <li><span class="step-num" style="background:#fed7aa;color:#c2410c">🟠</span><span><strong>ORANGE:</strong> Cortisol effects — blood glucose, immune cells, hippocampus</span></li>
+              <li><span class="step-num" style="background:#dbeafe;color:#2563eb">🔵</span><span><strong>BLUE:</strong> Draw the HPA axis nerve pathway from brain → adrenal glands</span></li>
+            </ul>
+            <p style="margin-top:12px">Then complete the <strong>Stress Response Flowchart</strong> on the back of the sheet — from 'Stressor' to 'Body Response', labelling each step.</p>
+            <div class="reflect-box">
+              <label class="reflect-label">💡 Pair check: Compare your diagram with a partner. What did they include that you missed?</label>
+              <textarea placeholder="My partner included... which I had missed because..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon discuss">⚖️</div>
+            <div class="phase-meta">
+              <div class="phase-title">Application — Adaptive or Harmful?</div>
+              <div class="phase-time">48–60 min · Class discussion</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>For each scenario, decide: is this stress response <strong>adaptive</strong> (helpful) or <strong>maladaptive</strong> (harmful)?</p>
+            <div id="scenarios" style="display:flex;flex-direction:column;gap:10px;margin:12px 0">
+              <div class="scenario-card" style="padding:14px;border:1.5px solid #e2e8f0;border-radius:10px">
+                <p style="font-size:13px;margin-bottom:10px"><strong>1.</strong> Mia's heart is pounding before an exam — she feels hyper-alert</p>
+                <div style="display:flex;gap:8px">
+                  <button onclick="pickScenario(this,'adaptive')" style="flex:1;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;background:#f8fafc;cursor:pointer;font-size:13px">✅ Adaptive</button>
+                  <button onclick="pickScenario(this,'maladaptive')" style="flex:1;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;background:#f8fafc;cursor:pointer;font-size:13px">❌ Maladaptive</button>
+                </div>
+              </div>
+              <div class="scenario-card" style="padding:14px;border:1.5px solid #e2e8f0;border-radius:10px">
+                <p style="font-size:13px;margin-bottom:10px"><strong>2.</strong> Daniel hasn't slept in 2 days — cortisol has suppressed his immune system</p>
+                <div style="display:flex;gap:8px">
+                  <button onclick="pickScenario(this,'adaptive')" style="flex:1;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;background:#f8fafc;cursor:pointer;font-size:13px">✅ Adaptive</button>
+                  <button onclick="pickScenario(this,'maladaptive')" style="flex:1;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;background:#f8fafc;cursor:pointer;font-size:13px">❌ Maladaptive</button>
+                </div>
+              </div>
+              <div class="scenario-card" style="padding:14px;border:1.5px solid #e2e8f0;border-radius:10px">
+                <p style="font-size:13px;margin-bottom:10px"><strong>3.</strong> Priya freezes and can't speak when called on unexpectedly in class</p>
+                <div style="display:flex;gap:8px">
+                  <button onclick="pickScenario(this,'adaptive')" style="flex:1;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;background:#f8fafc;cursor:pointer;font-size:13px">✅ Adaptive</button>
+                  <button onclick="pickScenario(this,'maladaptive')" style="flex:1;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;background:#f8fafc;cursor:pointer;font-size:13px">❌ Maladaptive</button>
+                </div>
+              </div>
+              <div class="scenario-card" style="padding:14px;border:1.5px solid #e2e8f0;border-radius:10px">
+                <p style="font-size:13px;margin-bottom:10px"><strong>4.</strong> Sam's body floods with adrenaline when a car swerves at them on their bike</p>
+                <div style="display:flex;gap:8px">
+                  <button onclick="pickScenario(this,'adaptive')" style="flex:1;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;background:#f8fafc;cursor:pointer;font-size:13px">✅ Adaptive</button>
+                  <button onclick="pickScenario(this,'maladaptive')" style="flex:1;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;background:#f8fafc;cursor:pointer;font-size:13px">❌ Maladaptive</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon exit">🧪</div>
+            <div class="phase-meta">
+              <div class="phase-title">Exit — Quick-Fire Knowledge Check</div>
+              <div class="phase-time">60–70 min · Individual</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>Answer these from memory:</p>
+            <div class="quiz-card">
+              <div class="quiz-q">Q1: Which THREE hormones are released in the stress response?</div>
+              <div class="quiz-options">
+                <label class="quiz-opt"><input type="radio" name="q1" value="a"> Insulin, Oestrogen, Dopamine</label>
+                <label class="quiz-opt"><input type="radio" name="q1" value="b"> Adrenaline, Noradrenaline, Cortisol</label>
+                <label class="quiz-opt"><input type="radio" name="q1" value="c"> Serotonin, Melatonin, Cortisol</label>
+              </div>
+              <button onclick="checkQ(this,'b','Correct! Adrenaline and noradrenaline are released fast (seconds), while cortisol follows via the HPA axis (minutes).')" style="margin-top:10px;padding:8px 16px;background:var(--blue);color:white;border:none;border-radius:8px;cursor:pointer;font-size:13px">Check Answer</button>
+              <div class="quiz-feedback"></div>
+            </div>
+            <div class="quiz-card">
+              <div class="quiz-q">Q2: What does HPA stand for?</div>
+              <div class="quiz-options">
+                <label class="quiz-opt"><input type="radio" name="q2" value="a"> Hippocampus-Prefrontal-Amygdala</label>
+                <label class="quiz-opt"><input type="radio" name="q2" value="b"> Hypothalamus-Pituitary-Adrenal</label>
+                <label class="quiz-opt"><input type="radio" name="q2" value="c"> Heart-Pressure-Adrenaline</label>
+              </div>
+              <button onclick="checkQ(this,'b','Correct! The HPA axis: Hypothalamus signals the Pituitary, which signals the Adrenal cortex to release cortisol.')" style="margin-top:10px;padding:8px 16px;background:var(--green);color:white;border:none;border-radius:8px;cursor:pointer;font-size:13px">Check Answer</button>
+              <div class="quiz-feedback"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resource-links">
+        <h3>📚 Lesson Resources</h3>
+        <a class="resource-link" href="https://headspace.com.au/young-people/understanding-anxiety-for-young-people/" target="_blank">
+          <div class="link-icon" style="background:#f0fdf4">💚</div>
+          <div class="link-meta"><div class="lt">headspace — Understanding Anxiety & Stress</div><div class="ls">Designed for young Australians · headspace.com.au</div></div>
+          <span class="link-arrow">↗</span>
+        </a>
+        <a class="resource-link" href="https://www.khanacademy.org/test-prep/mcat/behavior/motivation-emotion-and-stress/a/stress" target="_blank">
+          <div class="link-icon" style="background:#fff3e0">🎥</div>
+          <div class="link-meta"><div class="lt">Khan Academy — The Stress Response</div><div class="ls">MCAT-level stress biology overview · khanacademy.org</div></div>
+          <span class="link-arrow">↗</span>
+        </a>
+        <a class="resource-link" href="https://www.bbc.co.uk/bitesize/guides/zqpfcj6/revision/1" target="_blank">
+          <div class="link-icon" style="background:#e8f5e9">📰</div>
+          <div class="link-meta"><div class="lt">BBC Bitesize — Fight or Flight Explained</div><div class="ls">Clear visual explainer · bbc.co.uk</div></div>
+          <span class="link-arrow">↗</span>
+        </a>
+      </div>
+
+      <button class="complete-btn" id="btn-2" onclick="markDone(2)">Mark Lesson 2 Complete ✓</button>
+    </div>
+
+    <!-- ══════════════════ LESSON 3 ══════════════════ -->
+    <div class="lesson-panel l3" id="panel-3">
+
+      <div class="lesson-header l3-header" data-num="3">
+        <div class="lesson-tag">Lesson 3 · AC9S10H04</div>
+        <h2>Stress & Coping<br>What Do We Actually Do?</h2>
+        <p class="lesson-goal">By the end of this lesson, you'll be able to <strong>analyse</strong> adaptive and maladaptive coping strategies and examine how societal values shape which strategies get researched and promoted.</p>
+        <div class="lesson-chips">
+          <span class="chip">⏱ 70 minutes</span>
+          <span class="chip">🎯 Analyse</span>
+          <span class="chip">✍️ TEEL Paragraph</span>
+        </div>
+      </div>
+
+      <div class="phases l3">
+
+        <div class="phase-card open">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon hook">🎭</div>
+            <div class="phase-meta">
+              <div class="phase-title">Hook — What Do You Actually Do?</div>
+              <div class="phase-time">0–10 min · Anonymous</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>Your teacher will collect anonymous responses and read them aloud. After hearing the class results, sort the strategies into two columns:</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0">
+              <div>
+                <div style="background:#dcfce7;padding:10px;border-radius:8px 8px 0 0;font-family:Syne,sans-serif;font-size:12px;font-weight:700;color:#15803d;text-transform:uppercase;letter-spacing:0.06em">✅ Approach Strategies</div>
+                <div style="border:1.5px solid #bbf7d0;border-radius:0 0 8px 8px;padding:10px;min-height:80px">
+                  <textarea style="border:none;background:transparent;resize:none;width:100%;min-height:70px;font-size:13px" placeholder="List class examples here..."></textarea>
+                </div>
+              </div>
+              <div>
+                <div style="background:#fff7ed;padding:10px;border-radius:8px 8px 0 0;font-family:Syne,sans-serif;font-size:12px;font-weight:700;color:#c2410c;text-transform:uppercase;letter-spacing:0.06em">❌ Avoidance Strategies</div>
+                <div style="border:1.5px solid #fed7aa;border-radius:0 0 8px 8px;padding:10px;min-height:80px">
+                  <textarea style="border:none;background:transparent;resize:none;width:100%;min-height:70px;font-size:13px" placeholder="List class examples here..."></textarea>
+                </div>
+              </div>
+            </div>
+            <p style="font-size:13px;color:#374151;font-style:italic">Key question to think about: Who decides which of these is healthy — and is that always accurate?</p>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon direct">📖</div>
+            <div class="phase-meta">
+              <div class="phase-title">Direct Instruction — Types of Coping</div>
+              <div class="phase-time">10–25 min · Notes</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>There are three main categories of coping. The same strategy can be adaptive <em>or</em> maladaptive depending on context.</p>
+            <div style="display:flex;flex-direction:column;gap:10px;margin:12px 0">
+              <div style="padding:14px;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px">
+                <strong style="color:#c2410c;font-size:13px">1️⃣ PROBLEM-FOCUSED COPING</strong>
+                <p style="font-size:13px;margin-top:6px;color:#374151;line-height:1.6">Directly addresses the stressor itself. Examples: making a study plan, seeking information, assertiveness, time management.</p>
+              </div>
+              <div style="padding:14px;background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:10px">
+                <strong style="color:#1e40af;font-size:13px">2️⃣ EMOTION-FOCUSED COPING</strong>
+                <p style="font-size:13px;margin-top:6px;color:#374151;line-height:1.6"><strong>Adaptive:</strong> exercise, mindfulness, journaling, social support, creative expression.<br><strong>Maladaptive:</strong> substance use, avoidance, rumination, aggression.</p>
+              </div>
+              <div style="padding:14px;background:#f5f3ff;border:1.5px solid #ddd6fe;border-radius:10px">
+                <strong style="color:#5b21b6;font-size:13px">3️⃣ MEANING-FOCUSED COPING</strong>
+                <p style="font-size:13px;margin-top:6px;color:#374151;line-height:1.6">Finding purpose or reframing the stressor. Examples: faith/prayer, gratitude, post-traumatic growth, community connection.</p>
+              </div>
+            </div>
+            <div class="activity-box">
+              <div class="activity-label" style="color:#c2410c">🔗 AC9S10H04 Connection</div>
+              <p style="font-size:13px;color:#374151;line-height:1.6;margin-top:4px">Why do mindfulness and CBT get more research funding than prayer or community rituals? What does this reveal about whose values shape scientific research priorities?</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon practice">📊</div>
+            <div class="phase-meta">
+              <div class="phase-title">Guided Practice — Coping Strategy Analysis Grid</div>
+              <div class="phase-time">25–45 min · Individual then groups</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>Use <strong>Resource Sheet 3</strong> to analyse 10 coping strategies across four columns. Remember: your job is to <strong>explain</strong> your reasoning, not just label.</p>
+            <div class="activity-box">
+              <div class="activity-label" style="color:#c2410c">📋 The 10 Strategies to Analyse</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px">
+                <div style="font-size:13px;padding:6px 10px;background:#fff7ed;border-radius:6px">1. Mindfulness meditation</div>
+                <div style="font-size:13px;padding:6px 10px;background:#fff7ed;border-radius:6px">2. Social media scrolling</div>
+                <div style="font-size:13px;padding:6px 10px;background:#fff7ed;border-radius:6px">3. Exercise</div>
+                <div style="font-size:13px;padding:6px 10px;background:#fff7ed;border-radius:6px">4. Alcohol / drug use</div>
+                <div style="font-size:13px;padding:6px 10px;background:#fff7ed;border-radius:6px">5. Prayer / spiritual practice</div>
+                <div style="font-size:13px;padding:6px 10px;background:#fff7ed;border-radius:6px">6. Avoidance / ignoring</div>
+                <div style="font-size:13px;padding:6px 10px;background:#fff7ed;border-radius:6px">7. Journaling</div>
+                <div style="font-size:13px;padding:6px 10px;background:#fff7ed;border-radius:6px">8. Seeking professional help</div>
+                <div style="font-size:13px;padding:6px 10px;background:#fff7ed;border-radius:6px">9. Talking to a friend</div>
+                <div style="font-size:13px;padding:6px 10px;background:#fff7ed;border-radius:6px">10. Extended sleep / napping</div>
+              </div>
+            </div>
+            <div class="reflect-box">
+              <label class="reflect-label">💬 Group share: Which strategy did your group disagree most about? Why?</label>
+              <textarea placeholder="We disagreed about... because..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon discuss">🏛️</div>
+            <div class="phase-meta">
+              <div class="phase-title">Critical Thinking — Wall of Wisdom</div>
+              <div class="phase-time">45–58 min · Sticky notes</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>Your teacher will share three research facts. For each one, write your response on your sticky note or below:</p>
+            <div style="display:flex;flex-direction:column;gap:12px;margin:12px 0">
+              <div style="background:#fef3c7;border:1.5px solid #fbbf24;border-radius:10px;padding:14px">
+                <div style="font-family:Syne,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#92400e;margin-bottom:6px">Fact 1</div>
+                <p style="font-size:13px;color:#78350f">Most early stress research was conducted on male rats and male human participants.</p>
+                <div class="reflect-box" style="margin-top:8px">
+                  <textarea style="min-height:60px" placeholder="This matters because... / This could be fixed by..."></textarea>
+                </div>
+              </div>
+              <div style="background:#fef3c7;border:1.5px solid #fbbf24;border-radius:10px;padding:14px">
+                <div style="font-family:Syne,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#92400e;margin-bottom:6px">Fact 2</div>
+                <p style="font-size:13px;color:#78350f">The 'tend and befriend' stress response was only formally described in 2000 — adding female-typical responses to the fight-flight-freeze model.</p>
+                <div class="reflect-box" style="margin-top:8px">
+                  <textarea style="min-height:60px" placeholder="This matters because... / This could be fixed by..."></textarea>
+                </div>
+              </div>
+              <div style="background:#fef3c7;border:1.5px solid #fbbf24;border-radius:10px;padding:14px">
+                <div style="font-family:Syne,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#92400e;margin-bottom:6px">Fact 3</div>
+                <p style="font-size:13px;color:#78350f">Indigenous and culturally-specific coping strategies (e.g. connection to Country) are rarely included in mainstream stress research.</p>
+                <div class="reflect-box" style="margin-top:8px">
+                  <textarea style="min-height:60px" placeholder="This matters because... / This could be fixed by..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-card-header" onclick="togglePhase(this)">
+            <div class="phase-icon exit">✍️</div>
+            <div class="phase-meta">
+              <div class="phase-title">Exit — TEEL Paragraph</div>
+              <div class="phase-time">58–70 min · Individual writing</div>
+            </div>
+            <div class="phase-toggle">▼</div>
+          </div>
+          <div class="phase-body">
+            <p>Write a structured paragraph using <strong>TEEL</strong>. Choose one coping strategy from your grid as your evidence:</p>
+            <div style="display:flex;flex-direction:column;gap:2px;margin:12px 0">
+              <div style="display:flex;gap:0;align-items:stretch">
+                <div style="background:#2563eb;color:white;width:36px;display:flex;align-items:center;justify-content:center;font-family:Syne,sans-serif;font-weight:800;font-size:18px;border-radius:8px 0 0 0;flex-shrink:0">T</div>
+                <div style="background:#dbeafe;padding:10px 14px;flex:1;font-size:13px;border-radius:0 8px 0 0">
+                  <strong>Topic:</strong> Start with <em>"Coping strategies can be categorised as adaptive or maladaptive depending on..."</em>
+                  <textarea style="margin-top:6px;min-height:60px;background:white" placeholder="Write your topic sentence..."></textarea>
+                </div>
+              </div>
+              <div style="display:flex;gap:0;align-items:stretch">
+                <div style="background:#15803d;color:white;width:36px;display:flex;align-items:center;justify-content:center;font-family:Syne,sans-serif;font-weight:800;font-size:18px;flex-shrink:0">E</div>
+                <div style="background:#dcfce7;padding:10px 14px;flex:1;font-size:13px">
+                  <strong>Evidence:</strong> <em>"For example, research on __________ shows that..."</em>
+                  <textarea style="margin-top:6px;min-height:70px;background:white" placeholder="Choose a strategy from your grid..."></textarea>
+                </div>
+              </div>
+              <div style="display:flex;gap:0;align-items:stretch">
+                <div style="background:#c2410c;color:white;width:36px;display:flex;align-items:center;justify-content:center;font-family:Syne,sans-serif;font-weight:800;font-size:18px;flex-shrink:0">E</div>
+                <div style="background:#fff7ed;padding:10px 14px;flex:1;font-size:13px">
+                  <strong>Explanation:</strong> <em>"This is effective/ineffective because..."</em>
+                  <textarea style="margin-top:6px;min-height:70px;background:white" placeholder="Explain why, using psychological concepts..."></textarea>
+                </div>
+              </div>
+              <div style="display:flex;gap:0;align-items:stretch">
+                <div style="background:#1a2e4a;color:white;width:36px;display:flex;align-items:center;justify-content:center;font-family:Syne,sans-serif;font-weight:800;font-size:18px;border-radius:0 0 0 8px;flex-shrink:0">L</div>
+                <div style="background:#f1f5f9;padding:10px 14px;flex:1;font-size:13px;border-radius:0 0 8px 0">
+                  <strong>Link:</strong> <em>"This illustrates how societal values shape which strategies are researched because..."</em>
+                  <textarea style="margin-top:6px;min-height:60px;background:white" placeholder="Connect back to AC9S10H04..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resource-links">
+        <h3>📚 Lesson Resources</h3>
+        <a class="resource-link" href="https://headspace.com.au/young-people/coping-with-stress/" target="_blank">
+          <div class="link-icon" style="background:#f0fdf4">💚</div>
+          <div class="link-meta"><div class="lt">headspace — Coping with Stress</div><div class="ls">Australian youth mental health resource · headspace.com.au</div></div>
+          <span class="link-arrow">↗</span>
+        </a>
+        <a class="resource-link" href="https://www.apa.org/topics/stress" target="_blank">
+          <div class="link-icon" style="background:#e8f5e9">📰</div>
+          <div class="link-meta"><div class="lt">APA — Stress & Coping Research</div><div class="ls">Research overviews and fact sheets · apa.org</div></div>
+          <span class="link-arrow">↗</span>
+        </a>
+        <a class="resource-link" href="https://www.beyondblue.org.au/mental-health/anxiety/treatments-for-anxiety/psychological-treatments" target="_blank">
+          <div class="link-icon" style="background:#e3f2fd">💙</div>
+          <div class="link-meta"><div class="lt">Beyond Blue — Evidence-based treatments</div><div class="ls">Australian context · beyondblue.org.au</div></div>
+          <span class="link-arrow">↗</span>
+        </a>
+        <a class="resource-link" href="https://www.qcaa.qld.edu.au/p-10/aciq/version-9/cognitive-verbs-in-version-9.0/cognitive-verb-resources" target="_blank">
+          <div class="link-icon" style="background:#fef3c7">📋</div>
+          <div class="link-meta"><div class="lt">QCAA — What does 'Analyse' mean?</div><div class="ls">AC v9 cognitive verb resources · qcaa.qld.edu.au</div></div>
+          <span class="link-arrow">↗</span>
+        </a>
+      </div>
+
+      <button class="complete-btn" id="btn-3" onclick="markDone(3)">Mark Lesson 3 Complete ✓</button>
+    </div>
+
+  </div><!-- /lesson-panels -->
+</div><!-- /main -->
+
+<script>
+let done = {1: false, 2: false, 3: false};
+let activeLesson = 1;
+
+function switchLesson(n) {
+  event && event.preventDefault();
+  document.querySelectorAll('.lesson-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.lesson-nav-item').forEach(i => i.classList.remove('active'));
+  document.getElementById('panel-' + n).classList.add('active');
+  document.querySelectorAll('.lesson-nav-item')[n-1].classList.add('active');
+  activeLesson = n;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function togglePhase(header) {
+  const card = header.closest('.phase-card');
+  card.classList.toggle('open');
+}
+
+function markDone(n) {
+  done[n] = true;
+  const btn = document.getElementById('btn-' + n);
+  btn.textContent = '✅ Lesson ' + n + ' Complete!';
+  btn.classList.add('done');
+
+  const check = document.getElementById('check-' + n);
+  check.classList.add('done');
+  check.innerHTML = '<svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  updateProgress();
+
+  // Auto-advance to next lesson
+  if (n < 3) {
+    setTimeout(() => switchLesson(n + 1), 600);
+  }
+}
+
+function updateProgress() {
+  const count = Object.values(done).filter(Boolean).length;
+  const pct = Math.round((count / 3) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '% complete';
+}
+
+function pickScenario(btn, type) {
+  const card = btn.closest('.scenario-card');
+  const btns = card.querySelectorAll('button');
+  btns.forEach(b => {
+    b.style.background = '#f8fafc';
+    b.style.borderColor = '#e2e8f0';
+    b.style.color = '';
+  });
+  if (type === 'adaptive') {
+    btn.style.background = '#f0fdf4';
+    btn.style.borderColor = '#22c55e';
+    btn.style.color = '#15803d';
+  } else {
+    btn.style.background = '#fef2f2';
+    btn.style.borderColor = '#fca5a5';
+    btn.style.color = '#991b1b';
+  }
+}
+
+function checkQ(btn, correct, feedback) {
+  const card = btn.closest('.quiz-card');
+  const selected = card.querySelector('input[type=radio]:checked');
+  const fb = card.querySelector('.quiz-feedback');
+
+  if (!selected) { fb.textContent = 'Please select an answer first.'; fb.className = 'quiz-feedback show err'; return; }
+
+  if (selected.value === correct) {
+    fb.textContent = '✅ ' + feedback;
+    fb.className = 'quiz-feedback show ok';
+    card.querySelectorAll('.quiz-opt').forEach(o => {
+      if (o.querySelector('input').value === correct) o.classList.add('correct');
+    });
+  } else {
+    fb.textContent = '❌ Not quite — review your notes and try again.';
+    fb.className = 'quiz-feedback show err';
+    card.querySelector('input:checked').closest('.quiz-opt').classList.add('wrong');
+  }
+}
+
+// Initial progress
+updateProgress();
+</script>
+</body>
+</html>
