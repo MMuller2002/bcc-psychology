@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Year 10 Psychology — Week 5: Measuring the Mind</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f5f0; --surf:#ffffff; --surf2:#eeede8;
+  --border:#d8d7d0; --text:#1a1a14; --muted:#6b7280;
+  --navy:#1e3a5f;
+  --forest:#166534; --lfor:#dcfce7;
+  --gold:#854d0e;   --lgold:#fef9c3;
+  --slate:#3730a3;  --lslate:#ede9fe;
+  --green:#15803d;  --lgreen:#dcfce7;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero{
+  background:var(--navy);
+  border-bottom:3px solid #1e3a5f;
+  position:relative;overflow:hidden;
+}
+/* grid pattern */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+/* accent bar */
+.hero::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:linear-gradient(180deg,var(--forest),var(--gold),var(--slate));
+}
+.hero-inner{
+  position:relative;max-width:1120px;margin:0 auto;
+  padding:52px 40px 0;
+  display:grid;grid-template-columns:1fr 280px;gap:40px;align-items:end;
+}
+.wtag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;
+  color:rgba(255,255,255,0.45);margin-bottom:14px;
+}
+.wtag::before{content:'//';color:var(--forest);margin-right:4px}
+.hero h1{
+  font-family:'IBM Plex Serif',serif;
+  font-size:clamp(26px,3.8vw,46px);font-weight:600;
+  color:#fff;line-height:1.12;margin-bottom:12px;
+}
+.hero h1 em{font-style:italic;color:#86efac}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.7;max-width:520px;margin-bottom:24px;font-weight:300}
+.hero-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px}
+.hchip{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  border:1px solid rgba(255,255,255,0.15);border-radius:4px;
+  padding:4px 12px;color:rgba(255,255,255,0.7);
+}
+
+/* data visual */
+.data-vis{padding-bottom:24px}
+.dv-label{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px}
+.dv-row{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.dv-name{font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,0.5);width:88px;text-align:right;flex-shrink:0}
+.dv-bar-wrap{flex:1;height:8px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden}
+.dv-bar{height:100%;border-radius:2px}
+
+/* ── BIG Q ──────────────────────────────────────── */
+.bq{
+  background:rgba(0,0,0,0.2);border-top:1px solid rgba(255,255,255,0.06);
+  padding:16px 40px;display:flex;align-items:center;gap:16px;justify-content:center;
+}
+.bq-l{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--forest);white-space:nowrap;flex-shrink:0}
+.bq-t{font-family:'IBM Plex Serif',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,0.7)}
+
+/* ── PROGRESS ───────────────────────────────────── */
+.pw{max-width:1120px;margin:0 auto;padding:22px 40px 0}
+.pr{display:flex;justify-content:space-between;margin-bottom:5px}
+.pl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
+.pp{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--forest)}
+.pt{height:4px;background:var(--border);border-radius:99px;overflow:hidden}
+.pf{height:100%;background:linear-gradient(90deg,var(--forest),var(--gold),var(--slate));border-radius:99px;width:0%;transition:width 0.9s cubic-bezier(0.34,1.56,0.64,1)}
+
+/* ── LAYOUT ─────────────────────────────────────── */
+.main{max-width:1120px;margin:0 auto;padding:24px 40px 80px;display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:start}
+
+/* ── SIDEBAR ────────────────────────────────────── */
+.sidebar{position:sticky;top:20px}
+.scard{background:var(--surf);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+.scard-head{padding:9px 14px;background:var(--navy);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.35)}
+.ni{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;text-decoration:none;color:inherit}
+.ni:last-child{border-bottom:none}
+.ni:hover{background:var(--surf2)}
+.ni.a1{background:var(--lfor);border-left:3px solid var(--forest)}
+.ni.a2{background:var(--lgold);border-left:3px solid var(--gold)}
+.ni.a3{background:var(--lslate);border-left:3px solid var(--slate)}
+.nn{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;flex-shrink:0}
+.nl1 .nn{background:var(--lfor);color:var(--forest)}
+.nl2 .nn{background:var(--lgold);color:var(--gold)}
+.nl3 .nn{background:var(--lslate);color:var(--slate)}
+.ni.a1 .nn{background:var(--forest);color:#fff}
+.ni.a2 .nn{background:var(--gold);color:#fff}
+.ni.a3 .nn{background:var(--slate);color:#fff}
+.nt-{flex:1}
+.nt- .ntt{font-size:13px;font-weight:500}
+.nt- .nts{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px}
+.nck{width:15px;height:15px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto}
+.nck.done{background:#22c55e;border-color:#22c55e}
+
+.vw{padding:12px 14px}
+.ve{margin-bottom:10px}
+.vt{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;color:var(--forest);text-transform:uppercase;letter-spacing:0.05em}
+.vd{font-size:12px;color:var(--muted);line-height:1.55;margin-top:3px}
+
+/* ── PANELS ─────────────────────────────────────── */
+.lesson-panel{display:none}
+.lesson-panel.active{display:block;animation:fu 0.3s ease}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.lhdr{border-radius:12px;padding:32px;margin-bottom:20px;position:relative;overflow:hidden;border-left:5px solid}
+.l1hdr{background:linear-gradient(135deg,#052e16 0%,#14532d 100%);border-color:var(--forest)}
+.l2hdr{background:linear-gradient(135deg,#431407 0%,#78350f 100%);border-color:var(--gold)}
+.l3hdr{background:linear-gradient(135deg,#1e1b4b 0%,#312e81 100%);border-color:var(--slate)}
+.lhdr::after{content:attr(data-icon);position:absolute;right:16px;top:8px;font-size:90px;opacity:0.07;pointer-events:none;line-height:1}
+.ltag{display:inline-block;background:rgba(255,255,255,0.1);border-radius:4px;padding:2px 10px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.6);margin-bottom:10px}
+.lhdr h2{font-family:'IBM Plex Serif',serif;font-size:24px;font-weight:600;color:#fff;line-height:1.2;margin-bottom:10px}
+.lgol{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:560px;margin-bottom:14px}
+.lchips{display:flex;gap:8px;flex-wrap:wrap}
+.lchip{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:4px;padding:3px 10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,0.8)}
+
+/* Phase cards */
+.phases{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.pc{background:var(--surf);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color 0.2s}
+.pc:hover{border-color:rgba(0,0,0,0.15)}
+.ph{display:flex;align-items:center;gap:12px;padding:13px 18px;cursor:pointer;user-select:none}
+.pi{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.pm{flex:1}
+.ptit{font-size:14px;font-weight:500}
+.ptim{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px}
+.ptog{width:20px;height:20px;border-radius:50%;background:var(--surf2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);transition:transform 0.25s;flex-shrink:0}
+.pc.open .ptog{transform:rotate(180deg)}
+.pb{display:none;padding:0 18px 18px;border-top:1px solid var(--border)}
+.pc.open .pb{display:block}
+.pb p{font-size:14px;line-height:1.75;color:#374151;margin-bottom:10px}
+.pb strong{color:var(--text)}
+.l1 .ptit{color:var(--forest)}
+.l2 .ptit{color:var(--gold)}
+.l3 .ptit{color:var(--slate)}
+
+/* info boxes */
+.ib{padding:12px 16px;border-radius:8px;margin:10px 0;font-size:14px;line-height:1.7;border-left:4px solid}
+.ib-for{background:var(--lfor);border-color:var(--forest);color:#14532d}
+.ib-gld{background:var(--lgold);border-color:var(--gold);color:#431407}
+.ib-slt{background:var(--lslate);border-color:var(--slate);color:#1e1b4b}
+.ib-gen{background:var(--surf2);border-color:var(--border);color:#374151}
+
+/* PZ box */
+.pz{border-radius:8px;overflow:hidden;margin:10px 0;border:1px solid var(--border)}
+.pz-hd{padding:9px 14px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase}
+.pz-body{display:grid;gap:0}
+.pz-step{padding:12px 14px;border-top:1px solid var(--border)}
+.pz-lbl{font-family:'IBM Plex Serif',serif;font-size:15px;font-weight:600;margin-bottom:5px}
+.pz-prompt{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+
+/* classification cards */
+.cls-grid{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.cls-card{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:var(--surf2);border:1px solid var(--border);border-radius:8px}
+.cls-num{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--muted);width:18px;flex-shrink:0;padding-top:2px}
+.cls-text{flex:1;font-size:13px;line-height:1.6}
+.cls-btns{display:flex;gap:5px;flex-wrap:wrap;flex-shrink:0}
+.cls-btn{padding:4px 10px;border-radius:5px;border:1.5px solid var(--border);background:var(--surf);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;transition:all 0.15s}
+.cls-btn:hover{border-color:var(--forest);color:var(--forest)}
+.cls-btn.sel-sr{background:var(--lfor);border-color:var(--forest);color:var(--forest)}
+.cls-btn.sel-ob{background:var(--lgold);border-color:var(--gold);color:var(--gold)}
+.cls-btn.sel-ph{background:var(--lslate);border-color:var(--slate);color:var(--slate)}
+.cls-btn.sel-ni{background:#fef2f2;border-color:#dc2626;color:#dc2626}
+
+/* survey bias checker */
+.bias-card{padding:14px;border:1.5px solid var(--border);border-radius:8px;margin-bottom:8px}
+.bias-q{font-size:14px;font-style:italic;color:var(--gold);margin-bottom:10px;padding-left:10px;border-left:3px solid var(--gold)}
+.bias-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.bias-btn{padding:5px 12px;border-radius:5px;border:1.5px solid var(--border);background:var(--surf2);cursor:pointer;font-size:12px;font-family:'IBM Plex Mono',monospace;transition:all 0.15s}
+.bias-btn:hover{background:var(--lgold);border-color:var(--gold)}
+.bias-btn.sel{background:var(--lgold);border-color:var(--gold);color:var(--gold);font-weight:500}
+
+/* reliability/validity table */
+.rv-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+.rv-table th{padding:8px 12px;text-align:left;font-weight:600;border-bottom:2px solid var(--border)}
+.rv-table td{padding:9px 12px;border-bottom:1px solid var(--border);color:#374151;vertical-align:top}
+.rv-table tr:last-child td{border-bottom:none}
+.rv-table tr:hover td{background:var(--surf2)}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500}
+.b-r{background:var(--lfor);color:var(--forest)}
+.b-v{background:var(--lgold);color:var(--gold)}
+
+/* claim verdict */
+.claim-card{padding:14px 16px;border-radius:8px;border:1px solid var(--border);margin-bottom:10px;background:var(--surf)}
+.claim-src{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px}
+.claim-text{font-size:14px;margin-bottom:10px;line-height:1.6}
+.verdict-btns{display:flex;gap:8px;margin-bottom:8px}
+.vbtn{padding:6px 14px;border-radius:6px;border:1.5px solid var(--border);background:var(--surf2);cursor:pointer;font-size:13px;transition:all 0.15s}
+.vbtn:hover{border-color:var(--slate);background:var(--lslate)}
+.vbtn.trust{background:var(--lfor);border-color:var(--forest);color:var(--forest)}
+.vbtn.partial{background:var(--lgold);border-color:var(--gold);color:var(--gold)}
+.vbtn.distrust{background:#fef2f2;border-color:#dc2626;color:#dc2626}
+
+/* graph placeholder */
+.graph-ph{background:var(--surf2);border:1px dashed var(--border);border-radius:8px;padding:24px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin:10px 0}
+
+/* textarea */
+textarea{width:100%;background:var(--surf);border:1.5px solid var(--border);border-radius:7px;padding:10px 13px;font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:84px;transition:border-color 0.2s}
+textarea:focus{outline:none;border-color:var(--forest)}
+textarea.bcc-has-content{border-color:#22c55e!important}
+.rf{margin-top:12px}
+.rf label{font-size:13px;font-weight:500;display:block;margin-bottom:5px;color:#374151}
+
+/* quiz */
+.qc{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:12px}
+.qq{font-size:15px;font-weight:500;margin-bottom:10px}
+.qo{display:flex;flex-direction:column;gap:7px}
+.qopt{display:flex;align-items:center;gap:10px;padding:9px 13px;border:1.5px solid var(--border);border-radius:7px;cursor:pointer;font-size:14px;transition:all 0.15s;background:var(--surf2)}
+.qopt:hover{background:var(--lfor);border-color:var(--forest)}
+.qopt.correct{background:var(--lgreen);border-color:var(--green);color:var(--green)}
+.qopt.wrong{background:#fef2f2;border-color:#dc2626;color:#dc2626}
+.qfb{font-size:13px;margin-top:8px;padding:9px 13px;border-radius:7px;display:none;line-height:1.6}
+.qfb.show{display:block}
+.qfb.ok{background:var(--lgreen);color:var(--green)}
+.qfb.err{background:#fef2f2;color:#dc2626}
+
+/* resources */
+.rw{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:16px}
+.rw h3{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.rl{display:flex;align-items:center;gap:10px;padding:10px 13px;background:var(--surf2);border:1px solid var(--border);border-radius:7px;text-decoration:none;color:var(--text);margin-bottom:7px;transition:all 0.15s}
+.rl:hover{background:var(--lfor);border-color:var(--forest)}
+.rl:last-child{margin-bottom:0}
+.ri{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.rm{flex:1}
+.rm .rt{font-size:13px;font-weight:500}
+.rm .rs{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:1px}
+
+/* done btn */
+.db{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px;border:1.5px solid var(--border);border-radius:8px;background:var(--surf);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--muted);transition:all 0.2s;margin-bottom:12px}
+.db:hover{border-color:var(--forest);color:var(--forest);background:var(--lfor)}
+.db.marked{background:var(--lfor);border-color:var(--forest);color:var(--forest)}
+
+@media(max-width:768px){
+  .main{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .hero-inner{grid-template-columns:1fr}
+  .data-vis{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="wtag">Year 10 Psychology · Unit 2 · Week 5</div>
+      <h1>Measuring the <em>Mind</em> —<br>Tools, Trust &amp; Data</h1>
+      <p class="hero-sub">Three lessons mapping the full landscape of psychological measurement — from surveys to EEG — and building the critical eye you'll need to design your own investigation.</p>
+      <div class="hero-chips">
+        <div class="hchip">// 3 × 70 min</div>
+        <div class="hchip">AC9S10I05 · I07</div>
+        <div class="hchip">Describe · Evaluate · Analyse</div>
+        <div class="hchip">PZ: I Used to Think · Connect-Extend-Challenge</div>
+      </div>
+    </div>
+    <div class="data-vis">
+      <div class="dv-label">Measurement tools landscape</div>
+      <div class="dv-row"><div class="dv-name">Self-Report</div><div class="dv-bar-wrap"><div class="dv-bar" style="width:85%;background:var(--forest)"></div></div></div>
+      <div class="dv-row"><div class="dv-name">Observation</div><div class="dv-bar-wrap"><div class="dv-bar" style="width:60%;background:#0d9488"></div></div></div>
+      <div class="dv-row"><div class="dv-name">HRV</div><div class="dv-bar-wrap"><div class="dv-bar" style="width:55%;background:var(--gold)"></div></div></div>
+      <div class="dv-row"><div class="dv-name">GSR</div><div class="dv-bar-wrap"><div class="dv-bar" style="width:48%;background:#b45309"></div></div></div>
+      <div class="dv-row"><div class="dv-name">Cortisol</div><div class="dv-bar-wrap"><div class="dv-bar" style="width:42%;background:var(--slate)"></div></div></div>
+      <div class="dv-row"><div class="dv-name">EEG</div><div class="dv-bar-wrap"><div class="dv-bar" style="width:38%;background:#6366f1"></div></div></div>
+      <div class="dv-row"><div class="dv-name">fMRI</div><div class="dv-bar-wrap"><div class="dv-bar" style="width:22%;background:#7c3aed"></div></div></div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,255,255,0.25);margin-top:8px;text-align:right">← feasibility in school research</div>
+    </div>
+  </div>
+  <div class="bq">
+    <span class="bq-l">// Big Question</span>
+    <span class="bq-t">How do psychologists actually know what they claim to know — and how confident can we be in their measurements?</span>
+  </div>
+</div>
+
+<div class="pw">
+  <div class="pr"><span class="pl">Week 5 Progress</span><span class="pp" id="pp">0 / 3 complete</span></div>
+  <div class="pt"><div class="pf" id="pf"></div></div>
+</div>
+
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="scard">
+      <div class="scard-head">This Week</div>
+      <a class="ni nl1 a1" onclick="go(1)" href="#">
+        <div class="nn">1</div>
+        <div class="nt-"><div class="ntt">Psychological Measurement</div><div class="nts">Describe · 70 min</div></div>
+        <div class="nck" id="c1"></div>
+      </a>
+      <a class="ni nl2" onclick="go(2)" href="#">
+        <div class="nn">2</div>
+        <div class="nt-"><div class="ntt">Self-Report Measures</div><div class="nts">Evaluate · 70 min</div></div>
+        <div class="nck" id="c2"></div>
+      </a>
+      <a class="ni nl3" onclick="go(3)" href="#">
+        <div class="nn">3</div>
+        <div class="nt-"><div class="ntt">Physiological Measures</div><div class="nts">Analyse · 70 min</div></div>
+        <div class="nck" id="c3"></div>
+      </a>
+    </div>
+
+    <div class="scard">
+      <div class="scard-head">Key Terms</div>
+      <div class="vw">
+        <div class="ve"><div class="vt">Reliability</div><div class="vd">Consistency of a measure — does it give the same result under the same conditions?</div></div>
+        <div class="ve"><div class="vt">Validity</div><div class="vd">Accuracy — does the measure actually measure what it claims to measure?</div></div>
+        <div class="ve"><div class="vt">Cronbach's Alpha (α)</div><div class="vd">A statistic measuring internal consistency. Acceptable: α > 0.7. You can be reliable but not valid.</div></div>
+        <div class="ve"><div class="vt">Social Desirability Bias</div><div class="vd">Answering in ways that look good, rather than truthfully — a major threat to self-report validity.</div></div>
+        <div class="ve"><div class="vt">HRV (Heart Rate Variability)</div><div class="vd">Variation between heartbeats — a measure of autonomic nervous system balance, NOT heart rate.</div></div>
+        <div class="ve"><div class="vt">GSR / Skin Conductance</div><div class="vd">Sympathetic arousal measure — detects excitement AND fear (cannot tell them apart).</div></div>
+        <div class="ve"><div class="vt">Inference Problem</div><div class="vd">Physiological signals indicate biological states — inferring psychological states from them requires caution.</div></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="scard-head">Assessment Link</div>
+      <div class="vw">
+        <p style="font-size:13px;color:var(--muted);line-height:1.65">From this week you should be <strong style="color:var(--text)">actively choosing your measurement approach</strong> for the Week 8 investigation. Use the comparison table in Lesson 3 to justify your choice.</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- PANELS -->
+  <div>
+
+    <!-- ══ L1 ══ -->
+    <div class="lesson-panel l1 active" id="panel-1">
+      <div class="lhdr l1hdr" data-icon="🔭">
+        <div class="ltag">Lesson 1 · AC9S10I05 · Describe</div>
+        <h2>The Measurement Landscape —<br>Tools of the Trade</h2>
+        <p class="lgol">By the end of this lesson you'll be able to <strong>describe</strong> the four categories of psychological measurement, explain what each captures (and cannot capture), and recommend an appropriate tool for a given research question.</p>
+        <div class="lchips"><span class="lchip">// 70 min</span><span class="lchip">4 Categories</span><span class="lchip">PZ: I Used to Think</span></div>
+      </div>
+
+      <div class="phases l1">
+
+        <div class="pc open">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lfor)">💭</div><div class="pm"><div class="ptit">Hook — How Would You Measure That?</div><div class="ptim">0–10 min · Brainstorm</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Before any instruction, write your initial idea for measuring each construct. There are no wrong answers — this is about capturing your starting assumptions.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0">
+              <div style="background:var(--surf2);border:1px solid var(--border);border-radius:8px;padding:14px">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--forest);margin-bottom:8px">HOW STRESSED is this student?</div>
+                <textarea data-field-id="l1-measure-stress" data-field-label="Hook: How would you measure stress?" data-lesson="1" style="min-height:64px" placeholder="My idea: ..."></textarea>
+              </div>
+              <div style="background:var(--surf2);border:1px solid var(--border);border-radius:8px;padding:14px">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);margin-bottom:8px">HOW HAPPY is this person?</div>
+                <textarea data-field-id="l1-measure-happy" data-field-label="Hook: How would you measure happiness?" data-lesson="1" style="min-height:64px" placeholder="My idea: ..."></textarea>
+              </div>
+              <div style="background:var(--surf2);border:1px solid var(--border);border-radius:8px;padding:14px">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--slate);margin-bottom:8px">HOW IMPULSIVE is this teenager?</div>
+                <textarea data-field-id="l1-measure-impulsive" data-field-label="Hook: How would you measure impulsivity?" data-lesson="1" style="min-height:64px" placeholder="My idea: ..."></textarea>
+              </div>
+              <div style="background:var(--surf2);border:1px solid var(--border);border-radius:8px;padding:14px">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--navy);margin-bottom:8px">IS this person depressed?</div>
+                <textarea data-field-id="l1-measure-depressed" data-field-label="Hook: How would you measure depression?" data-lesson="1" style="min-height:64px" placeholder="My idea: ..."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lfor)">📐</div><div class="pm"><div class="ptit">Direct Instruction — Four Categories</div><div class="ptim">10–28 min · Notes · Resource Sheet 13</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Complete the overview table on Resource Sheet 13 as your teacher explains each category. The critical insight across all four:</p>
+            <div style="display:flex;flex-direction:column;gap:8px;margin:10px 0">
+              <div class="ib ib-for"><strong>Self-Report:</strong> Only the participant has direct access to their subjective experience. No instrument can measure "what it feels like" except asking. But asking introduces bias.</div>
+              <div class="ib ib-gld"><strong>Behavioural Observation:</strong> Captures what people actually DO, not what they say they do. Removes self-report bias — but introduces observer effects and requires costly, trained observers.</div>
+              <div class="ib ib-slt"><strong>Physiological Measures:</strong> Objective biological recordings — but they measure the body, not the mind. Every physiological inference about a mental state requires careful justification.</div>
+              <div class="ib ib-gen"><strong>Neuroimaging:</strong> The most dramatic-looking measure — but suffers from the <strong>reverse inference problem</strong>: seeing amygdala activation and concluding "they felt fear" is not valid without corroborating evidence. fMRI measures blood flow, not thoughts.</div>
+            </div>
+            <div class="rf">
+              <label>📝 In your own words: What does self-report capture that physiological measures cannot — and vice versa?</label>
+              <textarea data-field-id="l1-capture-distinction" data-field-label="Key distinction: What self-report vs physiological measures capture" data-lesson="1" placeholder="Self-report captures... but cannot... / Physiological measures capture... but cannot..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lfor)">🗂</div><div class="pm"><div class="ptit">Guided Practice — Scenario Card Sort</div><div class="ptim">28–46 min · Individual · Resource Sheet 13</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Classify each research scenario. Click the category button to tag it, then complete the strength and limitation on Resource Sheet 13.</p>
+            <div class="cls-grid">
+              <div class="cls-card"><div class="cls-num">1</div><div class="cls-text">Researcher gives participants a 20-item anxiety symptom questionnaire rated 0–3</div><div class="cls-btns"><button class="cls-btn" onclick="classify(this,'sr')">Self-Report</button><button class="cls-btn" onclick="classify(this,'ob')">Observation</button><button class="cls-btn" onclick="classify(this,'ph')">Physio</button><button class="cls-btn" onclick="classify(this,'ni')">Neuro</button></div></div>
+              <div class="cls-card"><div class="cls-num">2</div><div class="cls-text">Researcher attaches a heart rate monitor to participants during a stress task</div><div class="cls-btns"><button class="cls-btn" onclick="classify(this,'sr')">Self-Report</button><button class="cls-btn" onclick="classify(this,'ob')">Observation</button><button class="cls-btn" onclick="classify(this,'ph')">Physio</button><button class="cls-btn" onclick="classify(this,'ni')">Neuro</button></div></div>
+              <div class="cls-card"><div class="cls-num">3</div><div class="cls-text">Researcher watches children through a one-way mirror during free play, coding behaviours</div><div class="cls-btns"><button class="cls-btn" onclick="classify(this,'sr')">Self-Report</button><button class="cls-btn" onclick="classify(this,'ob')">Observation</button><button class="cls-btn" onclick="classify(this,'ph')">Physio</button><button class="cls-btn" onclick="classify(this,'ni')">Neuro</button></div></div>
+              <div class="cls-card"><div class="cls-num">4</div><div class="cls-text">Participants placed in an fMRI scanner while viewing emotional images</div><div class="cls-btns"><button class="cls-btn" onclick="classify(this,'sr')">Self-Report</button><button class="cls-btn" onclick="classify(this,'ob')">Observation</button><button class="cls-btn" onclick="classify(this,'ph')">Physio</button><button class="cls-btn" onclick="classify(this,'ni')">Neuro</button></div></div>
+              <div class="cls-card"><div class="cls-num">5</div><div class="cls-text">Participants use a phone app to rate their mood 3× per day for two weeks</div><div class="cls-btns"><button class="cls-btn" onclick="classify(this,'sr')">Self-Report</button><button class="cls-btn" onclick="classify(this,'ob')">Observation</button><button class="cls-btn" onclick="classify(this,'ph')">Physio</button><button class="cls-btn" onclick="classify(this,'ni')">Neuro</button></div></div>
+              <div class="cls-card"><div class="cls-num">6</div><div class="cls-text">Researcher measures cortisol in saliva samples before and after an exam</div><div class="cls-btns"><button class="cls-btn" onclick="classify(this,'sr')">Self-Report</button><button class="cls-btn" onclick="classify(this,'ob')">Observation</button><button class="cls-btn" onclick="classify(this,'ph')">Physio</button><button class="cls-btn" onclick="classify(this,'ni')">Neuro</button></div></div>
+              <div class="cls-card"><div class="cls-num">7</div><div class="cls-text">Two observers code aggressive behaviours on a playground using a checklist</div><div class="cls-btns"><button class="cls-btn" onclick="classify(this,'sr')">Self-Report</button><button class="cls-btn" onclick="classify(this,'ob')">Observation</button><button class="cls-btn" onclick="classify(this,'ph')">Physio</button><button class="cls-btn" onclick="classify(this,'ni')">Neuro</button></div></div>
+              <div class="cls-card"><div class="cls-num">8</div><div class="cls-text">Researcher records brain electrical activity during sleep using scalp electrodes</div><div class="cls-btns"><button class="cls-btn" onclick="classify(this,'sr')">Self-Report</button><button class="cls-btn" onclick="classify(this,'ob')">Observation</button><button class="cls-btn" onclick="classify(this,'ph')">Physio</button><button class="cls-btn" onclick="classify(this,'ni')">Neuro</button></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lfor)">🧩</div><div class="pm"><div class="ptit">Application — Best Tool for the Question</div><div class="ptim">46–58 min · Pairs</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>For each research question, recommend the most appropriate tool and justify. Note that multiple tools could work — the reasoning matters more than the choice.</p>
+            <div style="display:flex;flex-direction:column;gap:10px;margin:10px 0">
+              <div style="padding:14px;background:var(--surf2);border:1px solid var(--border);border-radius:8px">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--forest);margin-bottom:6px">Q1: Does chronic stress in Year 10 students affect sleep quality?</div>
+                <textarea data-field-id="l1-q1-tool" data-field-label="Best tool: chronic stress and sleep quality" data-lesson="1" style="min-height:64px" placeholder="I would use _____ because it measures _____ which directly addresses..."></textarea>
+              </div>
+              <div style="padding:14px;background:var(--surf2);border:1px solid var(--border);border-radius:8px">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);margin-bottom:6px">Q2: Do adolescents actually use phones less when they say they have?</div>
+                <textarea data-field-id="l1-q2-tool" data-field-label="Best tool: actual vs reported phone use" data-lesson="1" style="min-height:64px" placeholder="The gap between saying and doing means I would use..."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lfor)">✏️</div><div class="pm"><div class="ptit">Exit — I Used to Think / Now I Think (PZ Routine)</div><div class="ptim">58–70 min · Metacognitive reflection</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Complete this honestly — it tracks the shift in your thinking, not whether you have the "right" answer.</p>
+            <div class="pz" style="border-color:var(--forest)">
+              <div class="pz-hd" style="background:var(--lfor);color:var(--forest)">I USED TO THINK / NOW I THINK — Project Zero Thinking Routine</div>
+              <div class="pz-body" style="grid-template-columns:1fr 1fr">
+                <div class="pz-step">
+                  <div class="pz-lbl" style="color:var(--forest)">I used to think...</div>
+                  <div class="pz-prompt">...psychological measurement meant: (what was your assumption before today?)</div>
+                  <textarea data-field-id="l1-pz-usedto" data-field-label="PZ I Used to Think: assumption before today's lesson" data-lesson="1" style="min-height:80px" placeholder="I used to think..."></textarea>
+                </div>
+                <div class="pz-step" style="border-left:1px solid var(--border)">
+                  <div class="pz-lbl" style="color:var(--navy)">Now I think...</div>
+                  <div class="pz-prompt">...because: (what specifically shifted? What evidence or example caused the change?)</div>
+                  <textarea data-field-id="l1-pz-nowthink" data-field-label="PZ Now I Think: what shifted and why" data-lesson="1" style="min-height:80px" placeholder="Now I think..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rw"><h3>Resources</h3>
+        <a class="rl" href="https://www.apa.org/topics/assessment" target="_blank"><div class="ri" style="background:var(--lfor)">📋</div><div class="rm"><div class="rt">APA — Psychological Assessment</div><div class="rs">apa.org</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="rl" href="https://pz.harvard.edu/resources/i-used-to-think-now-i-think" target="_blank"><div class="ri" style="background:var(--lgold)">🎓</div><div class="rm"><div class="rt">Project Zero — I Used to Think / Now I Think</div><div class="rs">pz.harvard.edu</div></div><span style="color:var(--muted)">↗</span></a>
+      </div>
+      <button class="db" id="btn-1" onclick="done(1)">Mark Lesson 1 Complete ✓</button>
+    </div>
+
+    <!-- ══ L2 ══ -->
+    <div class="lesson-panel l2" id="panel-2">
+      <div class="lhdr l2hdr" data-icon="📊">
+        <div class="ltag">Lesson 2 · AC9S10I07 · Evaluate</div>
+        <h2>Self-Report Measures —<br>What You Say vs What Is</h2>
+        <p class="lgol">By the end of this lesson you'll be able to <strong>evaluate</strong> survey reliability and validity — identifying specific threats, critiquing real survey design flaws, and reaching a reasoned judgement about when self-report data can and cannot be trusted.</p>
+        <div class="lchips"><span class="lchip">// 70 min</span><span class="lchip">Reliability · Validity · Bias</span><span class="lchip">PHQ-9 Analysis</span></div>
+      </div>
+
+      <div class="phases l2">
+
+        <div class="pc open">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lgold)">🤔</div><div class="pm"><div class="ptit">Hook — Would You Answer This Honestly?</div><div class="ptim">0–10 min · Survey critique</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Your teacher will display four survey questions. Identify what is problematic about each as a research instrument:</p>
+            <div style="display:flex;flex-direction:column;gap:8px;margin:10px 0">
+              <div class="bias-card">
+                <div class="bias-q">"How many hours per week do you spend on social media?"</div>
+                <div class="bias-btns">
+                  <button class="bias-btn" onclick="tagBias(this)">Social desirability</button>
+                  <button class="bias-btn" onclick="tagBias(this)">Recall bias</button>
+                  <button class="bias-btn" onclick="tagBias(this)">Acquiescence</button>
+                  <button class="bias-btn" onclick="tagBias(this)">Leading question</button>
+                  <button class="bias-btn" onclick="tagBias(this)">Double-barrelled</button>
+                </div>
+              </div>
+              <div class="bias-card">
+                <div class="bias-q">"Do you always listen to your teacher's instructions?"</div>
+                <div class="bias-btns">
+                  <button class="bias-btn" onclick="tagBias(this)">Social desirability</button>
+                  <button class="bias-btn" onclick="tagBias(this)">Recall bias</button>
+                  <button class="bias-btn" onclick="tagBias(this)">Acquiescence</button>
+                  <button class="bias-btn" onclick="tagBias(this)">Leading question</button>
+                  <button class="bias-btn" onclick="tagBias(this)">Double-barrelled</button>
+                </div>
+              </div>
+              <div class="bias-card">
+                <div class="bias-q">"Rate your mental health from 1–10"</div>
+                <div class="bias-btns">
+                  <button class="bias-btn" onclick="tagBias(this)">No anchoring</button>
+                  <button class="bias-btn" onclick="tagBias(this)">Undefined construct</button>
+                  <button class="bias-btn" onclick="tagBias(this)">Recall bias</button>
+                  <button class="bias-btn" onclick="tagBias(this)">Leading question</button>
+                </div>
+              </div>
+              <div class="bias-card">
+                <div class="bias-q">"How often do you feel completely overwhelmed: Never / Sometimes / Often / Always"</div>
+                <div class="bias-btns">
+                  <button class="bias-btn" onclick="tagBias(this)">Loaded question</button>
+                  <button class="bias-btn" onclick="tagBias(this)">Assumes the construct exists</button>
+                  <button class="bias-btn" onclick="tagBias(this)">Social desirability</button>
+                  <button class="bias-btn" onclick="tagBias(this)">Leading question</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lgold)">⚖️</div><div class="pm"><div class="ptit">Direct Instruction — Reliability and Validity Framework</div><div class="ptim">10–28 min · Notes · Resource Sheet 14</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <div class="ib ib-gld"><strong>The scale analogy:</strong> A scale that gives different readings each time = unreliable. A scale that consistently reads 5kg too heavy = reliable but NOT valid. You need both. And Cronbach's alpha measures internal consistency — one type of reliability — NOT validity. This is the most common confusion in psychology research.</div>
+            <table class="rv-table">
+              <tr><th>Concept</th><th>Type</th><th>What it means</th><th>Key threat</th></tr>
+              <tr><td>Test-Retest</td><td><span class="badge b-r">Reliability</span></td><td>Same measure → same result over time</td><td>Real change in the construct; practice effects</td></tr>
+              <tr><td>Internal Consistency (α)</td><td><span class="badge b-r">Reliability</span></td><td>All items measure the same construct (α > 0.7)</td><td>Items measuring slightly different things</td></tr>
+              <tr><td>Inter-Rater</td><td><span class="badge b-r">Reliability</span></td><td>Two scorers give consistent ratings</td><td>Observer subjectivity; ambiguous scoring criteria</td></tr>
+              <tr><td>Face Validity</td><td><span class="badge b-v">Validity</span></td><td>Looks like it measures the construct</td><td>Weakest form — necessary but insufficient</td></tr>
+              <tr><td>Content Validity</td><td><span class="badge b-v">Validity</span></td><td>Covers all aspects of the construct</td><td>Depression scale that ignores sleep/appetite</td></tr>
+              <tr><td>Construct Validity</td><td><span class="badge b-v">Validity</span></td><td>Behaves as theory predicts (convergent + discriminant)</td><td>Correlates with unrelated constructs</td></tr>
+              <tr><td>Criterion Validity</td><td><span class="badge b-v">Validity</span></td><td>Predicts a relevant real-world outcome</td><td>Criterion measure itself may be flawed</td></tr>
+            </table>
+            <div class="rf">
+              <label>⚠️ Critical check: Can Cronbach's alpha tell you whether a measure is valid? Explain why or why not.</label>
+              <textarea data-field-id="l2-alpha-validity" data-field-label="Critical check: Can Cronbach's alpha tell you about validity?" data-lesson="2" placeholder="Cronbach's alpha measures... / It cannot tell you about validity because..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lgold)">🔍</div><div class="pm"><div class="ptit">Guided Practice — PHQ-9 Analysis + Dodgy Survey Fix-It</div><div class="ptim">28–47 min · Individual · Resource Sheet 14</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>The PHQ-9 is one of the most widely-used depression screening tools in the world. Your teacher will display it. Evaluate it against the framework:</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0">
+              <div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold);margin-bottom:6px">FACE + CONTENT VALIDITY</div><textarea data-field-id="l2-phq9-validity" data-field-label="PHQ-9: Face and content validity analysis" data-lesson="2" style="min-height:80px" placeholder="The PHQ-9 has face validity because... / Content validity concern: it does / does not cover all aspects of depression because..."></textarea></div>
+              <div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold);margin-bottom:6px">TWO VALIDITY THREATS (Year 10 students)</div><textarea data-field-id="l2-phq9-threats" data-field-label="PHQ-9: Two validity threats for Year 10 students" data-lesson="2" style="min-height:80px" placeholder="Threat 1: ... / Threat 2: ..."></textarea></div>
+            </div>
+            <p style="margin-top:12px">The PHQ-9 has α = 0.89 in adolescent samples.</p>
+            <div class="rf">
+              <label>What does α = 0.89 mean — and what does it NOT tell you about the PHQ-9?</label>
+              <textarea data-field-id="l2-phq9-alpha" data-field-label="PHQ-9: Interpreting Cronbach's alpha of 0.89" data-lesson="2" placeholder="α = 0.89 means... / However, this does not tell us..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lgold)">📰</div><div class="pm"><div class="ptit">Critical Evaluation — When Should We Trust Survey Data?</div><div class="ptim">47–58 min · Discussion</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Three real research claims using self-report data. Click your verdict, then write your justification:</p>
+            <div style="display:flex;flex-direction:column;gap:10px;margin:10px 0">
+              <div class="claim-card">
+                <div class="claim-src">Claim 1 — Source: Online survey, self-selected via social media ads, n=2,000</div>
+                <div class="claim-text">"42% of Australian teenagers report feeling anxious most of the time."</div>
+                <div class="verdict-btns">
+                  <button class="vbtn" onclick="pickVerdict(this,'trust')">✅ Can be trusted</button>
+                  <button class="vbtn" onclick="pickVerdict(this,'partial')">⚠️ Partially trusted</button>
+                  <button class="vbtn" onclick="pickVerdict(this,'distrust')">❌ Cannot be trusted</button>
+                </div>
+                <textarea data-field-id="l2-claim1" data-field-label="Claim 1 verdict: 42% anxiety claim (self-selected online survey)" data-lesson="2" style="min-height:64px" placeholder="This claim [can/partially/cannot] be trusted because..."></textarea>
+              </div>
+              <div class="claim-card">
+                <div class="claim-src">Claim 2 — Source: Validated sleep diary + NAPLAN data, random sample, n=500</div>
+                <div class="claim-text">"Students who report sleeping 8+ hours perform significantly better on standardised tests."</div>
+                <div class="verdict-btns">
+                  <button class="vbtn" onclick="pickVerdict(this,'trust')">✅ Can be trusted</button>
+                  <button class="vbtn" onclick="pickVerdict(this,'partial')">⚠️ Partially trusted</button>
+                  <button class="vbtn" onclick="pickVerdict(this,'distrust')">❌ Cannot be trusted</button>
+                </div>
+                <textarea data-field-id="l2-claim2" data-field-label="Claim 2 verdict: sleep and academic performance (random sample + objective data)" data-lesson="2" style="min-height:64px" placeholder="This claim [can/partially/cannot] be trusted because..."></textarea>
+              </div>
+              <div class="claim-card">
+                <div class="claim-src">Claim 3 — Source: 6-week study, PHQ-4, n=80, no control condition</div>
+                <div class="claim-text">"Mindfulness apps reduce adolescent anxiety by 35%."</div>
+                <div class="verdict-btns">
+                  <button class="vbtn" onclick="pickVerdict(this,'trust')">✅ Can be trusted</button>
+                  <button class="vbtn" onclick="pickVerdict(this,'partial')">⚠️ Partially trusted</button>
+                  <button class="vbtn" onclick="pickVerdict(this,'distrust')">❌ Cannot be trusted</button>
+                </div>
+                <textarea data-field-id="l2-claim3" data-field-label="Claim 3 verdict: mindfulness apps 35% reduction (no control)" data-lesson="2" style="min-height:64px" placeholder="This claim [can/partially/cannot] be trusted because..."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lgold)">✏️</div><div class="pm"><div class="ptit">Exit — Evaluate Paragraph</div><div class="ptim">58–70 min · Written</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p><strong>Prompt:</strong> <em>Evaluate the use of self-report surveys for investigating adolescent mental health. Identify at least two strengths, two limitations, and reach a reasoned judgement about when they are and are not appropriate.</em></p>
+            <div style="display:flex;flex-direction:column;gap:2px;margin:12px 0">
+              <div style="display:flex"><div style="background:var(--forest);color:#fff;width:36px;border-radius:7px 0 0 0;display:flex;align-items:center;justify-content:center;font-family:IBM Plex Serif,serif;font-size:18px;font-weight:600;flex-shrink:0">💪</div><div style="background:var(--lfor);padding:10px 13px;flex:1;border-radius:0 7px 0 0"><div style="font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--forest);margin-bottom:4px">STRENGTHS</div><textarea data-field-id="l2-exit-strengths" data-field-label="Evaluate: Self-report strengths" data-lesson="2" style="min-height:64px;background:white" placeholder="Strength 1: ... / Strength 2: ..."></textarea></div></div>
+              <div style="display:flex"><div style="background:var(--gold);color:#fff;width:36px;display:flex;align-items:center;justify-content:center;font-family:IBM Plex Serif,serif;font-size:18px;font-weight:600;flex-shrink:0">⚠️</div><div style="background:var(--lgold);padding:10px 13px;flex:1"><div style="font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--gold);margin-bottom:4px">LIMITATIONS</div><textarea data-field-id="l2-exit-limits" data-field-label="Evaluate: Self-report limitations" data-lesson="2" style="min-height:64px;background:white" placeholder="Limitation 1: ... / Limitation 2: ..."></textarea></div></div>
+              <div style="display:flex"><div style="background:var(--navy);color:#fff;width:36px;border-radius:0 0 0 7px;display:flex;align-items:center;justify-content:center;font-family:IBM Plex Serif,serif;font-size:18px;font-weight:600;flex-shrink:0">⚖️</div><div style="background:var(--surf2);padding:10px 13px;flex:1;border-radius:0 0 7px 0"><div style="font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--navy);margin-bottom:4px">REASONED JUDGEMENT</div><textarea data-field-id="l2-exit-judgement" data-field-label="Evaluate: Reasoned judgement on when to use self-report" data-lesson="2" style="min-height:64px;background:white" placeholder="Self-report surveys are appropriate when... / not appropriate when..."></textarea></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rw"><h3>Resources</h3>
+        <a class="rl" href="https://www.phqscreeners.com/" target="_blank"><div class="ri" style="background:var(--lgold)">📋</div><div class="rm"><div class="rt">PHQ-9 — Free download</div><div class="rs">phqscreeners.com</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="rl" href="https://www.khanacademy.org/science/statistics-probability/designing-studies/sampling-methods-stats/a/introduction-to-surveys" target="_blank"><div class="ri" style="background:var(--lgold)">🎥</div><div class="rm"><div class="rt">Khan Academy — Survey Design</div><div class="rs">khanacademy.org</div></div><span style="color:var(--muted)">↗</span></a>
+      </div>
+      <button class="db" id="btn-2" onclick="done(2)">Mark Lesson 2 Complete ✓</button>
+    </div>
+
+    <!-- ══ L3 ══ -->
+    <div class="lesson-panel l3" id="panel-3">
+      <div class="lhdr l3hdr" data-icon="📡">
+        <div class="ltag">Lesson 3 · AC9S10I05 · Analyse</div>
+        <h2>Measuring the Body —<br>Physiological Measures in Psychology</h2>
+        <p class="lgol">By the end of this lesson you'll be able to <strong>analyse</strong> HRV, GSR, cortisol, and EEG data — connect physiological patterns to psychological interpretations — and make a realistic decision about which tool you could use for your own investigation.</p>
+        <div class="lchips"><span class="lchip">// 70 min</span><span class="lchip">HRV · GSR · Cortisol · EEG</span><span class="lchip">PZ: Connect-Extend-Challenge</span></div>
+      </div>
+
+      <div class="phases l3">
+
+        <div class="pc open">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lslate)">🔍</div><div class="pm"><div class="ptit">Hook — Read the Body (Data Mystery)</div><div class="ptim">0–10 min · Pairs</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Your teacher will display three unlabelled physiological graphs. For each, write what you think is happening to the participant:</p>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0">
+              <div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--slate);margin-bottom:6px">GRAPH A — Heart rate</div><div class="graph-ph">Spike → plateau → gradual return</div><textarea data-field-id="l3-graph-a" data-field-label="Mystery graph A: Heart rate spike — what might be happening?" data-lesson="3" style="min-height:60px" placeholder="I think..."></textarea></div>
+              <div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold);margin-bottom:6px">GRAPH B — Cortisol</div><div class="graph-ph">Gradual rise → peak → steady decline</div><textarea data-field-id="l3-graph-b" data-field-label="Mystery graph B: Cortisol rise then decline — what might be happening?" data-lesson="3" style="min-height:60px" placeholder="I think..."></textarea></div>
+              <div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--forest);margin-bottom:6px">GRAPH C — Skin conductance</div><div class="graph-ph">Flat baseline → 3 rapid spikes → return</div><textarea data-field-id="l3-graph-c" data-field-label="Mystery graph C: Skin conductance spikes — what might be happening?" data-lesson="3" style="min-height:60px" placeholder="I think..."></textarea></div>
+            </div>
+            <div class="rf">
+              <label>The inference problem: You just inferred a psychological state from a biological signal. What is the risk — and what would you need to increase confidence in your inference?</label>
+              <textarea data-field-id="l3-inference" data-field-label="Inference problem: Risk of inferring psychological states from physiological data" data-lesson="3" placeholder="The risk is... / To increase confidence I would need..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lslate)">📡</div><div class="pm"><div class="ptit">Direct Instruction — Four Physiological Measures</div><div class="ptim">10–28 min · Notes · Resource Sheet 15</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <div style="display:flex;flex-direction:column;gap:8px;margin:10px 0">
+              <div class="ib ib-slt"><strong>HRV (Heart Rate Variability):</strong> Variation between consecutive heartbeats — NOT the same as heart rate. High HRV = healthy parasympathetic balance. Low HRV = sympathetic dominance / stress. Measurable by smartwatch (PPG). Key confound: age, fitness, caffeine, body position.</div>
+              <div class="ib ib-gld"><strong>GSR / Skin Conductance:</strong> Measures sympathetic arousal via sweat glands. Fast and sensitive. Major limitation: <em>measures arousal, not valence</em> — excitement and fear produce identical signals. Cannot tell them apart.</div>
+              <div class="ib ib-for"><strong>Cortisol Assay:</strong> Salivary cortisol peaks 15–20 min after a stressor. Hair cortisol = 1 month per centimetre (retrospective chronic stress measure). Critical: control for the cortisol awakening response (CAR) — cortisol peaks naturally within 30 min of waking regardless of stress.</div>
+              <div class="ib ib-gen"><strong>EEG Extension — ERPs:</strong> Event-Related Potentials are brain responses to specific stimuli. The P300 wave (300ms after a surprising stimulus) indicates attentional processing. Alpha asymmetry (right vs left frontal) correlates with approach vs withdrawal motivation in emotion research.</div>
+            </div>
+            <div class="rf">
+              <label>📝 GSR cannot distinguish fear from excitement — they produce the same signal. What does this tell us about the limits of physiological measurement?</label>
+              <textarea data-field-id="l3-gsr-limit" data-field-label="GSR limitation: cannot distinguish fear from excitement" data-lesson="3" placeholder="This tells us that physiological measures can only tell us... / To distinguish them you would also need..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lslate)">📉</div><div class="pm"><div class="ptit">Data Analysis — Three Datasets</div><div class="ptim">28–48 min · Individual · Resource Sheet 15</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Your teacher will display three datasets. Complete the analysis grid on Resource Sheet 15. The key for each: connect the pattern to a psychological interpretation AND identify the inferential limit.</p>
+            <div style="display:flex;flex-direction:column;gap:8px;margin:10px 0">
+              <div style="padding:12px 14px;background:var(--surf2);border-left:4px solid var(--slate);border-radius:0 7px 7px 0;font-size:13px;line-height:1.65"><strong style="color:var(--slate)">Dataset 1 — HRV:</strong> Mindfulness group vs control during a maths exam. Describe the pattern, identify the trend, explain the group difference, find one anomaly.</div>
+              <div style="padding:12px 14px;background:var(--surf2);border-left:4px solid var(--forest);border-radius:0 7px 7px 0;font-size:13px;line-height:1.65"><strong style="color:var(--forest)">Dataset 2 — Cortisol:</strong> Salivary cortisol at 4 time points across term + hair cortisol at Week 10. Describe pattern, compare salivary vs hair, explain peaks, explain what hair tells you that saliva cannot.</div>
+              <div style="padding:12px 14px;background:var(--surf2);border-left:4px solid var(--gold);border-radius:0 7px 7px 0;font-size:13px;line-height:1.65"><strong style="color:var(--gold)">Dataset 3 — Multi-measure:</strong> GAD-7, GSR, and cortisol show low-to-moderate correlations. Explain what this means, identify which is best for moment-to-moment arousal vs subjective experience, explain the weak GSR/GAD-7 correlation.</div>
+            </div>
+            <div class="rf">
+              <label>💡 Dataset 3 key insight: People expected measures of "the same thing" to correlate highly. Why do they not — and is that a problem or a feature of good psychological measurement?</label>
+              <textarea data-field-id="l3-multi-insight" data-field-label="Dataset 3: Why multiple measures of anxiety don't perfectly correlate" data-lesson="3" placeholder="The measures don't correlate perfectly because they're measuring different... / This is not a problem, it's a feature because..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lslate)">🔬</div><div class="pm"><div class="ptit">Synthesis — Complete Measurement Comparison</div><div class="ptim">48–58 min · Individual · Resource Sheet 15</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Complete the full comparison table on Resource Sheet 15 for all six measurement approaches. The most important column is the last one — could YOU realistically use this in your Week 8 investigation?</p>
+            <div class="qc">
+              <div class="qq">Quick check: Which physiological measure provides a retrospective record of chronic stress over months, rather than a snapshot?</div>
+              <div class="qo">
+                <label class="qopt"><input type="radio" name="qw5"> HRV (Heart Rate Variability)</label>
+                <label class="qopt"><input type="radio" name="qw5"> Salivary cortisol</label>
+                <label class="qopt"><input type="radio" name="qw5"> Hair cortisol</label>
+                <label class="qopt"><input type="radio" name="qw5"> GSR (Skin Conductance)</label>
+              </div>
+              <button onclick="chk(this,'c','Correct! Each centimetre of hair represents approximately one month of cortisol accumulation — making hair cortisol the only measure that captures chronic stress history rather than acute stress at a single moment.')" style="margin-top:10px;padding:8px 16px;background:var(--slate);color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:IBM Plex Mono,monospace;font-size:12px">Check</button>
+              <div class="qfb"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lslate)">✏️</div><div class="pm"><div class="ptit">Exit — Connect-Extend-Challenge (PZ Routine)</div><div class="ptim">58–70 min · Metacognitive synthesis</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Synthesise the whole week — and be honest about what's still unclear. The Challenge component directly shapes Week 6.</p>
+            <div class="pz" style="border-color:var(--slate)">
+              <div class="pz-hd" style="background:var(--lslate);color:var(--slate)">CONNECT — EXTEND — CHALLENGE · Project Zero Thinking Routine</div>
+              <div class="pz-body" style="display:grid;grid-template-columns:repeat(3,1fr)">
+                <div class="pz-step">
+                  <div class="pz-lbl" style="color:var(--forest)">🔗 Connect</div>
+                  <div class="pz-prompt">This week connects to [specific content from Weeks 1–4] because... (be specific — which topic, which concept)</div>
+                  <textarea data-field-id="l3-cec-connect" data-field-label="PZ Connect: Link measurement week to Weeks 1-4 content" data-lesson="3" style="min-height:80px" placeholder="This connects to Week ___ because..."></textarea>
+                </div>
+                <div class="pz-step" style="border-left:1px solid var(--border)">
+                  <div class="pz-lbl" style="color:var(--gold)">➕ Extend</div>
+                  <div class="pz-prompt">This week extended my thinking about research by making me realise... (what is genuinely new in your understanding?)</div>
+                  <textarea data-field-id="l3-cec-extend" data-field-label="PZ Extend: What genuinely changed in understanding of research" data-lesson="3" style="min-height:80px" placeholder="I now realise that..."></textarea>
+                </div>
+                <div class="pz-step" style="border-left:1px solid var(--border)">
+                  <div class="pz-lbl" style="color:var(--slate)">❓ Challenge</div>
+                  <div class="pz-prompt">Something still confusing or challenging is... (be honest — this is not marked on correctness, it helps shape next week)</div>
+                  <textarea data-field-id="l3-cec-challenge" data-field-label="PZ Challenge: What is still confusing after Week 5" data-lesson="3" style="min-height:80px" placeholder="I'm still unsure about..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rw"><h3>Resources</h3>
+        <a class="rl" href="https://www.sleepfoundation.org/sleep-studies/polysomnography" target="_blank"><div class="ri" style="background:var(--lslate)">🔬</div><div class="rm"><div class="rt">Sleep Foundation — Physiological Sleep Measurement</div><div class="rs">sleepfoundation.org</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="rl" href="https://www.apa.org/topics/biofeedback" target="_blank"><div class="ri" style="background:var(--lgold)">📡</div><div class="rm"><div class="rt">APA — Biofeedback and Physiological Measurement</div><div class="rs">apa.org</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="rl" href="https://pz.harvard.edu/resources/connect-extend-challenge" target="_blank"><div class="ri" style="background:var(--lfor)">🎓</div><div class="rm"><div class="rt">Project Zero — Connect-Extend-Challenge</div><div class="rs">pz.harvard.edu</div></div><span style="color:var(--muted)">↗</span></a>
+      </div>
+      <button class="db" id="btn-3" onclick="done(3)">Mark Lesson 3 Complete ✓</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const completed={1:false,2:false,3:false};
+function go(n){if(event)event.preventDefault();document.querySelectorAll('.lesson-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.ni').forEach(i=>i.classList.remove('a1','a2','a3'));document.getElementById('panel-'+n).classList.add('active');const cls=['a1','a2','a3'];document.querySelectorAll('.ni')[n-1].classList.add(cls[n-1]);window.scrollTo({top:0,behavior:'smooth'});}
+function tog(h){h.closest('.pc').classList.toggle('open');}
+function done(n){completed[n]=true;const b=document.getElementById('btn-'+n);b.textContent='✅ Lesson '+n+' Complete!';b.classList.add('marked');const c=document.getElementById('c'+n);c.classList.add('done');c.innerHTML='<svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';updateProg();if(n<3)setTimeout(()=>go(n+1),500);}
+function updateProg(){const c=Object.values(completed).filter(Boolean).length;document.getElementById('pf').style.width=(c/3*100)+'%';document.getElementById('pp').textContent=c+' / 3 complete';}
+function classify(btn,type){const card=btn.closest('.cls-card');card.querySelectorAll('.cls-btn').forEach(b=>{b.className='cls-btn';});btn.classList.add('sel-'+type);}
+function tagBias(btn){const card=btn.closest('.bias-card');card.querySelectorAll('.bias-btn').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');}
+function pickVerdict(btn,type){const card=btn.closest('.claim-card');card.querySelectorAll('.vbtn').forEach(b=>{b.className='vbtn';});btn.classList.add(type);}
+function chk(btn,correct,feedback){const card=btn.closest('.qc');const sel=card.querySelector('input[type=radio]:checked');const fb=card.querySelector('.qfb');if(!sel){fb.textContent='Please select an answer.';fb.className='qfb show err';return;}const opts=['a','b','c','d'];const idx=Array.from(card.querySelectorAll('.qopt')).findIndex(o=>o.querySelector('input')===sel);if(opts[idx]===correct){fb.textContent='✅ '+feedback;fb.className='qfb show ok';card.querySelectorAll('.qopt').forEach((o,i)=>{if(opts[i]===correct)o.classList.add('correct');});}else{fb.textContent='❌ Not quite — review the cortisol notes and try again.';fb.className='qfb show err';sel.closest('.qopt').classList.add('wrong');}}
+updateProg();
+</script>
+
+<script>
+// BCC Data Collection Module
+// ═══════════════════════════════════════════════════════════════════════════
+// BCC Psychology Portal — Data Collection Module v1.0
+// Embed this <script> block in every student portal.
+// Replace APPS_SCRIPT_URL with your deployed Web App URL.
+// ═══════════════════════════════════════════════════════════════════════════
+
+window.BCC_COLLECTOR = (function () {
+
+  // ── CONFIG — replace this URL after deploying your Apps Script ─────────────
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw0dfsGJx23m_ERybkYgtk_mLcpLiZuvp49wnoCWYeZJYhMv9KBs4iIyas3lVo1r7hz/exec";
+
+  // ── State ──────────────────────────────────────────────────────────────────
+  let studentName = "";
+  let studentClass = "";
+  let identityConfirmed = false;
+
+  // ── Public API ─────────────────────────────────────────────────────────────
+  function init(weekNum, lessonData) {
+    // weekNum: integer (1, 2, 3…)
+    // lessonData: array of { lesson, title } objects
+    window._BCC_WEEK = weekNum;
+    window._BCC_LESSONS = lessonData;
+
+    injectStyles();
+    injectIdentityBar();
+    injectSubmitButtons(lessonData);
+    restoreIdentity();
+  }
+
+  // Collect all textarea values for a given lesson panel
+  function collectResponses(lessonNum) {
+    const panel = document.getElementById("panel-" + lessonNum);
+    if (!panel) return {};
+
+    const responses = {};
+    const textareas = panel.querySelectorAll("textarea[data-field-id]");
+
+    textareas.forEach(function (ta) {
+      const val = ta.value.trim();
+      if (val) {
+        responses[ta.dataset.fieldId] = {
+          label: ta.dataset.fieldLabel || ta.placeholder || "Response",
+          value: val
+        };
+      }
+    });
+
+    return responses;
+  }
+
+  // Submit a lesson's responses to Google Sheets
+  function submit(lessonNum) {
+    if (!identityConfirmed) {
+      showIdentityError();
+      return;
+    }
+
+    const lessonInfo = (window._BCC_LESSONS || []).find(function (l) {
+      return l.lesson === lessonNum;
+    }) || {};
+
+    const responses = collectResponses(lessonNum);
+    const responseCount = Object.keys(responses).length;
+
+    if (responseCount === 0) {
+      showToast("No responses found for Lesson " + lessonNum + ". Try typing in some fields first.", "warn");
+      return;
+    }
+
+    const payload = {
+      studentName: studentName,
+      class: studentClass,
+      week: window._BCC_WEEK,
+      lesson: lessonNum,
+      lessonTitle: lessonInfo.title || "",
+      submittedAt: new Date().toISOString(),
+      responses: responses
+    };
+
+    const btn = document.getElementById("submit-btn-" + lessonNum);
+    setButtonState(btn, "loading");
+
+    fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",     // Apps Script doesn't return CORS headers on redirect
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(payload)
+    })
+    .then(function () {
+      // no-cors means we can't read the response body — treat any completion as success
+      setButtonState(btn, "done");
+      markLessonSubmitted(lessonNum);
+      showToast("Lesson " + lessonNum + " submitted! " + responseCount + " response" + (responseCount !== 1 ? "s" : "") + " saved to your teacher's spreadsheet.", "ok");
+      saveLocalBackup(payload);
+    })
+    .catch(function (err) {
+      setButtonState(btn, "error");
+      showToast("Submission failed — check your internet connection and try again. Your responses are still saved locally.", "error");
+      saveLocalBackup(payload);
+      console.error("BCC submit error:", err);
+    });
+  }
+
+  // ── Identity bar ───────────────────────────────────────────────────────────
+  function injectIdentityBar() {
+    const bar = document.createElement("div");
+    bar.id = "bcc-identity-bar";
+    bar.innerHTML = `
+      <div class="bcc-id-inner">
+        <div class="bcc-id-icon">👤</div>
+        <input id="bcc-name" type="text" placeholder="Your full name" autocomplete="name" spellcheck="false">
+        <input id="bcc-class" type="text" placeholder="Class (e.g. 10A)" autocomplete="off" spellcheck="false">
+        <button id="bcc-confirm-btn" onclick="BCC_COLLECTOR.confirmIdentity()">Confirm</button>
+        <div id="bcc-id-status" class="bcc-id-status"></div>
+      </div>
+    `;
+    document.body.insertBefore(bar, document.body.firstChild);
+
+    // Allow Enter key to confirm
+    bar.querySelectorAll("input").forEach(function (inp) {
+      inp.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") confirmIdentity();
+      });
+    });
+  }
+
+  function confirmIdentity() {
+    const nameEl  = document.getElementById("bcc-name");
+    const classEl = document.getElementById("bcc-class");
+    const status  = document.getElementById("bcc-id-status");
+    const btn     = document.getElementById("bcc-confirm-btn");
+
+    const name  = nameEl.value.trim();
+    const cls   = classEl.value.trim();
+
+    if (!name || !cls) {
+      status.textContent = "Please enter both your name and class.";
+      status.className = "bcc-id-status error";
+      return;
+    }
+
+    studentName     = name;
+    studentClass    = cls;
+    identityConfirmed = true;
+
+    nameEl.disabled  = true;
+    classEl.disabled = true;
+    btn.textContent  = "✓ Confirmed";
+    btn.disabled     = true;
+    btn.style.background = "#22c55e";
+
+    status.textContent = "Responses will be submitted as " + name + " · " + cls;
+    status.className   = "bcc-id-status ok";
+
+    // Persist for the session
+    try {
+      sessionStorage.setItem("bcc_name",  name);
+      sessionStorage.setItem("bcc_class", cls);
+    } catch (e) {}
+
+    showToast("Identity confirmed. Fill in your responses and submit each lesson when you're done.", "ok");
+  }
+
+  function restoreIdentity() {
+    try {
+      const savedName  = sessionStorage.getItem("bcc_name");
+      const savedClass = sessionStorage.getItem("bcc_class");
+      if (savedName && savedClass) {
+        document.getElementById("bcc-name").value  = savedName;
+        document.getElementById("bcc-class").value = savedClass;
+        confirmIdentity();
+      }
+    } catch (e) {}
+  }
+
+  function showIdentityError() {
+    const bar = document.getElementById("bcc-identity-bar");
+    bar.style.borderColor = "#ef4444";
+    bar.style.boxShadow   = "0 0 0 3px rgba(239,68,68,0.2)";
+    setTimeout(function () {
+      bar.style.borderColor = "";
+      bar.style.boxShadow   = "";
+    }, 2000);
+    showToast("Please enter your name and class at the top of the page first.", "error");
+    document.getElementById("bcc-name").focus();
+  }
+
+  // ── Submit buttons ─────────────────────────────────────────────────────────
+  function injectSubmitButtons(lessonData) {
+    lessonData.forEach(function (l) {
+      const doneBtn = document.getElementById("btn-" + l.lesson);
+      if (!doneBtn) return;
+
+      // Create submit button and insert before the existing "mark complete" button
+      const submitBtn = document.createElement("button");
+      submitBtn.id        = "submit-btn-" + l.lesson;
+      submitBtn.className = "bcc-submit-btn";
+      submitBtn.setAttribute("data-lesson", l.lesson);
+      submitBtn.innerHTML = "📤 Submit Lesson " + l.lesson + " to Teacher";
+      submitBtn.addEventListener("click", function () {
+        submit(l.lesson);
+      });
+
+      doneBtn.parentNode.insertBefore(submitBtn, doneBtn);
+    });
+  }
+
+  function setButtonState(btn, state) {
+    if (!btn) return;
+    btn.disabled = (state === "loading" || state === "done");
+    if (state === "loading") {
+      btn.innerHTML = '<span class="bcc-spinner"></span> Submitting…';
+      btn.className = "bcc-submit-btn loading";
+    } else if (state === "done") {
+      btn.innerHTML = "✅ Submitted to Teacher";
+      btn.className = "bcc-submit-btn submitted";
+    } else if (state === "error") {
+      btn.innerHTML = "⚠️ Try Again";
+      btn.className = "bcc-submit-btn error";
+      btn.disabled  = false;
+    }
+  }
+
+  function markLessonSubmitted(lessonNum) {
+    // Update the existing "mark complete" button too
+    const doneBtn = document.getElementById("btn-" + lessonNum);
+    if (doneBtn && !doneBtn.classList.contains("done") && !doneBtn.classList.contains("marked")) {
+      // Trigger the existing markDone / done function if it exists
+      if (typeof markDone === "function") markDone(lessonNum);
+      else if (typeof done === "function") done(lessonNum);
+    }
+  }
+
+  // ── Local backup (survives page refresh within same browser) ───────────────
+  function saveLocalBackup(payload) {
+    try {
+      const key = "bcc_backup_w" + payload.week + "l" + payload.lesson + "_" + normalise(payload.studentName);
+      sessionStorage.setItem(key, JSON.stringify({
+        savedAt: new Date().toISOString(),
+        payload: payload
+      }));
+    } catch (e) {}
+  }
+
+  // ── Toast notifications ────────────────────────────────────────────────────
+  function showToast(message, type) {
+    const existing = document.getElementById("bcc-toast");
+    if (existing) existing.remove();
+
+    const toast = document.createElement("div");
+    toast.id = "bcc-toast";
+    toast.className = "bcc-toast bcc-toast-" + (type || "ok");
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // Animate in
+    requestAnimationFrame(function () {
+      toast.style.opacity  = "1";
+      toast.style.transform = "translateY(0)";
+    });
+
+    // Auto dismiss
+    setTimeout(function () {
+      toast.style.opacity   = "0";
+      toast.style.transform = "translateY(8px)";
+      setTimeout(function () { toast.remove(); }, 300);
+    }, type === "error" ? 6000 : 4000);
+  }
+
+  // ── Styles ─────────────────────────────────────────────────────────────────
+  function injectStyles() {
+    const style = document.createElement("style");
+    style.textContent = `
+      /* Identity bar */
+      #bcc-identity-bar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: #0f172a;
+        border-bottom: 2px solid #334155;
+        padding: 10px 32px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+      .bcc-id-inner {
+        max-width: 1120px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .bcc-id-icon { font-size: 16px; flex-shrink: 0; }
+      #bcc-name, #bcc-class {
+        padding: 7px 12px;
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        color: #e2e8f0;
+        font-family: inherit;
+        font-size: 14px;
+        transition: border-color 0.2s;
+      }
+      #bcc-name { width: 200px; }
+      #bcc-class { width: 100px; }
+      #bcc-name:focus, #bcc-class:focus {
+        outline: none;
+        border-color: #6366f1;
+      }
+      #bcc-name:disabled, #bcc-class:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      #bcc-confirm-btn {
+        padding: 7px 18px;
+        background: #6366f1;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        flex-shrink: 0;
+      }
+      #bcc-confirm-btn:hover:not(:disabled) { background: #4f46e5; }
+      #bcc-confirm-btn:disabled { cursor: not-allowed; }
+      .bcc-id-status {
+        font-size: 12px;
+        color: #94a3b8;
+        flex: 1;
+        min-width: 200px;
+      }
+      .bcc-id-status.ok    { color: #4ade80; }
+      .bcc-id-status.error { color: #f87171; }
+
+      /* Submit button */
+      .bcc-submit-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 15px;
+        background: #1e3a5f;
+        border: 2px solid #2563eb;
+        border-radius: 12px;
+        color: #93c5fd;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-bottom: 10px;
+      }
+      .bcc-submit-btn:hover:not(:disabled) {
+        background: #1e40af;
+        border-color: #60a5fa;
+        color: #fff;
+      }
+      .bcc-submit-btn.loading {
+        background: #1e293b;
+        border-color: #475569;
+        color: #94a3b8;
+        cursor: wait;
+      }
+      .bcc-submit-btn.submitted {
+        background: #052e16;
+        border-color: #16a34a;
+        color: #86efac;
+        cursor: default;
+      }
+      .bcc-submit-btn.error {
+        background: #450a0a;
+        border-color: #dc2626;
+        color: #fca5a5;
+      }
+
+      /* Spinner */
+      .bcc-spinner {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border: 2px solid rgba(255,255,255,0.2);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: bcc-spin 0.7s linear infinite;
+        flex-shrink: 0;
+      }
+      @keyframes bcc-spin { to { transform: rotate(360deg); } }
+
+      /* Toast */
+      .bcc-toast {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(8px);
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        max-width: 560px;
+        text-align: center;
+        z-index: 9999;
+        opacity: 0;
+        transition: opacity 0.25s, transform 0.25s;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+        pointer-events: none;
+        font-family: inherit;
+      }
+      .bcc-toast-ok    { background: #052e16; color: #86efac; border: 1px solid #16a34a; }
+      .bcc-toast-warn  { background: #451a03; color: #fcd34d; border: 1px solid #d97706; }
+      .bcc-toast-error { background: #450a0a; color: #fca5a5; border: 1px solid #dc2626; }
+
+      /* Response count badge on textareas */
+      textarea.bcc-has-content {
+        border-color: #22c55e !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // ── Helpers ────────────────────────────────────────────────────────────────
+  function normalise(str) {
+    return String(str || "").trim().toLowerCase().replace(/\s+/g, "_");
+  }
+
+  // ── Textarea watcher — tags textareas that have content ───────────────────
+  function watchTextareas() {
+    document.querySelectorAll("textarea[data-field-id]").forEach(function (ta) {
+      ta.addEventListener("input", function () {
+        if (ta.value.trim()) {
+          ta.classList.add("bcc-has-content");
+        } else {
+          ta.classList.remove("bcc-has-content");
+        }
+      });
+    });
+  }
+
+  // Expose confirmIdentity so the inline onclick in the injected HTML works
+  return {
+    init: init,
+    submit: submit,
+    confirmIdentity: confirmIdentity,
+    watchTextareas: watchTextareas,
+    _getState: function () { return { studentName, studentClass, identityConfirmed }; }
+  };
+})();
+
+document.addEventListener('DOMContentLoaded',function(){
+  BCC_COLLECTOR.init(5,[{"lesson": 1, "title": "The Measurement Landscape \u2014 Tools of the Trade"}, {"lesson": 2, "title": "Self-Report Measures \u2014 What You Say vs What Is"}, {"lesson": 3, "title": "Physiological Measures in Psychology"}]);
+  BCC_COLLECTOR.watchTextareas();
+});
+</script>
+</body>
+</html>
