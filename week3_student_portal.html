@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 Psychology — Week 3: Inside the Sleeping Brain</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:      #0a0f1a;
+  --surf:    #111827;
+  --surf2:   #1a2336;
+  --border:  #1e2d45;
+  --text:    #e2e8f0;
+  --muted:   #64748b;
+  --em:      #059669;  /* emerald — L1 */
+  --lem:     rgba(5,150,105,0.12);
+  --am:      #d97706;  /* amber — L2 */
+  --lam:     rgba(217,119,6,0.12);
+  --rose:    #e11d48;  /* rose — L3 */
+  --lrose:   rgba(225,29,72,0.12);
+  --ind:     #6366f1;
+  --teal:    #0d9488;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+
+/* ── HERO ──────────────────────────────────────────────── */
+.hero{
+  background:var(--bg);
+  position:relative;
+  overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+/* animated brainwave background */
+.brainwave-bg{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+}
+.brainwave-bg svg{
+  position:absolute;bottom:0;left:0;width:100%;opacity:0.12;
+}
+.wave-path{
+  fill:none;stroke-width:1.5;
+  animation:waveDrift 8s ease-in-out infinite;
+}
+.w1{stroke:#059669;animation-delay:0s;}
+.w2{stroke:#d97706;animation-delay:1.5s;}
+.w3{stroke:#e11d48;animation-delay:3s;}
+.w4{stroke:#6366f1;animation-delay:4.5s;}
+@keyframes waveDrift{
+  0%,100%{transform:translateX(0)}
+  50%{transform:translateX(-40px)}
+}
+/* grid overlay */
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size:40px 40px;
+}
+
+.hero-inner{
+  position:relative;
+  max-width:1120px;margin:0 auto;
+  padding:60px 32px 0;
+  display:grid;
+  grid-template-columns:1fr 220px;
+  gap:40px;align-items:end;
+}
+.week-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--border);border-radius:6px;
+  padding:4px 12px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:0.08em;color:var(--muted);
+  margin-bottom:18px;
+}
+.week-chip span{width:6px;height:6px;border-radius:50%;background:var(--em);flex-shrink:0;}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(30px,4vw,52px);
+  font-weight:700;line-height:1.08;
+  color:#fff;margin-bottom:14px;
+  letter-spacing:-0.01em;
+}
+.hero h1 em{font-style:italic;color:var(--em);}
+.hero-sub{
+  font-size:15px;color:var(--muted);line-height:1.7;
+  max-width:520px;margin-bottom:28px;font-weight:300;
+}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px;}
+.hero-tag{
+  border:1px solid var(--border);border-radius:6px;
+  padding:5px 12px;font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--muted);
+}
+
+/* EEG visual */
+.eeg-vis{
+  display:flex;flex-direction:column;gap:6px;
+  padding-bottom:24px;
+}
+.eeg-row{display:flex;align-items:center;gap:8px;}
+.eeg-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;color:var(--muted);width:30px;text-align:right;flex-shrink:0;
+}
+.eeg-wave{
+  flex:1;height:24px;border-radius:4px;
+  overflow:hidden;position:relative;
+}
+.eeg-wave svg{width:100%;height:100%;}
+
+/* ── BIG Q ──────────────────────────────────────────────── */
+.bq{
+  background:var(--surf);border-top:1px solid var(--border);
+  padding:18px 32px;
+  display:flex;align-items:center;gap:16px;justify-content:center;
+}
+.bq-l{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--em);
+  white-space:nowrap;flex-shrink:0;
+}
+.bq-t{
+  font-family:'Playfair Display',serif;font-size:15px;
+  font-style:italic;color:#94a3b8;
+}
+
+/* ── PROGRESS ──────────────────────────────────────────── */
+.prog-wrap{
+  max-width:1120px;margin:0 auto;
+  padding:24px 32px 0;
+}
+.prog-row{display:flex;justify-content:space-between;margin-bottom:6px;}
+.prog-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);}
+.prog-pct{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--em);}
+.prog-track{height:3px;background:var(--border);border-radius:99px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--em),var(--am),var(--rose));border-radius:99px;width:0%;transition:width 0.9s cubic-bezier(0.34,1.56,0.64,1);}
+
+/* ── LAYOUT ──────────────────────────────────────────────── */
+.main{
+  max-width:1120px;margin:0 auto;
+  padding:28px 32px 80px;
+  display:grid;
+  grid-template-columns:250px 1fr;
+  gap:28px;align-items:start;
+}
+
+/* ── SIDEBAR ─────────────────────────────────────────────── */
+.sidebar{position:sticky;top:20px;}
+.scard{
+  background:var(--surf);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;margin-bottom:14px;
+}
+.scard-head{
+  padding:10px 16px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--border);
+}
+.nav-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 16px;border-bottom:1px solid var(--border);
+  cursor:pointer;transition:background 0.15s;
+  text-decoration:none;color:inherit;
+}
+.nav-item:last-child{border-bottom:none;}
+.nav-item:hover{background:var(--surf2);}
+.nav-item.active{background:rgba(5,150,105,0.08);border-left:2px solid var(--em);}
+.nav-l2.active{background:rgba(217,119,6,0.08);border-left-color:var(--am);}
+.nav-l3.active{background:rgba(225,29,72,0.08);border-left-color:var(--rose);}
+.nav-num{
+  width:28px;height:28px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;
+  flex-shrink:0;
+}
+.nav-l1 .nav-num{background:var(--lem);color:var(--em);}
+.nav-l2 .nav-num{background:var(--lam);color:var(--am);}
+.nav-l3 .nav-num{background:var(--lrose);color:var(--rose);}
+.nav-l1.active .nav-num{background:var(--em);color:#fff;}
+.nav-l2.active .nav-num{background:var(--am);color:#fff;}
+.nav-l3.active .nav-num{background:var(--rose);color:#fff;}
+.nav-t{flex:1;}
+.nav-t .nt{font-size:13px;font-weight:500;color:var(--text);}
+.nav-t .ns{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px;}
+.nav-chk{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto;}
+.nav-chk.done{background:#22c55e;border-color:#22c55e;}
+
+.vocab-wrap{padding:14px 16px;}
+.v-entry{margin-bottom:12px;}
+.v-term{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:var(--em);text-transform:uppercase;letter-spacing:0.05em;}
+.v-def{font-size:12px;color:#94a3b8;line-height:1.55;margin-top:3px;}
+
+/* ── LESSON PANELS ──────────────────────────────────────── */
+.lesson-panel{display:none;}
+.lesson-panel.active{display:block;animation:fu 0.3s ease;}
+@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* Lesson header */
+.l-hdr{
+  border-radius:16px;padding:36px;margin-bottom:22px;
+  position:relative;overflow:hidden;border:1px solid;
+}
+.l1-hdr{background:var(--lem);border-color:rgba(5,150,105,0.3);}
+.l2-hdr{background:var(--lam);border-color:rgba(217,119,6,0.3);}
+.l3-hdr{background:var(--lrose);border-color:rgba(225,29,72,0.3);}
+.l-hdr::after{
+  content:attr(data-icon);
+  position:absolute;right:20px;top:10px;
+  font-size:100px;opacity:0.06;pointer-events:none;line-height:1;
+}
+.l-tag{
+  display:inline-block;
+  border-radius:4px;padding:3px 10px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;
+  color:rgba(255,255,255,0.6);
+  margin-bottom:10px;background:rgba(255,255,255,0.08);
+}
+.l-hdr h2{
+  font-family:'Playfair Display',serif;
+  font-size:26px;font-weight:700;line-height:1.15;
+  color:#fff;margin-bottom:10px;
+}
+.l-goal{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:560px;margin-bottom:16px;}
+.l-chips{display:flex;gap:8px;flex-wrap:wrap;}
+.l-chip{
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  border-radius:6px;padding:4px 12px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.8);
+}
+
+/* Phase accordion */
+.phases{display:flex;flex-direction:column;gap:12px;margin-bottom:22px;}
+.pcard{
+  background:var(--surf);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+  transition:border-color 0.2s;
+}
+.pcard:hover{border-color:rgba(255,255,255,0.1);}
+.pcard.open{border-color:rgba(255,255,255,0.12);}
+.phead{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 20px;cursor:pointer;user-select:none;
+}
+.picon{
+  width:36px;height:36px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;
+}
+.pmeta{flex:1;}
+.ptitle{font-size:14px;font-weight:600;color:var(--text);}
+.ptime{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px;}
+.ptoggle{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--surf2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:var(--muted);
+  transition:transform 0.25s;flex-shrink:0;
+}
+.pcard.open .ptoggle{transform:rotate(180deg);}
+.pbody{
+  display:none;padding:0 20px 20px;
+  border-top:1px solid var(--border);
+}
+.pcard.open .pbody{display:block;}
+.pbody p{font-size:14px;line-height:1.75;color:#94a3b8;margin-bottom:10px;}
+.pbody strong{color:var(--text);}
+
+/* stage accent for titles */
+.l1 .ptitle{color:var(--em);}
+.l2 .ptitle{color:var(--am);}
+.l3 .ptitle{color:var(--rose);}
+
+/* Info boxes */
+.ibox{
+  background:var(--surf2);border:1px solid var(--border);
+  border-radius:10px;padding:14px;margin:12px 0;
+}
+.ibox-l{
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;
+  letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;
+}
+.ibox p{font-size:13px;line-height:1.65;color:#94a3b8;margin:0;}
+
+/* Stage card grid */
+.stage-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+.stage-card{border-radius:10px;padding:14px;border:1px solid;}
+
+/* Wave display */
+.wave-display{
+  display:flex;flex-direction:column;gap:10px;
+  margin:12px 0;
+}
+.wave-row{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 14px;background:var(--surf2);
+  border:1px solid var(--border);border-radius:8px;
+}
+.wave-stage{
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+  width:90px;flex-shrink:0;
+}
+.wave-desc{
+  flex:1;
+}
+.wave-desc .wd-wave{font-size:12px;color:var(--muted);}
+.wave-desc .wd-name{font-size:13px;font-weight:600;}
+
+/* Hypnogram visual */
+.hypno-visual{
+  background:var(--surf2);border:1px solid var(--border);
+  border-radius:10px;padding:20px;margin:12px 0;
+  font-family:'JetBrains Mono',monospace;
+}
+.hypno-title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px;}
+.hypno-row{
+  display:flex;align-items:center;gap:10px;margin-bottom:6px;
+}
+.hypno-lbl{font-size:11px;color:var(--muted);width:42px;text-align:right;flex-shrink:0;}
+.hypno-track{flex:1;height:14px;border-radius:4px;background:var(--border);position:relative;overflow:hidden;}
+.hypno-bar{height:100%;border-radius:4px;transition:width 0.5s;}
+.hypno-key{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap;}
+.hk-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);}
+.hk-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+
+/* textarea */
+textarea{
+  width:100%;background:var(--surf2);border:1px solid var(--border);
+  border-radius:8px;padding:12px 14px;
+  font-family:'Space Grotesk',sans-serif;font-size:14px;
+  color:var(--text);resize:vertical;min-height:88px;
+  transition:border-color 0.2s;
+}
+textarea:focus{outline:none;border-color:var(--em);}
+.reflect{margin-top:14px;}
+.reflect label{font-size:13px;font-weight:500;display:block;margin-bottom:6px;color:#94a3b8;}
+
+/* Data table */
+.data-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px;}
+.data-table th{
+  background:var(--surf2);padding:8px 12px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);
+  border-bottom:1px solid var(--border);text-align:left;
+}
+.data-table td{
+  padding:10px 12px;border-bottom:1px solid var(--border);
+  color:#94a3b8;line-height:1.5;
+}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:var(--surf2);}
+
+/* clickable consequence cards */
+.card-sort{display:flex;flex-direction:column;gap:8px;margin:12px 0;}
+.csort-card{
+  display:flex;align-items:center;gap:12px;padding:12px 14px;
+  border:1px solid var(--border);border-radius:10px;
+  cursor:pointer;transition:all 0.15s;background:var(--surf);
+}
+.csort-card:hover{border-color:rgba(255,255,255,0.15);}
+.csort-text{flex:1;font-size:13px;color:#94a3b8;}
+.csort-stage{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  padding:4px 10px;border-radius:6px;cursor:pointer;
+  border:1px solid var(--border);background:var(--surf2);color:var(--muted);
+  transition:all 0.15s;white-space:nowrap;
+}
+.csort-stage:hover{background:var(--surf2);color:var(--text);}
+.csort-stage.sel-N2{background:rgba(99,102,241,0.2);border-color:#6366f1;color:#a5b4fc;}
+.csort-stage.sel-N3{background:rgba(5,150,105,0.2);border-color:var(--em);color:#6ee7b7;}
+.csort-stage.sel-REM{background:rgba(225,29,72,0.2);border-color:var(--rose);color:#fda4af;}
+
+/* graph placeholder */
+.graph-box{
+  background:var(--surf2);border:1px solid var(--border);border-radius:10px;
+  padding:20px;margin:12px 0;text-align:center;
+}
+.graph-title{font-size:13px;font-weight:600;margin-bottom:8px;}
+.graph-ph{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--muted);padding:40px 20px;
+  border:1px dashed var(--border);border-radius:8px;
+}
+
+/* quiz */
+.quiz-c{background:var(--surf);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:14px;}
+.quiz-q{font-size:15px;font-weight:500;margin-bottom:12px;color:var(--text);}
+.quiz-opts{display:flex;flex-direction:column;gap:8px;}
+.quiz-opt{
+  display:flex;align-items:center;gap:10px;padding:10px 14px;
+  border:1px solid var(--border);border-radius:8px;cursor:pointer;
+  font-size:14px;color:#94a3b8;transition:all 0.15s;background:var(--surf2);
+}
+.quiz-opt:hover{border-color:rgba(255,255,255,0.15);color:var(--text);}
+.quiz-opt.correct{background:rgba(5,150,105,0.15);border-color:var(--em);color:#6ee7b7;}
+.quiz-opt.wrong{background:rgba(225,29,72,0.15);border-color:var(--rose);color:#fda4af;}
+.quiz-fb{font-size:13px;margin-top:10px;padding:10px 14px;border-radius:8px;display:none;line-height:1.6;}
+.quiz-fb.show{display:block;}
+.quiz-fb.ok{background:rgba(5,150,105,0.15);color:#6ee7b7;}
+.quiz-fb.err{background:rgba(225,29,72,0.15);color:#fda4af;}
+
+/* resources */
+.res-wrap{
+  background:var(--surf);border:1px solid var(--border);
+  border-radius:12px;padding:18px;margin-bottom:18px;
+}
+.res-wrap h3{
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;
+  letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:14px;
+}
+.res-link{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 14px;background:var(--surf2);border:1px solid var(--border);
+  border-radius:8px;text-decoration:none;color:var(--text);
+  margin-bottom:8px;transition:all 0.15s;
+}
+.res-link:hover{border-color:rgba(255,255,255,0.15);}
+.res-link:last-child{margin-bottom:0;}
+.rl-icon{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.rl-m{flex:1;}
+.rl-m .rlt{font-size:13px;font-weight:500;}
+.rl-m .rls{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:1px;}
+.rl-a{font-size:12px;color:var(--muted);}
+
+/* done btn */
+.done-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:14px;
+  border:1px solid var(--border);border-radius:10px;
+  background:var(--surf);cursor:pointer;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;
+  color:var(--muted);transition:all 0.2s;margin-bottom:14px;
+}
+.done-btn:hover{border-color:var(--em);color:var(--em);}
+.done-btn.marked{background:rgba(5,150,105,0.12);border-color:var(--em);color:#6ee7b7;}
+
+@media(max-width:768px){
+  .main{grid-template-columns:1fr;}
+  .sidebar{position:static;}
+  .hero-inner{grid-template-columns:1fr;}
+  .eeg-vis{display:none;}
+  .stage-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="brainwave-bg">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none">
+      <path class="wave-path w1" d="M0,100 C180,60 360,140 540,100 C720,60 900,140 1080,100 C1260,60 1380,100 1440,100"/>
+      <path class="wave-path w2" d="M0,120 C120,80 240,160 480,120 C720,80 960,160 1200,120 C1320,100 1380,120 1440,120" opacity="0.7"/>
+      <path class="wave-path w3" d="M0,80 C90,40 270,120 450,80 C630,40 810,120 990,80 C1170,40 1350,80 1440,80" opacity="0.5"/>
+      <path class="wave-path w4" d="M0,140 C200,100 400,180 600,140 C800,100 1000,180 1200,140 C1350,120 1400,140 1440,140" opacity="0.4"/>
+    </svg>
+  </div>
+  <div class="hero-inner">
+    <div>
+      <div class="week-chip"><span></span>Year 10 Psychology · Unit 2 · Week 3</div>
+      <h1>Inside the<br><em>Sleeping Brain</em></h1>
+      <p class="hero-sub">Three lessons going deeper than ever — mapping the architecture of sleep, measuring what it costs when you lose it, and learning how scientists actually see inside a sleeping brain.</p>
+      <div class="hero-tags">
+        <div class="hero-tag">⏱ 3 × 70 min</div>
+        <div class="hero-tag">AC9S10I05</div>
+        <div class="hero-tag">Describe · Analyse · Explain</div>
+        <div class="hero-tag">Term 2 · Week 3</div>
+      </div>
+    </div>
+    <div class="eeg-vis">
+      <div class="eeg-row"><div class="eeg-label" style="color:var(--em)">N3</div><div class="eeg-wave"><svg viewBox="0 0 200 24"><path d="M0,12 C10,12 15,2 25,2 C35,2 40,22 50,22 C60,22 65,2 75,2 C85,2 90,22 100,22 C110,22 115,2 125,2 C135,2 140,22 150,22 C160,22 165,2 175,2 C185,2 190,22 200,12" fill="none" stroke="#059669" stroke-width="2"/></svg></div></div>
+      <div class="eeg-row"><div class="eeg-label" style="color:var(--ind)">N2</div><div class="eeg-wave"><svg viewBox="0 0 200 24"><path d="M0,12 C20,10 30,8 40,12 C50,16 80,4 90,4 C100,4 110,20 120,12 C140,4 160,8 200,12" fill="none" stroke="#6366f1" stroke-width="1.5"/></svg></div></div>
+      <div class="eeg-row"><div class="eeg-label" style="color:var(--am)">N1</div><div class="eeg-wave"><svg viewBox="0 0 200 24"><path d="M0,12 C25,9 50,15 75,11 C100,7 125,17 150,12 C175,7 200,13 200,12" fill="none" stroke="#d97706" stroke-width="1.5"/></svg></div></div>
+      <div class="eeg-row"><div class="eeg-label" style="color:var(--rose)">REM</div><div class="eeg-wave"><svg viewBox="0 0 200 24"><path d="M0,12 C5,11 8,13 12,11 C16,9 18,14 22,12 C26,10 29,13 33,11 C37,9 40,14 45,12 C50,10 55,13 60,11 C65,9 68,14 72,12 C77,10 82,13 87,11 C92,9 96,14 101,12 C106,10 112,13 118,11 C124,9 130,14 136,12 C142,10 150,13 158,11 C166,9 180,14 200,12" fill="none" stroke="#e11d48" stroke-width="1"/></svg></div></div>
+    </div>
+  </div>
+  <div class="bq">
+    <span class="bq-l">🧠 Big Question</span>
+    <span class="bq-t">What is actually happening in your brain while you sleep — and does any of it matter?</span>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="prog-wrap">
+  <div class="prog-row">
+    <span class="prog-lbl">Week 3 Progress</span>
+    <span class="prog-pct" id="prog-pct">0 / 3 complete</span>
+  </div>
+  <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="scard">
+      <div class="scard-head">This Week</div>
+      <a class="nav-item nav-l1 active" onclick="go(1)" href="#">
+        <div class="nav-num">1</div>
+        <div class="nav-t"><div class="nt">Sleep Architecture</div><div class="ns">Describe · 70 min</div></div>
+        <div class="nav-chk" id="chk-1"></div>
+      </a>
+      <a class="nav-item nav-l2" onclick="go(2)" href="#">
+        <div class="nav-num">2</div>
+        <div class="nav-t"><div class="nt">Sleep & Performance</div><div class="ns">Analyse · 70 min</div></div>
+        <div class="nav-chk" id="chk-2"></div>
+      </a>
+      <a class="nav-item nav-l3" onclick="go(3)" href="#">
+        <div class="nav-num">3</div>
+        <div class="nav-t"><div class="nt">Research Methods & EEG</div><div class="ns">Explain · 70 min</div></div>
+        <div class="nav-chk" id="chk-3"></div>
+      </a>
+    </div>
+
+    <div class="scard">
+      <div class="scard-head">Key Terms</div>
+      <div class="vocab-wrap">
+        <div class="v-entry"><div class="v-term">Hypnogram</div><div class="v-def">A graph showing sleep stages across a night — the visual "fingerprint" of your sleep architecture.</div></div>
+        <div class="v-entry"><div class="v-term">Ultradian Cycle</div><div class="v-def">The ~90-minute repeating cycle through N1→N2→N3→REM sleep, occurring 4–6 times per night.</div></div>
+        <div class="v-entry"><div class="v-term">Sleep Spindles</div><div class="v-def">Brief 12–15 Hz bursts of neural activity in N2 — linked to memory consolidation and noise suppression.</div></div>
+        <div class="v-entry"><div class="v-term">REM Atonia</div><div class="v-def">Active muscle paralysis during REM sleep — prevents you from physically acting out your dreams.</div></div>
+        <div class="v-entry"><div class="v-term">Glymphatic System</div><div class="v-def">The brain's waste-clearance network — most active during N3 deep sleep; flushes amyloid-beta.</div></div>
+        <div class="v-entry"><div class="v-term">Polysomnography (PSG)</div><div class="v-def">Multi-channel sleep study recording EEG, eye movements, muscle tone, heart rate, and breathing simultaneously.</div></div>
+        <div class="v-entry"><div class="v-term">Actigraphy</div><div class="v-def">Wrist-worn movement sensor that infers sleep/wake patterns — the technology behind Fitbit sleep tracking.</div></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="scard-head">Assessment Link</div>
+      <div class="vocab-wrap">
+        <p style="font-size:13px;color:#64748b;line-height:1.65">Lesson 3 introduces the <strong style="color:#94a3b8">measurement methods</strong> you'll need to choose between for your <strong style="color:#94a3b8">Week 8 investigation</strong>. Start thinking: which method could YOU realistically use to investigate a sleep question?</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- PANELS -->
+  <div>
+
+    <!-- ══ LESSON 1 — SLEEP ARCHITECTURE ══ -->
+    <div class="lesson-panel l1 active" id="panel-1">
+      <div class="l-hdr l1-hdr" data-icon="🏗">
+        <div class="l-tag">Lesson 1 · AC9S10I05 · Describe</div>
+        <h2>Sleep Architecture —<br>The Blueprint of a Night</h2>
+        <p class="l-goal">By the end of this lesson you'll be able to <strong>describe</strong> all four sleep stages including brain wave frequencies, physiological characteristics, and the specific function each stage serves — with enough precision to peer-mark someone else's work.</p>
+        <div class="l-chips">
+          <span class="l-chip">⏱ 70 min</span><span class="l-chip">N1 · N2 · N3 · REM</span><span class="l-chip">🎭 Mime + Hypnogram</span>
+        </div>
+      </div>
+
+      <div class="phases l1">
+
+        <div class="pcard open">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lem)">🎭</div>
+            <div class="pmeta"><div class="ptitle">Hook — Sleep Stage Mime</div><div class="ptime">0–10 min · Class activity</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Four volunteers each performed a sleep stage. Based on what you saw, record your observations — then your teacher will reveal which stage was which.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0">
+              <div style="background:var(--surf2);border:1px solid var(--border);border-radius:8px;padding:12px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:6px">PERFORMER 1</div>
+                <p style="font-size:13px;margin:0">What I observed: ...</p>
+                <textarea data-field-id="l1-mime-1" data-field-label="Mime debrief: Performer 1 observation and guess" data-lesson="1" style="min-height:56px;margin-top:8px" placeholder="My guess: Stage ____"></textarea>
+              </div>
+              <div style="background:var(--surf2);border:1px solid var(--border);border-radius:8px;padding:12px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:6px">PERFORMER 2</div>
+                <p style="font-size:13px;margin:0">What I observed: ...</p>
+                <textarea data-field-id="l1-mime-2" data-field-label="Mime debrief: Performer 2 observation and guess" data-lesson="1" style="min-height:56px;margin-top:8px" placeholder="My guess: Stage ____"></textarea>
+              </div>
+              <div style="background:var(--surf2);border:1px solid var(--border);border-radius:8px;padding:12px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:6px">PERFORMER 3</div>
+                <p style="font-size:13px;margin:0">What I observed: ...</p>
+                <textarea data-field-id="l1-mime-3" data-field-label="Mime debrief: Performer 3 observation and guess" data-lesson="1" style="min-height:56px;margin-top:8px" placeholder="My guess: Stage ____"></textarea>
+              </div>
+              <div style="background:var(--surf2);border:1px solid var(--border);border-radius:8px;padding:12px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:6px">PERFORMER 4</div>
+                <p style="font-size:13px;margin:0">What I observed: ...</p>
+                <textarea data-field-id="l1-mime-4" data-field-label="Mime debrief: Performer 4 observation and guess" data-lesson="1" style="min-height:56px;margin-top:8px" placeholder="My guess: Stage ____"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lem)">📊</div>
+            <div class="pmeta"><div class="ptitle">Direct Instruction — The Four Stages</div><div class="ptime">10–28 min · Notes · Resource Sheet 7</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Each sleep stage has a distinctive EEG signature. Here's the wave pattern for each — take notes and add the Hz ranges, physiological features and functions to Resource Sheet 7.</p>
+            <div class="wave-display">
+              <div class="wave-row">
+                <div class="wave-stage" style="color:var(--am)">N1 — Light</div>
+                <div class="wave-desc">
+                  <div class="wd-name">Theta waves</div>
+                  <div class="wd-wave">4–8 Hz · Medium amplitude · Slow, irregular</div>
+                  <div style="font-size:12px;color:var(--muted);margin-top:3px">Easily woken · Hypnic jerks · Eyes roll slowly · 3–5% of night</div>
+                </div>
+              </div>
+              <div class="wave-row">
+                <div class="wave-stage" style="color:var(--ind)">N2 — Medium</div>
+                <div class="wave-desc">
+                  <div class="wd-name">Sleep spindles + K-complexes</div>
+                  <div class="wd-wave">Spindles: 12–15 Hz bursts · K-complex: large sharp waves</div>
+                  <div style="font-size:12px;color:var(--muted);margin-top:3px">Memory consolidation · Noise suppression · 45–55% of night</div>
+                </div>
+              </div>
+              <div class="wave-row">
+                <div class="wave-stage" style="color:var(--em)">N3 — Deep</div>
+                <div class="wave-desc">
+                  <div class="wd-name">Delta waves</div>
+                  <div class="wd-wave">0.5–4 Hz · HIGH amplitude · Large and slow</div>
+                  <div style="font-size:12px;color:var(--muted);margin-top:3px">Physical restoration · Growth hormone · Glymphatic flush · 15–20% (early night)</div>
+                </div>
+              </div>
+              <div class="wave-row">
+                <div class="wave-stage" style="color:var(--rose)">REM — Active</div>
+                <div class="wave-desc">
+                  <div class="wd-name">Beta/gamma — desynchronised</div>
+                  <div class="wd-wave">&gt;12 Hz · LOW amplitude · Nearly identical to waking (!)</div>
+                  <div style="font-size:12px;color:var(--muted);margin-top:3px">Dreams · Emotional memory · Creativity · REM atonia · 20–25% (late night)</div>
+                </div>
+              </div>
+            </div>
+            <div class="ibox">
+              <div class="ibox-l" style="color:var(--rose)">⚠️ Common Mistake</div>
+              <p>REM is often called "deep sleep" by the public — this is wrong. REM is the most <em>physiologically active</em> stage. The brain is essentially awake; only the body is paralysed. N3 is the correct "deep sleep."</p>
+            </div>
+            <div class="ibox">
+              <div class="ibox-l" style="color:var(--em)">🔄 The Ultradian Cycle</div>
+              <p>A ~90-minute cycle through all stages repeats 4–6 times per night. <strong style="color:var(--text)">Early cycles: heavy N3.</strong> <strong style="color:var(--text)">Late cycles: heavy REM.</strong> An alarm at 6 hours removes the final cycles — the ones richest in emotional and cognitive processing.</p>
+            </div>
+            <div class="reflect">
+              <label>📝 Critical question: If alcohol suppresses REM in the first half of the night, what specifically would a person lose — and why does this matter beyond just "worse sleep"?</label>
+              <textarea data-field-id="l1-rem-alcohol" data-field-label="Reflection: What specifically is lost if alcohol suppresses REM?" data-lesson="1" placeholder="Losing REM in the first half means losing... / The specific functions affected would be... / This matters because..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lem)">📈</div>
+            <div class="pmeta"><div class="ptitle">Guided Practice — Draw a Hypnogram</div><div class="ptime">28–47 min · Pairs · Resource Sheet 7</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <p>A hypnogram shows sleep stages across a night. Here's the general pattern for a typical adult — use this to guide your drawing on Resource Sheet 7, then modify it for your assigned scenario.</p>
+            <div class="hypno-visual">
+              <div class="hypno-title">Typical 8-Hour Adult Hypnogram (approximate)</div>
+              <div class="hypno-row"><div class="hypno-lbl">WAKE</div><div class="hypno-track"><div class="hypno-bar" style="width:5%;background:#ef4444"></div></div></div>
+              <div class="hypno-row"><div class="hypno-lbl" style="color:var(--rose)">REM</div><div class="hypno-track">
+                <div style="display:flex;height:100%;gap:2px">
+                  <div style="width:8%;background:transparent"></div><div style="width:4%;background:var(--rose);border-radius:4px"></div>
+                  <div style="width:14%;background:transparent"></div><div style="width:6%;background:var(--rose);border-radius:4px"></div>
+                  <div style="width:12%;background:transparent"></div><div style="width:9%;background:var(--rose);border-radius:4px"></div>
+                  <div style="width:8%;background:transparent"></div><div style="width:12%;background:var(--rose);border-radius:4px"></div>
+                </div>
+              </div></div>
+              <div class="hypno-row"><div class="hypno-lbl" style="color:var(--muted)">N1</div><div class="hypno-track"><div class="hypno-bar" style="width:100%;background:linear-gradient(90deg,#374151,#374151);opacity:0.4"></div></div></div>
+              <div class="hypno-row"><div class="hypno-lbl" style="color:var(--ind)">N2</div><div class="hypno-track"><div class="hypno-bar" style="width:55%;background:var(--ind);opacity:0.7"></div></div></div>
+              <div class="hypno-row"><div class="hypno-lbl" style="color:var(--em)">N3</div><div class="hypno-track">
+                <div style="display:flex;height:100%;gap:2px">
+                  <div style="width:20%;background:var(--em);border-radius:4px"></div>
+                  <div style="width:4%;background:transparent"></div>
+                  <div style="width:12%;background:var(--em);border-radius:4px;opacity:0.7"></div>
+                  <div style="width:4%;background:transparent"></div>
+                  <div style="width:5%;background:var(--em);border-radius:4px;opacity:0.4"></div>
+                </div>
+              </div></div>
+              <div class="hypno-key">
+                <div class="hk-item"><div class="hk-dot" style="background:var(--em)"></div>N3 dominates early</div>
+                <div class="hk-item"><div class="hk-dot" style="background:var(--rose)"></div>REM dominates late</div>
+                <div class="hk-item"><div class="hk-dot" style="background:var(--ind)"></div>N2 fills between</div>
+              </div>
+            </div>
+            <div class="reflect">
+              <label>🔍 Partner analysis: Identify ONE pattern, ONE trend, and ONE anomaly in your partner's altered hypnogram. Write them here:</label>
+              <textarea data-field-id="l1-partner-hyp" data-field-label="Partner analysis: Pattern, trend, and anomaly in altered hypnogram" data-lesson="1" placeholder="Pattern (consistent feature): ... / Trend (directional change): ... / Anomaly (unexpected departure): ..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lem)">🃏</div>
+            <div class="pmeta"><div class="ptitle">Application — Consequence Card Sort</div><div class="ptime">47–58 min · Group activity</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <p>For each consequence, select which sleep stage you would lose to cause it. Click the stage buttons to record your answer.</p>
+            <div class="card-sort">
+              <div class="csort-card"><div class="csort-text">Increased infection rate and slower wound healing</div><div style="display:flex;gap:6px"><button class="csort-stage" onclick="cSort(this,'N2')">N2</button><button class="csort-stage" onclick="cSort(this,'N3')">N3</button><button class="csort-stage" onclick="cSort(this,'REM')">REM</button></div></div>
+              <div class="csort-card"><div class="csort-text">Inability to consolidate new facts learned during the day</div><div style="display:flex;gap:6px"><button class="csort-stage" onclick="cSort(this,'N2')">N2</button><button class="csort-stage" onclick="cSort(this,'N3')">N3</button><button class="csort-stage" onclick="cSort(this,'REM')">REM</button></div></div>
+              <div class="csort-card"><div class="csort-text">Emotional dysregulation, increased anxiety and irritability</div><div style="display:flex;gap:6px"><button class="csort-stage" onclick="cSort(this,'N2')">N2</button><button class="csort-stage" onclick="cSort(this,'N3')">N3</button><button class="csort-stage" onclick="cSort(this,'REM')">REM</button></div></div>
+              <div class="csort-card"><div class="csort-text">Impaired physical growth in adolescents</div><div style="display:flex;gap:6px"><button class="csort-stage" onclick="cSort(this,'N2')">N2</button><button class="csort-stage" onclick="cSort(this,'N3')">N3</button><button class="csort-stage" onclick="cSort(this,'REM')">REM</button></div></div>
+              <div class="csort-card"><div class="csort-text">Increased amyloid-beta buildup (Alzheimer's risk factor)</div><div style="display:flex;gap:6px"><button class="csort-stage" onclick="cSort(this,'N2')">N2</button><button class="csort-stage" onclick="cSort(this,'N3')">N3</button><button class="csort-stage" onclick="cSort(this,'REM')">REM</button></div></div>
+              <div class="csort-card"><div class="csort-text">Reduced creativity and insight problem-solving ability</div><div style="display:flex;gap:6px"><button class="csort-stage" onclick="cSort(this,'N2')">N2</button><button class="csort-stage" onclick="cSort(this,'N3')">N3</button><button class="csort-stage" onclick="cSort(this,'REM')">REM</button></div></div>
+              <div class="csort-card"><div class="csort-text">Sleepwalking or night terrors (if woken from this stage)</div><div style="display:flex;gap:6px"><button class="csort-stage" onclick="cSort(this,'N2')">N2</button><button class="csort-stage" onclick="cSort(this,'N3')">N3</button><button class="csort-stage" onclick="cSort(this,'REM')">REM</button></div></div>
+            </div>
+            <div class="ibox">
+              <div class="ibox-l" style="color:var(--am)">💡 Check Your Answers</div>
+              <p>N3: immune function, growth hormone, glymphatic clearance, physical restoration, parasomnias (sleepwalking/night terrors). N2: declarative memory (spindles), procedural memory. REM: emotional regulation, creativity, fear extinction, social cognition.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lem)">✏️</div>
+            <div class="pmeta"><div class="ptitle">Exit — Describe Paragraph</div><div class="ptime">58–70 min · Individual writing</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Choose ONE sleep stage. Write 4 sentences — your partner will check you've hit all four criteria.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0">
+              <div style="padding:10px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px;color:#94a3b8"><span style="color:var(--em)">☐</span> Brain wave type with Hz range</div>
+              <div style="padding:10px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px;color:#94a3b8"><span style="color:var(--em)">☐</span> Two physiological characteristics</div>
+              <div style="padding:10px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px;color:#94a3b8"><span style="color:var(--em)">☐</span> Primary function of this stage</div>
+              <div style="padding:10px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px;color:#94a3b8"><span style="color:var(--em)">☐</span> Consequence if consistently lost</div>
+            </div>
+            <textarea data-field-id="l1-exit-describe" data-field-label="Exit: Describe paragraph (choose one stage)" data-lesson="1" placeholder="Stage chosen: _______&#10;&#10;My describe paragraph:"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="res-wrap">
+        <h3>Resources</h3>
+        <a class="res-link" href="https://www.sleepfoundation.org/stages-of-sleep" target="_blank"><div class="rl-icon" style="background:var(--lem)">🌿</div><div class="rl-m"><div class="rlt">Sleep Foundation — Stages of Sleep</div><div class="rls">sleepfoundation.org</div></div><span class="rl-a">↗</span></a>
+        <a class="res-link" href="https://www.sleepfoundation.org/stages-of-sleep/rem-sleep" target="_blank"><div class="rl-icon" style="background:var(--lrose)">👁</div><div class="rl-m"><div class="rlt">Sleep Foundation — REM Sleep Explained</div><div class="rls">sleepfoundation.org</div></div><span class="rl-a">↗</span></a>
+        <a class="res-link" href="https://www.khanacademy.org/test-prep/mcat/behavior/motivation-emotion-and-stress/a/sleep" target="_blank"><div class="rl-icon" style="background:var(--lam)">🎥</div><div class="rl-m"><div class="rlt">Khan Academy — Sleep Stages (MCAT)</div><div class="rls">khanacademy.org</div></div><span class="rl-a">↗</span></a>
+      </div>
+      <button class="done-btn" id="btn-1" onclick="markDone(1)">Mark Lesson 1 Complete ✓</button>
+    </div>
+
+    <!-- ══ LESSON 2 — SLEEP & PERFORMANCE ══ -->
+    <div class="lesson-panel l2" id="panel-2">
+      <div class="l-hdr l2-hdr" data-icon="📊">
+        <div class="l-tag">Lesson 2 · AC9S10I05 · Analyse</div>
+        <h2>Sleep &amp; Performance —<br>The Science Behind Your Results</h2>
+        <p class="l-goal">By the end of this lesson you'll be able to <strong>analyse</strong> multiple datasets connecting sleep quality to attention, memory, emotional regulation, and academic performance — identifying patterns, trends, and anomalies across all four.</p>
+        <div class="l-chips">
+          <span class="l-chip">⏱ 70 min</span><span class="l-chip">4 Data Sources</span><span class="l-chip">📈 Graph Analysis</span>
+        </div>
+      </div>
+
+      <div class="phases l2">
+
+        <div class="pcard open">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lam)">⚡</div>
+            <div class="pmeta"><div class="ptitle">Hook — Reaction Time Experiment</div><div class="ptime">0–10 min · Live data</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Your teacher ran a reaction time test with the class. Record the results and look for patterns.</p>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0">
+              <div style="padding:14px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;text-align:center">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:8px">MY SLEEP LAST NIGHT</div>
+                <textarea data-field-id="l2-sleep-hours" data-field-label="Reaction time: My sleep last night (hours)" data-lesson="2" style="min-height:40px;text-align:center" placeholder="_____ hours"></textarea>
+              </div>
+              <div style="padding:14px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;text-align:center">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:8px">MY REACTION TIME</div>
+                <textarea data-field-id="l2-rt-class" data-field-label="Reaction time: Class average (ms)" data-lesson="2" style="min-height:40px;text-align:center" placeholder="_____ ms"></textarea>
+              </div>
+              <div style="padding:14px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;text-align:center">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:8px">CLASS AVERAGE</div>
+                <textarea data-field-id="l2-rt-mine" data-field-label="Reaction time: My average reaction time (ms)" data-lesson="2" style="min-height:40px;text-align:center" placeholder="_____ ms"></textarea>
+              </div>
+            </div>
+            <div class="ibox">
+              <div class="ibox-l" style="color:var(--am)">⚠️ The Dose-Response Relationship</div>
+              <p>17–19 hours awake = cognitive impairment equivalent to a blood alcohol content of <strong style="color:var(--text)">0.05%</strong> — the legal driving limit. Two weeks of 6-hour nights matches one full night of total sleep deprivation in performance — but people rate themselves as "only slightly tired." <strong style="color:var(--text)">The subjective sense of impairment is lost before the actual impairment is.</strong></p>
+            </div>
+            <div class="reflect">
+              <label>🤔 Were there any anomalies in the class data — students who slept little but performed well, or vice versa? What alternative explanations might account for them?</label>
+              <textarea data-field-id="l2-rt-anomaly" data-field-label="Reaction time: Class data pattern and anomalies" data-lesson="2" placeholder="I noticed that... / A possible alternative explanation for outliers is... / This is a confound because..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lam)">🧠</div>
+            <div class="pmeta"><div class="ptitle">Direct Instruction — Four Performance Domains</div><div class="ptime">10–27 min · Notes</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <div style="display:flex;flex-direction:column;gap:10px;margin:12px 0">
+              <div style="padding:14px;background:var(--surf2);border-left:3px solid var(--am);border-radius:0 8px 8px 0">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--am);text-transform:uppercase;margin-bottom:6px">Domain 1 — Attention & Processing Speed</div>
+                <p style="font-size:13px;margin:0;line-height:1.7">PVT (Psychomotor Vigilance Task): 17–19 hrs awake = BAC 0.05% impairment. Reaction time degrades ~13ms per hour of deprivation beyond 16 hours. Critical finding: chronic restriction (6 hrs/night for 2 weeks) = same impairment as one sleepless night — but people <em>feel</em> only slightly tired. <strong style="color:var(--text)">Awareness of impairment is lost before the impairment is.</strong></p>
+              </div>
+              <div style="padding:14px;background:var(--surf2);border-left:3px solid var(--ind);border-radius:0 8px 8px 0">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ind);text-transform:uppercase;margin-bottom:6px">Domain 2 — Memory Consolidation</div>
+                <p style="font-size:13px;margin:0;line-height:1.7">Declarative memory requires N2 sleep spindles to transfer hippocampal encodings to cortical storage. Procedural memory requires N2/N3. REM "edits" emotional memory — strengthening the lesson while weakening the emotional sting. <strong style="color:var(--text)">Cramming by cutting sleep is neurologically self-defeating.</strong></p>
+              </div>
+              <div style="padding:14px;background:var(--surf2);border-left:3px solid var(--rose);border-radius:0 8px 8px 0">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--rose);text-transform:uppercase;margin-bottom:6px">Domain 3 — Emotional Regulation</div>
+                <p style="font-size:13px;margin:0;line-height:1.7">Amygdala reactivity: <strong style="color:var(--text)">60% greater</strong> after one night of sleep deprivation (Walker et al., 2007). The PFC-amygdala circuit is the most sleep-sensitive in the brain. Bidirectional relationship: poor sleep → depression, and depression → poor sleep. 90% of depressed patients report sleep disturbance.</p>
+              </div>
+              <div style="padding:14px;background:var(--surf2);border-left:3px solid var(--em);border-radius:0 8px 8px 0">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--em);text-transform:uppercase;margin-bottom:6px">Domain 4 — Academic Performance</div>
+                <p style="font-size:13px;margin:0;line-height:1.7">Wahlstrom et al. (2014): shifting start time from 7:15am → 8:40am produced a <strong style="color:var(--text)">1.06 GPA increase</strong> across 9,000 students. Carskadon: each earlier start hour reduces sleep by ~30 minutes (not compensated by earlier bedtime). ANOMALY: some studies find no GPA improvement — possible confounds: SES, family stability, individual chronotype variation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lam)">📉</div>
+            <div class="pmeta"><div class="ptitle">Data Analysis — Four Graphs</div><div class="ptime">27–47 min · Individual · Resource Sheet 8</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Your teacher will display four graphs. For each, complete the analysis grid on <strong>Resource Sheet 8</strong>. The key questions for every graph:</p>
+            <table class="data-table">
+              <tr><th>Graph</th><th>Title</th><th>Key analysis task</th></tr>
+              <tr><td style="color:var(--am);font-family:'JetBrains Mono',monospace">G1</td><td>Reaction Time vs Sleep Hours</td><td>Describe the pattern · Find where the curve steepens most · Note the anomaly above 9 hours</td></tr>
+              <tr><td style="color:var(--rose);font-family:'JetBrains Mono',monospace">G2</td><td>Amygdala Reactivity vs Deprivation</td><td>Is it linear? Identify the inflection point · What does dose-response mean here?</td></tr>
+              <tr><td style="color:var(--em);font-family:'JetBrains Mono',monospace">G3</td><td>GPA vs Nightly Sleep (scatter)</td><td>Direction and strength of correlation · Identify 3 outliers · Propose explanations</td></tr>
+              <tr><td style="color:var(--ind);font-family:'JetBrains Mono',monospace">G4</td><td>Memory Retention — Sleep vs No-Sleep</td><td>When does divergence begin? · What biological event explains it?</td></tr>
+            </table>
+            <div class="reflect">
+              <label>🔗 Group synthesis: Across all four graphs, what is the single most important finding for a Year 10 student? Connect two graphs in your answer.</label>
+              <textarea data-field-id="l2-synthesis" data-field-label="Group synthesis: Most important finding across four graphs" data-lesson="2" placeholder="The most important finding is... / Graphs ___ and ___ together show that... / The mechanism linking them is..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lam)">🔍</div>
+            <div class="pmeta"><div class="ptitle">Critical Thinking — The Correlation Trap</div><div class="ptime">47–58 min · Discussion</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <p>The sleep-performance correlation is solid. But <strong>correlation ≠ causation.</strong> Three alternative explanations:</p>
+            <div style="display:flex;flex-direction:column;gap:10px;margin:12px 0">
+              <div style="padding:14px;background:var(--lrose);border:1px solid rgba(225,29,72,0.3);border-radius:10px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--rose);text-transform:uppercase;margin-bottom:5px">Reverse Causation</div>
+                <p style="font-size:13px;margin:0;line-height:1.65;color:#94a3b8">Struggling students may sleep less <em>because of</em> stress about poor performance — making sleep deprivation the consequence, not the cause.</p>
+              </div>
+              <div style="padding:14px;background:var(--lam);border:1px solid rgba(217,119,6,0.3);border-radius:10px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--am);text-transform:uppercase;margin-bottom:5px">Common Cause (Third Variable)</div>
+                <p style="font-size:13px;margin:0;line-height:1.65;color:#94a3b8">Socioeconomic disadvantage independently reduces both sleep quality (noise, overcrowding, insecurity) and academic performance (under-resourced schools, low parental support).</p>
+              </div>
+              <div style="padding:14px;background:var(--lem);border:1px solid rgba(5,150,105,0.3);border-radius:10px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--em);text-transform:uppercase;margin-bottom:5px">Selection Bias</div>
+                <p style="font-size:13px;margin:0;line-height:1.65;color:#94a3b8">Students who describe themselves as "good sleepers" may also be more conscientious and organised — traits that independently predict academic performance regardless of sleep.</p>
+              </div>
+            </div>
+            <div class="reflect">
+              <label>💡 How would you design a study to establish CAUSAL direction? What makes an RCT (randomised controlled trial) impossible here — and what makes school start-time changes the closest thing to causal evidence?</label>
+              <textarea data-field-id="l2-causation" data-field-label="Critical thinking: How to establish causal direction" data-lesson="2" placeholder="To establish causation you would need... / An RCT is impossible because... / School start-time changes are like a natural experiment because..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lam)">✏️</div>
+            <div class="pmeta"><div class="ptitle">Exit — Analyse Paragraph</div><div class="ptime">58–70 min · Written</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <p><strong>Prompt:</strong> <em>Analyse the relationship between sleep quality and academic performance. Reference at least two graphs and identify one anomaly in the data.</em></p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0">
+              <div style="padding:10px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px;color:#94a3b8"><span style="color:var(--am)">☐</span> Pattern described for 2 graphs</div>
+              <div style="padding:10px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px;color:#94a3b8"><span style="color:var(--am)">☐</span> Mechanism named (not just "sleep helps")</div>
+              <div style="padding:10px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px;color:#94a3b8"><span style="color:var(--am)">☐</span> Anomaly identified + explanation</div>
+              <div style="padding:10px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px;color:#94a3b8"><span style="color:var(--am)">☐</span> Connection made between two data sources</div>
+            </div>
+            <textarea data-field-id="l2-exit-analyse" data-field-label="Exit: Analyse paragraph (two graphs, one anomaly)" data-lesson="2" placeholder="My analyse paragraph..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="res-wrap">
+        <h3>Resources</h3>
+        <a class="res-link" href="https://www.sleepfoundation.org/how-sleep-works/memory-and-sleep" target="_blank"><div class="rl-icon" style="background:var(--lam)">🧠</div><div class="rl-m"><div class="rlt">Sleep Foundation — Memory & Sleep</div><div class="rls">sleepfoundation.org</div></div><span class="rl-a">↗</span></a>
+        <a class="res-link" href="https://www.sleepfoundation.org/sleep-deprivation" target="_blank"><div class="rl-icon" style="background:var(--lrose)">⚠️</div><div class="rl-m"><div class="rlt">Sleep Foundation — Sleep Deprivation</div><div class="rls">sleepfoundation.org</div></div><span class="rl-a">↗</span></a>
+        <a class="res-link" href="https://www.khanacademy.org/test-prep/mcat/behavior/motivation-emotion-and-stress/a/sleep" target="_blank"><div class="rl-icon" style="background:var(--lem)">🎥</div><div class="rl-m"><div class="rlt">Khan Academy — Sleep and Cognition</div><div class="rls">khanacademy.org</div></div><span class="rl-a">↗</span></a>
+      </div>
+      <button class="done-btn" id="btn-2" onclick="markDone(2)">Mark Lesson 2 Complete ✓</button>
+    </div>
+
+    <!-- ══ LESSON 3 — RESEARCH METHODS / EEG ══ -->
+    <div class="lesson-panel l3" id="panel-3">
+      <div class="l-hdr l3-hdr" data-icon="📡">
+        <div class="l-tag">Lesson 3 · AC9S10I05 · Explain</div>
+        <h2>How We Know What We Know —<br>Measuring Sleep</h2>
+        <p class="l-goal">By the end of this lesson you'll be able to <strong>explain</strong> EEG, polysomnography, actigraphy, and self-report methods — interpret wave patterns and PSG data, and choose the right tool for a research question.</p>
+        <div class="l-chips">
+          <span class="l-chip">⏱ 70 min</span><span class="l-chip">EEG · PSG · Actigraphy</span><span class="l-chip">🔬 Data Interpretation</span>
+        </div>
+      </div>
+
+      <div class="phases l3">
+
+        <div class="pcard open">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lrose)">🖥</div>
+            <div class="pmeta"><div class="ptitle">Hook — The Mystery Readout</div><div class="ptime">0–10 min · Observe + discuss</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Your teacher displayed a full PSG readout. Before the explanation, record your initial observations:</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0">
+              <div style="padding:12px;background:var(--surf2);border:1px solid var(--border);border-radius:8px">
+                <p style="font-size:12px;color:var(--muted);margin-bottom:8px">How many different signals/channels did you count?</p>
+                <textarea data-field-id="l3-psg-count" data-field-label="Mystery readout: How many channels did you count?" data-lesson="3" style="min-height:50px" placeholder="I counted approximately..."></textarea>
+              </div>
+              <div style="padding:12px;background:var(--surf2);border:1px solid var(--border);border-radius:8px">
+                <p style="font-size:12px;color:var(--muted);margin-bottom:8px">What did you think each type of signal was measuring?</p>
+                <textarea data-field-id="l3-psg-guess" data-field-label="Mystery readout: What did you think each signal measured?" data-lesson="3" style="min-height:50px" placeholder="The wavy lines looked like... / The horizontal line might be..."></textarea>
+              </div>
+            </div>
+            <div class="ibox">
+              <div class="ibox-l" style="color:var(--rose)">📜 Historical moment</div>
+              <p>In 1953, Nathaniel Kleitman and Eugene Aserinsky used EEG to discover REM sleep — they initially thought the equipment was broken when they saw "waking-like" brain activity in sleeping subjects. This single discovery overturned centuries of assumption that sleep was a passive, uniform state.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lrose)">🔬</div>
+            <div class="pmeta"><div class="ptitle">Direct Instruction — Four Measurement Methods</div><div class="ptime">10–27 min · Notes · Resource Sheet 9</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <table class="data-table">
+              <tr>
+                <th>Method</th><th>What it measures</th><th>Strength</th><th>Key limitation</th>
+              </tr>
+              <tr>
+                <td style="color:var(--rose);font-weight:600">EEG</td>
+                <td>Cortical electrical activity via scalp electrodes — Hz and amplitude</td>
+                <td>Objective · High temporal resolution · Identifies stages precisely</td>
+                <td>Lab only · First-night effect · Equipment discomfort</td>
+              </tr>
+              <tr>
+                <td style="color:var(--rose);font-weight:600">PSG</td>
+                <td>EEG + EOG (eye movements) + EMG (muscle) + ECG + respiratory + oximetry</td>
+                <td>Gold standard · Diagnoses disorders (apnea, narcolepsy, RBD)</td>
+                <td>$800–2000/night · Lab only · Unnatural conditions</td>
+              </tr>
+              <tr>
+                <td style="color:var(--am);font-weight:600">Actigraphy</td>
+                <td>Movement patterns via wrist accelerometer → infers sleep/wake</td>
+                <td>Naturalistic · 7-day monitoring · Lower cost</td>
+                <td>80–90% accurate for sleep/wake only — cannot identify stages</td>
+              </tr>
+              <tr>
+                <td style="color:var(--em);font-weight:600">Self-Report</td>
+                <td>Subjective sleep quality (PSQI questionnaire, sleep diary)</td>
+                <td>Free · Scalable · Captures subjective experience</td>
+                <td>Retrospective bias · Poor insight (±20 min error on sleep onset)</td>
+              </tr>
+            </table>
+            <div class="ibox">
+              <div class="ibox-l" style="color:var(--rose)">⚠️ The Waking vs REM Problem</div>
+              <p>On EEG alone, waking and REM look nearly identical — both show desynchronised, low-amplitude beta waves. The ONLY way to distinguish them in a PSG is the <strong style="color:var(--text)">EMG channel</strong>: during REM, the chin muscle goes flat (atonia). This is why PSG uses multiple channels — no single signal tells the full story.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lrose)">🧩</div>
+            <div class="pmeta"><div class="ptitle">Guided Practice — EEG Wave ID + PSG Interpretation</div><div class="ptime">27–47 min · Individual · Resource Sheet 9</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Your teacher will display six EEG wave traces (A–F). For each, identify the wave type, record its frequency and amplitude, and assign the sleep stage.</p>
+            <div class="ibox">
+              <div class="ibox-l" style="color:var(--rose)">📋 Wave Reference Guide</div>
+              <div class="wave-display" style="margin:8px 0">
+                <div class="wave-row"><div class="wave-stage" style="color:var(--em)">DELTA (N3)</div><div class="wave-desc"><div class="wd-wave">0.5–4 Hz · HIGH amplitude · Large slow waves</div></div></div>
+                <div class="wave-row"><div class="wave-stage" style="color:var(--am)">THETA (N1)</div><div class="wave-desc"><div class="wd-wave">4–8 Hz · Medium amplitude · Irregular</div></div></div>
+                <div class="wave-row"><div class="wave-stage" style="color:var(--ind)">SPINDLE (N2)</div><div class="wave-desc"><div class="wd-wave">12–15 Hz · Brief bursts · Waxing-waning shape</div></div></div>
+                <div class="wave-row"><div class="wave-stage" style="color:var(--rose)">BETA-REM/WAKE</div><div class="wave-desc"><div class="wd-wave">&gt;12 Hz · LOW amplitude · Fast, desynchronised</div></div></div>
+              </div>
+            </div>
+            <div class="quiz-c">
+              <div class="quiz-q">Which two EEG wave patterns look nearly identical — requiring another PSG channel to distinguish?</div>
+              <div class="quiz-opts">
+                <label class="quiz-opt"><input type="radio" name="q3-1" value="a"> Delta (N3) and Theta (N1)</label>
+                <label class="quiz-opt"><input type="radio" name="q3-1" value="b"> Waking beta and REM beta</label>
+                <label class="quiz-opt"><input type="radio" name="q3-1" value="c"> Sleep spindles and K-complexes</label>
+              </div>
+              <button onclick="chk(this,'b','Correct! Both waking and REM show desynchronised low-amplitude beta activity on EEG. The definitive distinguishing channel is the EMG — REM shows muscle atonia (flat line), waking does not.')" style="margin-top:10px;padding:8px 16px;background:var(--rose);color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:JetBrains Mono,monospace;font-size:12px">Check</button>
+              <div class="quiz-fb"></div>
+            </div>
+            <div class="reflect">
+              <label>🏥 Clinical alert: In Epoch 2 of the PSG data, the respiratory channel shows a 10-second cessation of airflow. What is this event called, and what condition does it suggest?</label>
+              <textarea data-field-id="l3-apnea" data-field-label="Clinical alert: What is the apnea event and what does it suggest?" data-lesson="3" placeholder="This event is called an... / It suggests the patient may have... / The next clinical step would be..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lrose)">🎯</div>
+            <div class="pmeta"><div class="ptitle">Application — Sleep Study Design Challenge</div><div class="ptime">47–58 min · Groups</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Your group received a scenario. Recommend a measurement method and justify it. Here are the four scenarios for reference:</p>
+            <div style="display:flex;flex-direction:column;gap:8px;margin:12px 0">
+              <div style="padding:12px 14px;background:var(--surf2);border-left:3px solid var(--rose);border-radius:0 8px 8px 0;font-size:13px;color:#94a3b8"><strong style="color:var(--text)">Scenario A:</strong> A school psychologist wants to monitor how much sleep Year 10 students are getting across one full term — without disrupting school life.</div>
+              <div style="padding:12px 14px;background:var(--surf2);border-left:3px solid var(--am);border-radius:0 8px 8px 0;font-size:13px;color:#94a3b8"><strong style="color:var(--text)">Scenario B:</strong> A researcher wants to test whether a new melatonin supplement increases N3 sleep in adolescents.</div>
+              <div style="padding:12px 14px;background:var(--surf2);border-left:3px solid var(--em);border-radius:0 8px 8px 0;font-size:13px;color:#94a3b8"><strong style="color:var(--text)">Scenario C:</strong> A parent believes their child stops breathing during sleep. They need a clinical diagnosis.</div>
+              <div style="padding:12px 14px;background:var(--surf2);border-left:3px solid var(--ind);border-radius:0 8px 8px 0;font-size:13px;color:#94a3b8"><strong style="color:var(--text)">Scenario D:</strong> A large epidemiological study wants to survey sleep habits across 10,000 people in 5 countries.</div>
+            </div>
+            <div class="reflect">
+              <label>📝 Your group's recommendation (method + justification + limitation addressed):</label>
+              <textarea data-field-id="l3-study-design" data-field-label="Study design challenge: Method recommendation and justification" data-lesson="3" placeholder="Our scenario: ___   Our recommended method: ___&#10;&#10;Justification: ...&#10;&#10;Key limitation of our method: ... / We would address this by: ..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lrose)">✏️</div>
+            <div class="pmeta"><div class="ptitle">Exit — Explain Paragraph + Week 3 Synthesis</div><div class="ptime">58–70 min · Individual</div></div>
+            <div class="ptoggle">▼</div>
+          </div>
+          <div class="pbody">
+            <p><strong>Task 1 — Explain Paragraph:</strong> <em>Explain why polysomnography is the gold standard for sleep measurement. Include: (1) what PSG measures, (2) how EEG identifies sleep stages, (3) one limitation.</em></p>
+            <textarea data-field-id="l3-exit-explain" data-field-label="Exit: Explain paragraph (PSG gold standard)" data-lesson="3" style="margin-bottom:16px" placeholder="Polysomnography is considered the gold standard because... / EEG identifies sleep stages by... / One key limitation is..."></textarea>
+            <p><strong>Task 2 — Week 3 Synthesis Sentence:</strong></p>
+            <div style="padding:14px;background:var(--surf2);border:1px solid var(--border);border-radius:10px;margin:10px 0;font-size:14px;color:#94a3b8;line-height:1.7">
+              "This week I learned that sleep architecture involves <span style="color:var(--em)">_____</span> [L1], this matters for performance because <span style="color:var(--am)">_____</span> [L2], and we know this because researchers measure it using <span style="color:var(--rose)">_____</span> [L3]."
+            </div>
+            <textarea data-field-id="l3-synthesis" data-field-label="Week 3 synthesis sentence connecting all three lessons" data-lesson="3" placeholder="Write your full synthesis sentence here — don't just fill in the blanks above:"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="res-wrap">
+        <h3>Resources</h3>
+        <a class="res-link" href="https://www.sleepfoundation.org/sleep-studies" target="_blank"><div class="rl-icon" style="background:var(--lrose)">🔬</div><div class="rl-m"><div class="rlt">Sleep Foundation — Sleep Studies</div><div class="rls">sleepfoundation.org</div></div><span class="rl-a">↗</span></a>
+        <a class="res-link" href="https://www.sleepfoundation.org/how-sleep-works/eeg-sleep" target="_blank"><div class="rl-icon" style="background:var(--lrose)">📡</div><div class="rl-m"><div class="rlt">Sleep Foundation — EEG and Sleep</div><div class="rls">sleepfoundation.org</div></div><span class="rl-a">↗</span></a>
+        <a class="res-link" href="https://aasm.org/resources/pdf/pressroom/adult-sleep-fact-sheet.pdf" target="_blank"><div class="rl-icon" style="background:var(--lam)">📄</div><div class="rl-m"><div class="rlt">AASM — Sleep Fact Sheet</div><div class="rls">aasm.org · PDF</div></div><span class="rl-a">↗</span></a>
+      </div>
+      <button class="done-btn" id="btn-3" onclick="markDone(3)">Mark Lesson 3 Complete ✓</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const completed={1:false,2:false,3:false};
+
+function go(n){
+  if(event)event.preventDefault();
+  document.querySelectorAll('.lesson-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
+  document.getElementById('panel-'+n).classList.add('active');
+  document.querySelectorAll('.nav-item')[n-1].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function tog(head){head.closest('.pcard').classList.toggle('open');}
+function markDone(n){
+  completed[n]=true;
+  const btn=document.getElementById('btn-'+n);
+  btn.textContent='✅ Lesson '+n+' Complete!';
+  btn.classList.add('marked');
+  const chk=document.getElementById('chk-'+n);
+  chk.classList.add('done');
+  chk.innerHTML='<svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  updateProg();
+  if(n<3)setTimeout(()=>go(n+1),500);
+}
+function updateProg(){
+  const c=Object.values(completed).filter(Boolean).length;
+  document.getElementById('prog-fill').style.width=(c/3*100)+'%';
+  document.getElementById('prog-pct').textContent=c+' / 3 complete';
+}
+function cSort(btn, stage){
+  const card=btn.closest('.csort-card');
+  card.querySelectorAll('.csort-stage').forEach(b=>{b.className='csort-stage';});
+  btn.classList.add('sel-'+stage);
+}
+function chk(btn,correct,feedback){
+  const card=btn.closest('.quiz-c');
+  const sel=card.querySelector('input[type=radio]:checked');
+  const fb=card.querySelector('.quiz-fb');
+  if(!sel){fb.textContent='Please select an answer.';fb.className='quiz-fb show err';return;}
+  if(sel.value===correct){
+    fb.textContent='✅ '+feedback;fb.className='quiz-fb show ok';
+    card.querySelectorAll('.quiz-opt').forEach(o=>{if(o.querySelector('input').value===correct)o.classList.add('correct');});
+  }else{
+    fb.textContent='❌ Not quite — think about what distinguishes the two most similar EEG traces.';fb.className='quiz-fb show err';
+    sel.closest('.quiz-opt').classList.add('wrong');
+  }
+}
+updateProg();
+</script>
+
+<script>
+// ── BCC Data Collection Module ──────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════════════
+// BCC Psychology Portal — Data Collection Module v1.0
+// Embed this <script> block in every student portal.
+// Replace APPS_SCRIPT_URL with your deployed Web App URL.
+// ═══════════════════════════════════════════════════════════════════════════
+
+window.BCC_COLLECTOR = (function () {
+
+  // ── CONFIG — replace this URL after deploying your Apps Script ─────────────
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw0dfsGJx23m_ERybkYgtk_mLcpLiZuvp49wnoCWYeZJYhMv9KBs4iIyas3lVo1r7hz/exec";
+
+  // ── State ──────────────────────────────────────────────────────────────────
+  let studentName = "";
+  let studentClass = "";
+  let identityConfirmed = false;
+
+  // ── Public API ─────────────────────────────────────────────────────────────
+  function init(weekNum, lessonData) {
+    // weekNum: integer (1, 2, 3…)
+    // lessonData: array of { lesson, title } objects
+    window._BCC_WEEK = weekNum;
+    window._BCC_LESSONS = lessonData;
+
+    injectStyles();
+    injectIdentityBar();
+    injectSubmitButtons(lessonData);
+    restoreIdentity();
+  }
+
+  // Collect all textarea values for a given lesson panel
+  function collectResponses(lessonNum) {
+    const panel = document.getElementById("panel-" + lessonNum);
+    if (!panel) return {};
+
+    const responses = {};
+    const textareas = panel.querySelectorAll("textarea[data-field-id]");
+
+    textareas.forEach(function (ta) {
+      const val = ta.value.trim();
+      if (val) {
+        responses[ta.dataset.fieldId] = {
+          label: ta.dataset.fieldLabel || ta.placeholder || "Response",
+          value: val
+        };
+      }
+    });
+
+    return responses;
+  }
+
+  // Submit a lesson's responses to Google Sheets
+  function submit(lessonNum) {
+    if (!identityConfirmed) {
+      showIdentityError();
+      return;
+    }
+
+    const lessonInfo = (window._BCC_LESSONS || []).find(function (l) {
+      return l.lesson === lessonNum;
+    }) || {};
+
+    const responses = collectResponses(lessonNum);
+    const responseCount = Object.keys(responses).length;
+
+    if (responseCount === 0) {
+      showToast("No responses found for Lesson " + lessonNum + ". Try typing in some fields first.", "warn");
+      return;
+    }
+
+    const payload = {
+      studentName: studentName,
+      class: studentClass,
+      week: window._BCC_WEEK,
+      lesson: lessonNum,
+      lessonTitle: lessonInfo.title || "",
+      submittedAt: new Date().toISOString(),
+      responses: responses
+    };
+
+    const btn = document.getElementById("submit-btn-" + lessonNum);
+    setButtonState(btn, "loading");
+
+    fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",     // Apps Script doesn't return CORS headers on redirect
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(payload)
+    })
+    .then(function () {
+      // no-cors means we can't read the response body — treat any completion as success
+      setButtonState(btn, "done");
+      markLessonSubmitted(lessonNum);
+      showToast("Lesson " + lessonNum + " submitted! " + responseCount + " response" + (responseCount !== 1 ? "s" : "") + " saved to your teacher's spreadsheet.", "ok");
+      saveLocalBackup(payload);
+    })
+    .catch(function (err) {
+      setButtonState(btn, "error");
+      showToast("Submission failed — check your internet connection and try again. Your responses are still saved locally.", "error");
+      saveLocalBackup(payload);
+      console.error("BCC submit error:", err);
+    });
+  }
+
+  // ── Identity bar ───────────────────────────────────────────────────────────
+  function injectIdentityBar() {
+    const bar = document.createElement("div");
+    bar.id = "bcc-identity-bar";
+    bar.innerHTML = `
+      <div class="bcc-id-inner">
+        <div class="bcc-id-icon">👤</div>
+        <input id="bcc-name" type="text" placeholder="Your full name" autocomplete="name" spellcheck="false">
+        <input id="bcc-class" type="text" placeholder="Class (e.g. 10A)" autocomplete="off" spellcheck="false">
+        <button id="bcc-confirm-btn" onclick="BCC_COLLECTOR.confirmIdentity()">Confirm</button>
+        <div id="bcc-id-status" class="bcc-id-status"></div>
+      </div>
+    `;
+    document.body.insertBefore(bar, document.body.firstChild);
+
+    // Allow Enter key to confirm
+    bar.querySelectorAll("input").forEach(function (inp) {
+      inp.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") confirmIdentity();
+      });
+    });
+  }
+
+  function confirmIdentity() {
+    const nameEl  = document.getElementById("bcc-name");
+    const classEl = document.getElementById("bcc-class");
+    const status  = document.getElementById("bcc-id-status");
+    const btn     = document.getElementById("bcc-confirm-btn");
+
+    const name  = nameEl.value.trim();
+    const cls   = classEl.value.trim();
+
+    if (!name || !cls) {
+      status.textContent = "Please enter both your name and class.";
+      status.className = "bcc-id-status error";
+      return;
+    }
+
+    studentName     = name;
+    studentClass    = cls;
+    identityConfirmed = true;
+
+    nameEl.disabled  = true;
+    classEl.disabled = true;
+    btn.textContent  = "✓ Confirmed";
+    btn.disabled     = true;
+    btn.style.background = "#22c55e";
+
+    status.textContent = "Responses will be submitted as " + name + " · " + cls;
+    status.className   = "bcc-id-status ok";
+
+    // Persist for the session
+    try {
+      sessionStorage.setItem("bcc_name",  name);
+      sessionStorage.setItem("bcc_class", cls);
+    } catch (e) {}
+
+    showToast("Identity confirmed. Fill in your responses and submit each lesson when you're done.", "ok");
+  }
+
+  function restoreIdentity() {
+    try {
+      const savedName  = sessionStorage.getItem("bcc_name");
+      const savedClass = sessionStorage.getItem("bcc_class");
+      if (savedName && savedClass) {
+        document.getElementById("bcc-name").value  = savedName;
+        document.getElementById("bcc-class").value = savedClass;
+        confirmIdentity();
+      }
+    } catch (e) {}
+  }
+
+  function showIdentityError() {
+    const bar = document.getElementById("bcc-identity-bar");
+    bar.style.borderColor = "#ef4444";
+    bar.style.boxShadow   = "0 0 0 3px rgba(239,68,68,0.2)";
+    setTimeout(function () {
+      bar.style.borderColor = "";
+      bar.style.boxShadow   = "";
+    }, 2000);
+    showToast("Please enter your name and class at the top of the page first.", "error");
+    document.getElementById("bcc-name").focus();
+  }
+
+  // ── Submit buttons ─────────────────────────────────────────────────────────
+  function injectSubmitButtons(lessonData) {
+    lessonData.forEach(function (l) {
+      const doneBtn = document.getElementById("btn-" + l.lesson);
+      if (!doneBtn) return;
+
+      // Create submit button and insert before the existing "mark complete" button
+      const submitBtn = document.createElement("button");
+      submitBtn.id        = "submit-btn-" + l.lesson;
+      submitBtn.className = "bcc-submit-btn";
+      submitBtn.setAttribute("data-lesson", l.lesson);
+      submitBtn.innerHTML = "📤 Submit Lesson " + l.lesson + " to Teacher";
+      submitBtn.addEventListener("click", function () {
+        submit(l.lesson);
+      });
+
+      doneBtn.parentNode.insertBefore(submitBtn, doneBtn);
+    });
+  }
+
+  function setButtonState(btn, state) {
+    if (!btn) return;
+    btn.disabled = (state === "loading" || state === "done");
+    if (state === "loading") {
+      btn.innerHTML = '<span class="bcc-spinner"></span> Submitting…';
+      btn.className = "bcc-submit-btn loading";
+    } else if (state === "done") {
+      btn.innerHTML = "✅ Submitted to Teacher";
+      btn.className = "bcc-submit-btn submitted";
+    } else if (state === "error") {
+      btn.innerHTML = "⚠️ Try Again";
+      btn.className = "bcc-submit-btn error";
+      btn.disabled  = false;
+    }
+  }
+
+  function markLessonSubmitted(lessonNum) {
+    // Update the existing "mark complete" button too
+    const doneBtn = document.getElementById("btn-" + lessonNum);
+    if (doneBtn && !doneBtn.classList.contains("done") && !doneBtn.classList.contains("marked")) {
+      // Trigger the existing markDone / done function if it exists
+      if (typeof markDone === "function") markDone(lessonNum);
+      else if (typeof done === "function") done(lessonNum);
+    }
+  }
+
+  // ── Local backup (survives page refresh within same browser) ───────────────
+  function saveLocalBackup(payload) {
+    try {
+      const key = "bcc_backup_w" + payload.week + "l" + payload.lesson + "_" + normalise(payload.studentName);
+      sessionStorage.setItem(key, JSON.stringify({
+        savedAt: new Date().toISOString(),
+        payload: payload
+      }));
+    } catch (e) {}
+  }
+
+  // ── Toast notifications ────────────────────────────────────────────────────
+  function showToast(message, type) {
+    const existing = document.getElementById("bcc-toast");
+    if (existing) existing.remove();
+
+    const toast = document.createElement("div");
+    toast.id = "bcc-toast";
+    toast.className = "bcc-toast bcc-toast-" + (type || "ok");
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // Animate in
+    requestAnimationFrame(function () {
+      toast.style.opacity  = "1";
+      toast.style.transform = "translateY(0)";
+    });
+
+    // Auto dismiss
+    setTimeout(function () {
+      toast.style.opacity   = "0";
+      toast.style.transform = "translateY(8px)";
+      setTimeout(function () { toast.remove(); }, 300);
+    }, type === "error" ? 6000 : 4000);
+  }
+
+  // ── Styles ─────────────────────────────────────────────────────────────────
+  function injectStyles() {
+    const style = document.createElement("style");
+    style.textContent = `
+      /* Identity bar */
+      #bcc-identity-bar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: #0f172a;
+        border-bottom: 2px solid #334155;
+        padding: 10px 32px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+      .bcc-id-inner {
+        max-width: 1120px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .bcc-id-icon { font-size: 16px; flex-shrink: 0; }
+      #bcc-name, #bcc-class {
+        padding: 7px 12px;
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        color: #e2e8f0;
+        font-family: inherit;
+        font-size: 14px;
+        transition: border-color 0.2s;
+      }
+      #bcc-name { width: 200px; }
+      #bcc-class { width: 100px; }
+      #bcc-name:focus, #bcc-class:focus {
+        outline: none;
+        border-color: #6366f1;
+      }
+      #bcc-name:disabled, #bcc-class:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      #bcc-confirm-btn {
+        padding: 7px 18px;
+        background: #6366f1;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        flex-shrink: 0;
+      }
+      #bcc-confirm-btn:hover:not(:disabled) { background: #4f46e5; }
+      #bcc-confirm-btn:disabled { cursor: not-allowed; }
+      .bcc-id-status {
+        font-size: 12px;
+        color: #94a3b8;
+        flex: 1;
+        min-width: 200px;
+      }
+      .bcc-id-status.ok    { color: #4ade80; }
+      .bcc-id-status.error { color: #f87171; }
+
+      /* Submit button */
+      .bcc-submit-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 15px;
+        background: #1e3a5f;
+        border: 2px solid #2563eb;
+        border-radius: 12px;
+        color: #93c5fd;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-bottom: 10px;
+      }
+      .bcc-submit-btn:hover:not(:disabled) {
+        background: #1e40af;
+        border-color: #60a5fa;
+        color: #fff;
+      }
+      .bcc-submit-btn.loading {
+        background: #1e293b;
+        border-color: #475569;
+        color: #94a3b8;
+        cursor: wait;
+      }
+      .bcc-submit-btn.submitted {
+        background: #052e16;
+        border-color: #16a34a;
+        color: #86efac;
+        cursor: default;
+      }
+      .bcc-submit-btn.error {
+        background: #450a0a;
+        border-color: #dc2626;
+        color: #fca5a5;
+      }
+
+      /* Spinner */
+      .bcc-spinner {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border: 2px solid rgba(255,255,255,0.2);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: bcc-spin 0.7s linear infinite;
+        flex-shrink: 0;
+      }
+      @keyframes bcc-spin { to { transform: rotate(360deg); } }
+
+      /* Toast */
+      .bcc-toast {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(8px);
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        max-width: 560px;
+        text-align: center;
+        z-index: 9999;
+        opacity: 0;
+        transition: opacity 0.25s, transform 0.25s;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+        pointer-events: none;
+        font-family: inherit;
+      }
+      .bcc-toast-ok    { background: #052e16; color: #86efac; border: 1px solid #16a34a; }
+      .bcc-toast-warn  { background: #451a03; color: #fcd34d; border: 1px solid #d97706; }
+      .bcc-toast-error { background: #450a0a; color: #fca5a5; border: 1px solid #dc2626; }
+
+      /* Response count badge on textareas */
+      textarea.bcc-has-content {
+        border-color: #22c55e !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // ── Helpers ────────────────────────────────────────────────────────────────
+  function normalise(str) {
+    return String(str || "").trim().toLowerCase().replace(/\s+/g, "_");
+  }
+
+  // ── Textarea watcher — tags textareas that have content ───────────────────
+  function watchTextareas() {
+    document.querySelectorAll("textarea[data-field-id]").forEach(function (ta) {
+      ta.addEventListener("input", function () {
+        if (ta.value.trim()) {
+          ta.classList.add("bcc-has-content");
+        } else {
+          ta.classList.remove("bcc-has-content");
+        }
+      });
+    });
+  }
+
+  // Expose confirmIdentity so the inline onclick in the injected HTML works
+  return {
+    init: init,
+    submit: submit,
+    confirmIdentity: confirmIdentity,
+    watchTextareas: watchTextareas,
+    _getState: function () { return { studentName, studentClass, identityConfirmed }; }
+  };
+})();
+
+// ── Initialise for this week ─────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  BCC_COLLECTOR.init(3, [{"lesson": 1, "title": "Sleep Architecture"}, {"lesson": 2, "title": "Sleep and Performance"}, {"lesson": 3, "title": "Sleep Research Methods and EEG"}]);
+  BCC_COLLECTOR.watchTextareas();
+});
+</script>
+
+</body>
+</html>
