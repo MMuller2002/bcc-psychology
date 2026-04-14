@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Year 10 Psychology — Week 6: Research Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf9f7; --surf:#ffffff; --surf2:#f5f3ef;
+  --border:#e2ddd8; --text:#1c1917; --muted:#78716c;
+  --navy:#1e3a5f;
+  --plum:#581c87;  --lplum:#f3e8ff;
+  --burnt:#9a3412; --lburnt:#ffedd5;
+  --pine:#14532d;  --lpine:#dcfce7;
+  --green:#15803d; --lgreen:#dcfce7;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* ── HERO ─────────────────────────────── */
+.hero{
+  background:var(--navy);
+  position:relative;overflow:hidden;
+}
+/* manuscript lines */
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(
+    transparent, transparent 31px,
+    rgba(255,255,255,0.025) 31px, rgba(255,255,255,0.025) 32px
+  );
+}
+/* left colour bar */
+.hero-bar{
+  position:absolute;left:0;top:0;bottom:0;width:6px;
+  background:linear-gradient(180deg,var(--plum) 0%,var(--burnt) 50%,var(--pine) 100%);
+}
+.hero-inner{
+  position:relative;max-width:1120px;margin:0 auto;
+  padding:52px 40px 0;
+  display:grid;grid-template-columns:1fr 260px;gap:48px;align-items:end;
+}
+.wtag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.06em;
+  color:rgba(255,255,255,0.4);margin-bottom:14px;
+}
+.hero h1{
+  font-family:'Lora',serif;font-size:clamp(28px,3.8vw,50px);
+  font-weight:700;color:#fff;line-height:1.1;margin-bottom:12px;
+}
+.hero h1 em{font-style:italic;color:#c4b5fd}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.75;max-width:520px;margin-bottom:26px;font-weight:300}
+.hero-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px}
+.hchip{font-family:'DM Mono',monospace;font-size:11px;border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:4px 12px;color:rgba(255,255,255,0.7)}
+
+/* milestone tracker */
+.milestones{padding-bottom:28px}
+.ms-label{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px}
+.ms-item{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ms-dot{width:10px;height:10px;border-radius:50%;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;transition:all 0.3s}
+.ms-dot.done{background:#22c55e;border-color:#22c55e}
+.ms-dot.active{background:var(--plum);border-color:#c4b5fd}
+.ms-text{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,0.5)}
+.ms-text.active{color:#c4b5fd}
+.ms-text.done{color:#86efac}
+
+.bq{background:rgba(0,0,0,0.2);border-top:1px solid rgba(255,255,255,0.06);padding:16px 40px;display:flex;align-items:center;gap:16px;justify-content:center}
+.bq-l{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--plum);white-space:nowrap;flex-shrink:0}
+.bq-t{font-family:'Lora',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,0.7)}
+
+/* ── PROGRESS ─────────────────────────── */
+.pw{max-width:1120px;margin:0 auto;padding:22px 40px 0}
+.pr{display:flex;justify-content:space-between;margin-bottom:5px}
+.pl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
+.pp{font-family:'DM Mono',monospace;font-size:10px;color:var(--plum)}
+.pt{height:4px;background:var(--border);border-radius:99px;overflow:hidden}
+.pf{height:100%;background:linear-gradient(90deg,var(--plum),var(--burnt),var(--pine));border-radius:99px;width:0%;transition:width 0.9s cubic-bezier(0.34,1.56,0.64,1)}
+
+/* ── LAYOUT ────────────────────────────── */
+.main{max-width:1120px;margin:0 auto;padding:24px 40px 80px;display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:start}
+
+/* ── SIDEBAR ───────────────────────────── */
+.sidebar{position:sticky;top:20px}
+.scard{background:var(--surf);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+.scard-head{padding:9px 14px;background:var(--navy);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.35)}
+.ni{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;text-decoration:none;color:inherit}
+.ni:last-child{border-bottom:none}
+.ni:hover{background:var(--surf2)}
+.nl1.active{background:var(--lplum);border-left:3px solid var(--plum)}
+.nl2.active{background:var(--lburnt);border-left:3px solid var(--burnt)}
+.nl3.active{background:var(--lpine);border-left:3px solid var(--pine)}
+.nn{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;font-weight:500;flex-shrink:0}
+.nl1 .nn{background:var(--lplum);color:var(--plum)}
+.nl2 .nn{background:var(--lburnt);color:var(--burnt)}
+.nl3 .nn{background:var(--lpine);color:var(--pine)}
+.nl1.active .nn{background:var(--plum);color:#fff}
+.nl2.active .nn{background:var(--burnt);color:#fff}
+.nl3.active .nn{background:var(--pine);color:#fff}
+.nt-{flex:1}
+.nt- .ntt{font-size:13px;font-weight:500}
+.nt- .nts{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px}
+.nck{width:15px;height:15px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto}
+.nck.done{background:#22c55e;border-color:#22c55e}
+
+.vw{padding:12px 14px}
+.ve{margin-bottom:11px}
+.vt{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;color:var(--plum);text-transform:uppercase;letter-spacing:0.05em}
+.vd{font-size:12px;color:var(--muted);line-height:1.55;margin-top:3px}
+
+/* ── PANELS ─────────────────────────────── */
+.lesson-panel{display:none}
+.lesson-panel.active{display:block;animation:fu 0.3s ease}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.lhdr{border-radius:12px;padding:34px;margin-bottom:20px;position:relative;overflow:hidden}
+.l1hdr{background:linear-gradient(135deg,#2e1065 0%,#581c87 100%)}
+.l2hdr{background:linear-gradient(135deg,#431407 0%,#9a3412 100%)}
+.l3hdr{background:linear-gradient(135deg,#052e16 0%,#14532d 100%)}
+.lhdr::after{content:attr(data-icon);position:absolute;right:20px;top:10px;font-size:90px;opacity:0.08;pointer-events:none;line-height:1}
+.ltag{display:inline-block;background:rgba(255,255,255,0.12);border-radius:4px;padding:2px 10px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.65);margin-bottom:10px}
+.lhdr h2{font-family:'Lora',serif;font-size:24px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px}
+.lgol{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:560px;margin-bottom:14px}
+.lchips{display:flex;gap:8px;flex-wrap:wrap}
+.lchip{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:4px;padding:3px 10px;font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,0.85)}
+
+/* Phase accordion */
+.phases{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.pc{background:var(--surf);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s}
+.pc:hover{box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+.ph{display:flex;align-items:center;gap:12px;padding:13px 18px;cursor:pointer;user-select:none}
+.pi{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.pm{flex:1}
+.ptit{font-size:14px;font-weight:500}
+.ptim{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px}
+.ptog{width:20px;height:20px;border-radius:50%;background:var(--surf2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);transition:transform 0.25s;flex-shrink:0}
+.pc.open .ptog{transform:rotate(180deg)}
+.pb{display:none;padding:0 18px 18px;border-top:1px solid var(--border)}
+.pc.open .pb{display:block}
+.pb p{font-size:14px;line-height:1.75;color:#44403c;margin-bottom:10px}
+.pb strong{color:var(--text)}
+.l1 .ptit{color:var(--plum)}
+.l2 .ptit{color:var(--burnt)}
+.l3 .ptit{color:var(--pine)}
+
+/* info boxes */
+.ib{padding:12px 16px;border-radius:8px;margin:10px 0;font-size:14px;line-height:1.7;border-left:4px solid}
+.ib-p{background:var(--lplum);border-color:var(--plum);color:#3b0764}
+.ib-b{background:var(--lburnt);border-color:var(--burnt);color:#431407}
+.ib-g{background:var(--lpine);border-color:var(--pine);color:#052e16}
+.ib-n{background:var(--surf2);border-color:var(--border);color:#44403c}
+
+/* FINER evaluator */
+.finer-grid{display:flex;flex-direction:column;gap:6px;margin:12px 0}
+.finer-row{display:flex;align-items:stretch;gap:8px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.finer-letter{width:44px;display:flex;align-items:center;justify-content:center;font-family:'Lora',serif;font-size:24px;font-weight:700;color:#fff;flex-shrink:0}
+.finer-content{flex:1;padding:10px 14px}
+.finer-name{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px}
+.finer-q{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+
+/* FINER pass buttons */
+.finer-btns{display:flex;gap:6px}
+.fb-btn{padding:4px 12px;border-radius:5px;border:1.5px solid var(--border);background:var(--surf2);cursor:pointer;font-family:'DM Mono',monospace;font-size:11px;transition:all 0.15s}
+.fb-btn:hover{border-color:var(--plum);color:var(--plum)}
+.fb-btn.sel-yes{background:var(--lpine);border-color:var(--pine);color:var(--pine);font-weight:500}
+.fb-btn.sel-partial{background:var(--lburnt);border-color:var(--burnt);color:var(--burnt);font-weight:500}
+.fb-btn.sel-no{background:#fef2f2;border-color:#dc2626;color:#dc2626;font-weight:500}
+
+/* question quality evaluator */
+.q-eval{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.qe-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:1px solid var(--border);border-radius:8px;background:var(--surf2)}
+.qe-text{flex:1;font-size:13px;line-height:1.6;font-style:italic}
+.qe-btns{display:flex;gap:6px;flex-shrink:0}
+.qe-btn{padding:4px 12px;border-radius:5px;border:1.5px solid var(--border);background:var(--surf);cursor:pointer;font-family:'DM Mono',monospace;font-size:11px;transition:all 0.15s;white-space:nowrap}
+.qe-btn:hover{border-color:var(--plum)}
+.qe-btn.sel-good{background:var(--lpine);border-color:var(--pine);color:var(--pine);font-weight:500}
+.qe-btn.sel-flawed{background:#fef2f2;border-color:#dc2626;color:#dc2626;font-weight:500}
+
+/* Ladder of Feedback */
+.ladder{display:flex;flex-direction:column;gap:0;margin:12px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.rung{display:flex;align-items:stretch}
+.rung-num{width:44px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:#fff;flex-shrink:0;writing-mode:horizontal-tb;border-bottom:1px solid rgba(255,255,255,0.1)}
+.rung:last-child .rung-num{border-bottom:none}
+.rung-body{flex:1;padding:12px 14px;border-bottom:1px solid var(--border)}
+.rung:last-child .rung-body{border-bottom:none}
+.rung-label{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px}
+.rung-prompt{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+
+/* PZ box */
+.pz{border-radius:8px;overflow:hidden;margin:12px 0;border:1px solid var(--border)}
+.pz-hd{padding:9px 14px;font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase}
+.pz-grid{display:grid}
+.pz-step{padding:13px 14px;border-top:1px solid var(--border)}
+.pz-lbl{font-family:'Lora',serif;font-size:16px;font-weight:600;margin-bottom:5px}
+.pz-prompt{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+
+/* hypothesis checker */
+.hyp-check{display:flex;flex-direction:column;gap:6px;margin:12px 0}
+.hc-row{display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--surf2)}
+.hc-num{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;width:20px;flex-shrink:0;color:var(--burnt)}
+.hc-text{flex:1;font-size:13px;line-height:1.55}
+.hc-tick{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all 0.15s}
+.hc-tick:hover{border-color:var(--pine)}
+.hc-tick.checked{background:var(--pine);border-color:var(--pine);color:#fff}
+
+/* sample hypothesis rows */
+.hyp-card{padding:12px 14px;border-radius:8px;border:1px solid;margin-bottom:8px;font-size:13px;line-height:1.7}
+
+/* method section */
+.method-section{background:var(--surf);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:14px}
+.ms-head{padding:10px 16px;font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase}
+.ms-body{padding:16px}
+.ms-field{margin-bottom:14px}
+.ms-field label{font-size:13px;font-weight:500;display:block;margin-bottom:5px;color:#44403c}
+.ms-field .hint{font-size:12px;color:var(--muted);margin-bottom:6px;line-height:1.6;font-style:italic}
+
+/* checklist */
+.checklist{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.cl-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:background 0.15s}
+.cl-item:hover{background:var(--surf2)}
+.cl-item.checked{background:var(--lpine);border-color:var(--pine)}
+.cl-box{width:20px;height:20px;border-radius:4px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s}
+.cl-item.checked .cl-box{background:var(--pine);border-color:var(--pine);color:#fff}
+.cl-text{font-size:13px;line-height:1.5}
+
+/* flaw identification */
+.flaw-card{padding:12px 14px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;font-size:13px;line-height:1.6}
+.flaw-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--pine);text-transform:uppercase;margin-bottom:5px}
+
+/* quiz */
+.qc{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:12px}
+.qqt{font-size:15px;font-weight:500;margin-bottom:10px}
+.qopts{display:flex;flex-direction:column;gap:7px}
+.qopt{display:flex;align-items:center;gap:10px;padding:9px 13px;border:1.5px solid var(--border);border-radius:7px;cursor:pointer;font-size:14px;transition:all 0.15s;background:var(--surf2)}
+.qopt:hover{background:var(--lplum);border-color:var(--plum)}
+.qopt.correct{background:var(--lgreen);border-color:var(--green);color:var(--green)}
+.qopt.wrong{background:#fef2f2;border-color:#dc2626;color:#dc2626}
+.qfb{font-size:13px;margin-top:8px;padding:9px 13px;border-radius:7px;display:none;line-height:1.6}
+.qfb.show{display:block}
+.qfb.ok{background:var(--lgreen);color:var(--green)}
+.qfb.err{background:#fef2f2;color:#dc2626}
+
+/* textarea */
+textarea{width:100%;background:var(--surf);border:1.5px solid var(--border);border-radius:8px;padding:10px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:80px;transition:border-color 0.2s}
+textarea:focus{outline:none;border-color:var(--plum)}
+textarea.bcc-has-content{border-color:#22c55e!important}
+.rf{margin-top:12px}
+.rf label{font-size:13px;font-weight:500;display:block;margin-bottom:5px;color:#44403c}
+
+/* resources */
+.rw{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:16px}
+.rw h3{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.rl{display:flex;align-items:center;gap:10px;padding:10px 13px;background:var(--surf2);border:1px solid var(--border);border-radius:7px;text-decoration:none;color:var(--text);margin-bottom:7px;transition:all 0.15s}
+.rl:hover{background:var(--lplum);border-color:var(--plum)}
+.rl:last-child{margin-bottom:0}
+.ri{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.rm{flex:1}
+.rm .rt{font-size:13px;font-weight:500}
+.rm .rs{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:1px}
+
+/* done btn */
+.db{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px;border:1.5px solid var(--border);border-radius:8px;background:var(--surf);cursor:pointer;font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--muted);transition:all 0.2s;margin-bottom:12px}
+.db:hover{border-color:var(--plum);color:var(--plum);background:var(--lplum)}
+.db.marked{background:var(--lgreen);border-color:var(--green);color:var(--green)}
+
+/* assessment banner */
+.assess-banner{background:var(--lplum);border:1px solid rgba(88,28,135,0.3);border-radius:10px;padding:14px 18px;margin-bottom:18px}
+.assess-banner strong{color:var(--plum)}
+
+@media(max-width:768px){
+  .main{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .hero-inner{grid-template-columns:1fr}
+  .milestones{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-bar"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="wtag">Year 10 Psychology · Unit 2 · Week 6</div>
+      <h1>Research <em>Design</em> —<br>Questions, Hypotheses &amp; Plans</h1>
+      <p class="hero-sub">The pivot week. Everything you've learned about behaviour, sleep, stress, measurement, and the adolescent brain now comes together into one focused investigation of your own design.</p>
+      <div class="hero-chips">
+        <div class="hchip">// 3 × 70 min</div>
+        <div class="hchip">All AC9S10I07</div>
+        <div class="hchip">Construct · Construct · Plan</div>
+        <div class="hchip">PZ: Ladder of Feedback · What Makes You Say That?</div>
+      </div>
+    </div>
+    <div class="milestones">
+      <div class="ms-label">Week 6 deliverables</div>
+      <div class="ms-item"><div class="ms-dot active" id="ms1"></div><div class="ms-text active" id="mst1">Research Question (FINER-evaluated)</div></div>
+      <div class="ms-item"><div class="ms-dot" id="ms2"></div><div class="ms-text" id="mst2">Directional Hypothesis (5 components)</div></div>
+      <div class="ms-item"><div class="ms-dot" id="ms3"></div><div class="ms-text" id="mst3">Draft Method Plan (design + IV/DV)</div></div>
+    </div>
+  </div>
+  <div class="bq">
+    <span class="bq-l">// Big Question</span>
+    <span class="bq-t">What is the difference between a good research question and a bad one — and why does it matter so much?</span>
+  </div>
+</div>
+
+<div class="pw">
+  <div class="pr"><span class="pl">Week 6 Progress</span><span class="pp" id="pp">0 / 3 complete</span></div>
+  <div class="pt"><div class="pf" id="pf"></div></div>
+</div>
+
+<div class="main">
+  <aside class="sidebar">
+    <div class="scard">
+      <div class="scard-head">This Week</div>
+      <a class="ni nl1 active" onclick="go(1)" href="#">
+        <div class="nn">1</div>
+        <div class="nt-"><div class="ntt">Research Questions</div><div class="nts">Construct · 70 min</div></div>
+        <div class="nck" id="c1"></div>
+      </a>
+      <a class="ni nl2" onclick="go(2)" href="#">
+        <div class="nn">2</div>
+        <div class="nt-"><div class="ntt">Hypothesis Development</div><div class="nts">Construct · 70 min</div></div>
+        <div class="nck" id="c2"></div>
+      </a>
+      <a class="ni nl3" onclick="go(3)" href="#">
+        <div class="nn">3</div>
+        <div class="nt-"><div class="ntt">Research Design</div><div class="nts">Plan · 70 min</div></div>
+        <div class="nck" id="c3"></div>
+      </a>
+    </div>
+
+    <div class="scard">
+      <div class="scard-head">Key Terms</div>
+      <div class="vw">
+        <div class="ve"><div class="vt">FINER Criteria</div><div class="vd">Feasible, Interesting, Novel, Ethical, Relevant — the framework for evaluating research questions.</div></div>
+        <div class="ve"><div class="vt">Operationalisation</div><div class="vd">Making abstract variables concrete and measurable — specifying exactly how the IV and DV will be recorded.</div></div>
+        <div class="ve"><div class="vt">Directional Hypothesis</div><div class="vd">Predicts both that a difference exists AND its direction (higher/lower). Requires an evidential warrant.</div></div>
+        <div class="ve"><div class="vt">Null Hypothesis (H₀)</div><div class="vd">States no relationship exists — the default assumption that statistics work to disprove.</div></div>
+        <div class="ve"><div class="vt">Evidential Warrant</div><div class="vd">The research evidence that justifies a directional prediction — what makes a hypothesis more than a guess.</div></div>
+        <div class="ve"><div class="vt">Confounding Variable</div><div class="vd">A variable that independently affects the DV, creating an alternative explanation for findings.</div></div>
+        <div class="ve"><div class="vt">Correlational Design</div><div class="vd">Measures the relationship between naturally-occurring variables without manipulation. Cannot establish causation.</div></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="scard-head">Assessment Prep</div>
+      <div class="vw">
+        <p style="font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:10px">Your <strong style="color:var(--text)">Week 8 spoken investigation</strong> (3–4 min) needs all three deliverables from this week. Start sourcing your 2–3 research references now.</p>
+        <a href="https://scholar.google.com" target="_blank" style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--surf2);border:1px solid var(--border);border-radius:7px;text-decoration:none;color:var(--text);font-size:12px;font-weight:500">🔍 Google Scholar →</a>
+      </div>
+    </div>
+  </aside>
+
+  <div>
+
+    <!-- ══ LESSON 1 ══ -->
+    <div class="lesson-panel l1 active" id="panel-1">
+      <div class="lhdr l1hdr" data-icon="❓">
+        <div class="ltag">Lesson 1 · AC9S10I07 · Construct</div>
+        <h2>Research Questions —<br>The Art of Asking Well</h2>
+        <p class="lgol">By the end of this lesson you'll have a <strong>Version 2 research question</strong> that passes the FINER criteria — refined through the Ladder of Feedback peer review process.</p>
+        <div class="lchips"><span class="lchip">// 70 min</span><span class="lchip">FINER Criteria</span><span class="lchip">PZ: Ladder of Feedback</span></div>
+      </div>
+
+      <div class="assess-banner">
+        <strong>📋 Week 6 Assessment target:</strong> By the end of Lesson 3 today you need a research question, a hypothesis, and a draft method. Everything this week builds directly toward your Week 8 spoken investigation.
+      </div>
+
+      <div class="phases l1">
+
+        <div class="pc open">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lplum)">🔍</div><div class="pm"><div class="ptit">Hook — What Makes a Question Researchable?</div><div class="ptim">0–10 min · Class discussion</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Your teacher will open by reading some of the "Challenge" questions you submitted at the end of Week 5. Before instruction, evaluate these five questions — are they good research questions or flawed ones?</p>
+            <div class="q-eval">
+              <div class="qe-item"><div class="qe-text">"Why does sleep affect teenagers?"</div><div class="qe-btns"><button class="qe-btn" onclick="evalQ(this,'good')">Good</button><button class="qe-btn" onclick="evalQ(this,'flawed')">Flawed</button></div></div>
+              <div class="qe-item"><div class="qe-text">"Does more sleep lead to better grades?"</div><div class="qe-btns"><button class="qe-btn" onclick="evalQ(this,'good')">Good</button><button class="qe-btn" onclick="evalQ(this,'flawed')">Flawed</button></div></div>
+              <div class="qe-item"><div class="qe-text">"I want to investigate stress in students."</div><div class="qe-btns"><button class="qe-btn" onclick="evalQ(this,'good')">Good</button><button class="qe-btn" onclick="evalQ(this,'flawed')">Flawed</button></div></div>
+              <div class="qe-item"><div class="qe-text">"Among Year 10 students, does nightly sleep duration relate to self-rated academic alertness the following morning?"</div><div class="qe-btns"><button class="qe-btn" onclick="evalQ(this,'good')">Good</button><button class="qe-btn" onclick="evalQ(this,'flawed')">Flawed</button></div></div>
+              <div class="qe-item"><div class="qe-text">"Does social media affect mental health?"</div><div class="qe-btns"><button class="qe-btn" onclick="evalQ(this,'good')">Good</button><button class="qe-btn" onclick="evalQ(this,'flawed')">Flawed</button></div></div>
+            </div>
+            <div class="ib ib-p">A good research question has this structure: <strong>'Among [population], does [IV — measured by ____] relate to / predict [DV — measured by ____]?'</strong> — it must contain an IV, a DV, a population, and genuine uncertainty.</div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lplum)">📐</div><div class="pm"><div class="ptit">Direct Instruction — The FINER Criteria</div><div class="ptim">10–27 min · Notes · Resource Sheet 16</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>A good research question passes all five FINER tests. Evaluate your draft question against each criterion by clicking the buttons below:</p>
+            <div class="finer-grid">
+              <div class="finer-row"><div class="finer-letter" style="background:var(--plum)">F</div><div class="finer-content"><div class="finer-name" style="color:var(--plum)">Feasible</div><div class="finer-q">Can it be investigated with the resources, time, and participants available to a Year 10 student? (No fMRI, no 500 participants, no 6-month studies)</div><div class="finer-btns"><button class="fb-btn" onclick="finer(this,'yes')">✅ Yes</button><button class="fb-btn" onclick="finer(this,'partial')">⚠️ Partially</button><button class="fb-btn" onclick="finer(this,'no')">❌ No — needs revising</button></div></div></div>
+              <div class="finer-row"><div class="finer-letter" style="background:var(--burnt)">I</div><div class="finer-content"><div class="finer-name" style="color:var(--burnt)">Interesting</div><div class="finer-q">Is there genuine uncertainty? Does it go beyond what is already well-established? "Does sleep affect performance?" is NOT interesting — the answer is already known.</div><div class="finer-btns"><button class="fb-btn" onclick="finer(this,'yes')">✅ Yes</button><button class="fb-btn" onclick="finer(this,'partial')">⚠️ Partially</button><button class="fb-btn" onclick="finer(this,'no')">❌ No — needs revising</button></div></div></div>
+              <div class="finer-row"><div class="finer-letter" style="background:var(--pine)">N</div><div class="finer-content"><div class="finer-name" style="color:var(--pine)">Novel</div><div class="finer-q">Does it add something — a specific population (Year 10 at BCC), a specific context, or a specific operationalisation that makes it distinct?</div><div class="finer-btns"><button class="fb-btn" onclick="finer(this,'yes')">✅ Yes</button><button class="fb-btn" onclick="finer(this,'partial')">⚠️ Partially</button><button class="fb-btn" onclick="finer(this,'no')">❌ No — needs revising</button></div></div></div>
+              <div class="finer-row"><div class="finer-letter" style="background:var(--navy)">E</div><div class="finer-content"><div class="finer-name" style="color:var(--navy)">Ethical</div><div class="finer-q">Can it be conducted without harm? Is consent manageable? Does it avoid sensitive data (medical history, identifiable personal information) without proper safeguards?</div><div class="finer-btns"><button class="fb-btn" onclick="finer(this,'yes')">✅ Yes</button><button class="fb-btn" onclick="finer(this,'partial')">⚠️ Partially</button><button class="fb-btn" onclick="finer(this,'no')">❌ No — needs revising</button></div></div></div>
+              <div class="finer-row"><div class="finer-letter" style="background:var(--muted)">R</div><div class="finer-content"><div class="finer-name" style="color:var(--muted)">Relevant</div><div class="finer-q">Does it connect to existing psychology research? Would the findings have implications worth caring about for your cohort or for the field?</div><div class="finer-btns"><button class="fb-btn" onclick="finer(this,'yes')">✅ Yes</button><button class="fb-btn" onclick="finer(this,'partial')">⚠️ Partially</button><button class="fb-btn" onclick="finer(this,'no')">❌ No — needs revising</button></div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lplum)">✍️</div><div class="pm"><div class="ptit">Draft + Ladder of Feedback (PZ Routine)</div><div class="ptim">27–58 min · Individual + Pairs · Resource Sheet 16</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Choose a topic, draft your Version 1 question, then swap with a partner for Ladder of Feedback peer review. Complete all four rungs before writing Version 2.</p>
+            <div class="rf">
+              <label>📝 My topic area:</label>
+              <textarea data-field-id="l1-topic" data-field-label="My chosen topic area for investigation" data-lesson="1" style="min-height:56px" placeholder="e.g. Sleep duration and academic alertness in Year 10 students"></textarea>
+            </div>
+            <div class="rf">
+              <label>Version 1 — First attempt (before peer review):</label>
+              <textarea data-field-id="l1-q-v1" data-field-label="Research question Version 1 (before Ladder of Feedback)" data-lesson="1" placeholder="Among Year 10 students, does... relate to...?"></textarea>
+            </div>
+            <div class="ladder">
+              <div class="rung"><div class="rung-num" style="background:#581c87">1</div><div class="rung-body"><div class="rung-label" style="color:var(--plum)">Clarify — "I'm not sure what you mean by..."</div><div class="rung-prompt">Ask before judging. What in your partner's question needs clarification? No assumptions.</div><textarea data-field-id="l1-lof-clarify" data-field-label="Ladder of Feedback: Clarify (partner's question)" data-lesson="1" style="min-height:64px" placeholder="I'm not sure what you mean by..."></textarea></div></div>
+              <div class="rung"><div class="rung-num" style="background:#9a3412">2</div><div class="rung-body"><div class="rung-label" style="color:var(--burnt)">Value — "What works here is..."</div><div class="rung-prompt">Genuine strengths only — before any criticism.</div><textarea data-field-id="l1-lof-value" data-field-label="Ladder of Feedback: Value (partner's question)" data-lesson="1" style="min-height:64px" placeholder="What works here is..."></textarea></div></div>
+              <div class="rung"><div class="rung-num" style="background:#14532d">3</div><div class="rung-body"><div class="rung-label" style="color:var(--pine)">Concerns — "I wonder whether..."</div><div class="rung-prompt">Questions, not statements. What worries you about the question?</div><textarea data-field-id="l1-lof-concerns" data-field-label="Ladder of Feedback: Concerns (partner's question)" data-lesson="1" style="min-height:64px" placeholder="I wonder whether..."></textarea></div></div>
+              <div class="rung"><div class="rung-num" style="background:#1e3a5f">4</div><div class="rung-body"><div class="rung-label" style="color:var(--navy)">Suggest — "What if you tried..."</div><div class="rung-prompt">One or two concrete, actionable improvements only.</div><textarea data-field-id="l1-lof-suggest" data-field-label="Ladder of Feedback: Suggest (partner's question)" data-lesson="1" style="min-height:64px" placeholder="What if you tried..."></textarea></div></div>
+            </div>
+            <div class="rf">
+              <label>Version 2 — After peer review (what changed and why):</label>
+              <textarea data-field-id="l1-q-v2" data-field-label="Research question Version 2 (after Ladder of Feedback)" data-lesson="1" placeholder="Revised question..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lplum)">✏️</div><div class="pm"><div class="ptit">Exit — Final Question + Rationale</div><div class="ptim">58–70 min · Written submission</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Submit your final research question with a 3-sentence rationale. This is handed to your teacher and will be returned with FINER feedback before Lesson 2.</p>
+            <textarea data-field-id="l1-final-q" data-field-label="Final research question (submitted for teacher FINER feedback)" data-lesson="1" placeholder="My final research question:"></textarea>
+            <div class="rf">
+              <label>Rationale sentence 1 — Why this question is worth investigating:</label>
+              <textarea data-field-id="l1-rationale-1" data-field-label="Rationale: Why the question is worth investigating" data-lesson="1" style="min-height:64px" placeholder="This question is worth investigating because..."></textarea>
+            </div>
+            <div class="rf">
+              <label>Rationale sentence 2 — Why it is feasible for a Year 10 student:</label>
+              <textarea data-field-id="l1-rationale-2" data-field-label="Rationale: Why the question is feasible" data-lesson="1" style="min-height:64px" placeholder="It is feasible because..."></textarea>
+            </div>
+            <div class="rf">
+              <label>Rationale sentence 3 — Preliminary IV and DV:</label>
+              <textarea data-field-id="l1-rationale-3" data-field-label="Rationale: Preliminary IV and DV identification" data-lesson="1" style="min-height:64px" placeholder="The IV is... measured by... / The DV is... measured by..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rw"><h3>Resources</h3>
+        <a class="rl" href="https://pz.harvard.edu/resources/ladder-of-feedback" target="_blank"><div class="ri" style="background:var(--lplum)">🎓</div><div class="rm"><div class="rt">Project Zero — Ladder of Feedback</div><div class="rs">pz.harvard.edu</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="rl" href="https://www.khanacademy.org/science/ap-biology/science-and-the-process-of-science/scientific-method/a/the-scientific-method" target="_blank"><div class="ri" style="background:var(--lburnt)">🎥</div><div class="rm"><div class="rt">Khan Academy — Scientific Method</div><div class="rs">khanacademy.org</div></div><span style="color:var(--muted)">↗</span></a>
+      </div>
+      <button class="db" id="btn-1" onclick="done(1)">Mark Lesson 1 Complete ✓</button>
+    </div>
+
+    <!-- ══ LESSON 2 ══ -->
+    <div class="lesson-panel l2" id="panel-2">
+      <div class="lhdr l2hdr" data-icon="🎯">
+        <div class="ltag">Lesson 2 · AC9S10I07 · Construct</div>
+        <h2>Hypothesis Development —<br>Committing to a Prediction</h2>
+        <p class="lgol">By the end of this lesson you'll have a <strong>directional hypothesis with all five components</strong> — including an evidential warrant. A hypothesis with no evidence behind it is just a guess.</p>
+        <div class="lchips"><span class="lchip">// 70 min</span><span class="lchip">5-Component Anatomy</span><span class="lchip">PZ: What Makes You Say That?</span></div>
+      </div>
+
+      <div class="phases l2">
+
+        <div class="pc open">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lburnt)">📬</div><div class="pm"><div class="ptit">Hook — FINER Feedback Review</div><div class="ptim">0–10 min · Individual review</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Your teacher returns your research questions with FINER feedback. Read it carefully, make any final revisions, and confirm your question is locked in. Then:</p>
+            <div class="rf">
+              <label>📝 My confirmed research question (final version after teacher feedback):</label>
+              <textarea data-field-id="l2-confirmed-q" data-field-label="Confirmed research question after teacher FINER feedback" data-lesson="2" placeholder="My confirmed research question:"></textarea>
+            </div>
+            <div class="ib ib-b">Your research question asks <em>what</em> you want to find out. Your hypothesis is your <em>answer before you collect data</em> — your prediction, based on evidence. Today you make that commitment.</div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lburnt)">🏗</div><div class="pm"><div class="ptit">Direct Instruction — Five-Component Anatomy</div><div class="ptim">10–27 min · Notes · Resource Sheet 17</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <div class="ib ib-b"><strong>Template:</strong> '[Population] who [IV — condition A, measured by ____] will show significantly [higher/lower] [DV, measured by ____] than those who [IV — condition B], because [research finding + mechanism].'</div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin:12px 0">
+              <div style="padding:10px 14px;background:var(--surf2);border-radius:8px;border-left:4px solid var(--plum);font-size:13px;line-height:1.65"><strong style="color:var(--plum)">Component 1 — Specific population:</strong> Year 10 students at BCC</div>
+              <div style="padding:10px 14px;background:var(--surf2);border-radius:8px;border-left:4px solid var(--burnt);font-size:13px;line-height:1.65"><strong style="color:var(--burnt)">Component 2 — IV with both conditions:</strong> who report ≥8 hrs sleep (7-day diary) vs <8 hrs</div>
+              <div style="padding:10px 14px;background:var(--surf2);border-radius:8px;border-left:4px solid var(--pine);font-size:13px;line-height:1.65"><strong style="color:var(--pine)">Component 3 — DV with measurement:</strong> will score higher on the academic alertness scale (1–10 Likert)</div>
+              <div style="padding:10px 14px;background:var(--surf2);border-radius:8px;border-left:4px solid var(--navy);font-size:13px;line-height:1.65"><strong style="color:var(--navy)">Component 4 — Predicted direction:</strong> higher / lower / more / fewer / greater than</div>
+              <div style="padding:10px 14px;background:var(--surf2);border-radius:8px;border-left:4px solid var(--muted);font-size:13px;line-height:1.65"><strong>Component 5 — Evidential warrant:</strong> as demonstrated by [Author, Year] who found [mechanism]... This is what separates a hypothesis from a guess.</div>
+            </div>
+            <div class="qc">
+              <div class="qqt">Which of these is a properly operationalised DV?</div>
+              <div class="qopts">
+                <label class="qopt"><input type="radio" name="qw6"> "Academic performance"</label>
+                <label class="qopt"><input type="radio" name="qw6"> "Self-reported academic alertness on a 1–10 Likert scale measured the morning after each sleep diary entry"</label>
+                <label class="qopt"><input type="radio" name="qw6"> "How well students do in school"</label>
+              </div>
+              <button onclick="chk(this,'b','Correct! A properly operationalised DV specifies the instrument, the scale, and when/how it is measured — not just the concept.')" style="margin-top:10px;padding:7px 16px;background:var(--burnt);color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:DM Mono,monospace;font-size:12px">Check</button>
+              <div class="qfb"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lburnt)">🔬</div><div class="pm"><div class="ptit">Guided Practice — Sample Hypothesis Evaluation</div><div class="ptim">27–42 min · Individual · Resource Sheet 17</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Evaluate these six sample hypotheses on Resource Sheet 17. Below, rewrite the weakest one:</p>
+            <div style="display:flex;flex-direction:column;gap:8px;margin:12px 0">
+              <div class="hyp-card" style="background:var(--lburnt);border-color:var(--burnt);color:#431407"><strong>WEAK 1:</strong> "Students who use their phone before bed will sleep worse." <em style="opacity:0.7">(Missing: population, measurement, evidential warrant)</em></div>
+              <div class="hyp-card" style="background:var(--lpine);border-color:var(--pine);color:#052e16"><strong>STRONG 2:</strong> "Year 10 students who report >2 hrs social media after 9pm (diary) will score significantly lower on PSQI than those reporting <30 mins, as Hale & Guan (2015) found a dose-response relationship between evening screen use and sleep disturbance."</div>
+              <div class="hyp-card" style="background:var(--lburnt);border-color:var(--burnt);color:#431407"><strong>WEAK 3:</strong> "There will be a difference in stress between students who exercise and those who don't." <em style="opacity:0.7">(Non-directional — but the literature clearly supports a direction. Why is it non-directional?)</em></div>
+              <div class="hyp-card" style="background:var(--lpine);border-color:var(--pine);color:#052e16"><strong>STRONG 4:</strong> "Year 10 students doing ≥3 weekly exercise sessions will score significantly lower on PSS-10 than those with <1 session, consistent with meta-analytic evidence (Stubbs et al., 2017) showing exercise reduces perceived stress in adolescents."</div>
+            </div>
+            <div class="rf">
+              <label>🔧 Rewrite WEAK 1 to include all five components:</label>
+              <textarea data-field-id="l2-rewrite-hyp" data-field-label="Rewrite of weak hypothesis 1 with all 5 components" data-lesson="2" placeholder="Year 10 students at BCC who... will show significantly... compared to those who... because [Author, Year] found that..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lburnt)">💬</div><div class="pm"><div class="ptit">PZ Routine — What Makes You Say That?</div><div class="ptim">42–55 min · Individual writing</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Before writing your hypothesis, complete this two-part routine. If you cannot complete Part 2, your prediction is a guess — not a hypothesis. Find the research first, then write the direction.</p>
+            <div class="pz" style="border-color:var(--burnt)">
+              <div class="pz-hd" style="background:var(--lburnt);color:var(--burnt)">WHAT MAKES YOU SAY THAT? — Project Zero Thinking Routine</div>
+              <div class="pz-grid" style="grid-template-columns:1fr 1fr">
+                <div class="pz-step">
+                  <div class="pz-lbl" style="color:var(--burnt)">I predict that...</div>
+                  <div class="pz-prompt">State your predicted direction — what do you expect to find? Be specific about IV, DV, and direction.</div>
+                  <textarea data-field-id="l2-wmyst-predict" data-field-label="What Makes You Say That: My prediction (direction)" data-lesson="2" style="min-height:80px" placeholder="I predict that Year 10 students who [IV] will show [higher/lower] [DV] than those who [other IV condition]..."></textarea>
+                </div>
+                <div class="pz-step" style="border-left:1px solid var(--border)">
+                  <div class="pz-lbl" style="color:var(--navy)">What makes me say that is...</div>
+                  <div class="pz-prompt">What research evidence or theory justifies this prediction? Name at least ONE study. This is your evidential warrant.</div>
+                  <textarea data-field-id="l2-wmyst-evidence" data-field-label="What Makes You Say That: Evidential warrant (research cited)" data-lesson="2" style="min-height:80px" placeholder="What makes me say this is [Author, Year] who found that... / Research on [topic] consistently shows..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lburnt)">✏️</div><div class="pm"><div class="ptit">Exit — Write and Peer-Check Your Hypothesis</div><div class="ptim">55–70 min · Written + peer review</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Write your directional hypothesis, then tick each component as your partner checks it.</p>
+            <textarea data-field-id="l2-hypothesis-draft" data-field-label="Draft hypothesis (before peer check)" data-lesson="2" placeholder="Year 10 students who... will show significantly... compared to those who... because [Author, Year] found that..."></textarea>
+            <div class="hyp-check" style="margin-top:14px">
+              <div class="hc-row"><div class="hc-num">1</div><div class="hc-text">Specific population named</div><div class="hc-tick" onclick="tick(this)"></div></div>
+              <div class="hc-row"><div class="hc-num">2</div><div class="hc-text">IV stated with both conditions / levels</div><div class="hc-tick" onclick="tick(this)"></div></div>
+              <div class="hc-row"><div class="hc-num">3</div><div class="hc-text">DV stated with measurement approach</div><div class="hc-tick" onclick="tick(this)"></div></div>
+              <div class="hc-row"><div class="hc-num">4</div><div class="hc-text">Predicted direction specified (higher / lower / more / fewer)</div><div class="hc-tick" onclick="tick(this)"></div></div>
+              <div class="hc-row"><div class="hc-num">5</div><div class="hc-text">Evidential warrant — at least one research finding cited</div><div class="hc-tick" onclick="tick(this)"></div></div>
+            </div>
+            <div class="rf" style="margin-top:14px">
+              <label>Final hypothesis (revised after peer check):</label>
+              <textarea data-field-id="l2-hypothesis-final" data-field-label="Final hypothesis after five-component peer check" data-lesson="2" placeholder="Final version..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rw"><h3>Resources</h3>
+        <a class="rl" href="https://pz.harvard.edu/resources/what-makes-you-say-that" target="_blank"><div class="ri" style="background:var(--lburnt)">🎓</div><div class="rm"><div class="rt">Project Zero — What Makes You Say That?</div><div class="rs">pz.harvard.edu</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="rl" href="https://scholar.google.com" target="_blank"><div class="ri" style="background:var(--lpine)">🔍</div><div class="rm"><div class="rt">Google Scholar — find your evidential warrant</div><div class="rs">scholar.google.com</div></div><span style="color:var(--muted)">↗</span></a>
+      </div>
+      <button class="db" id="btn-2" onclick="done(2)">Mark Lesson 2 Complete ✓</button>
+    </div>
+
+    <!-- ══ LESSON 3 ══ -->
+    <div class="lesson-panel l3" id="panel-3">
+      <div class="lhdr l3hdr" data-icon="📋">
+        <div class="ltag">Lesson 3 · AC9S10I07 · Plan</div>
+        <h2>Research Design —<br>From Question to Method</h2>
+        <p class="lgol">By the end of this lesson you'll have a <strong>draft method plan</strong> — specifying design type, participants, IV/DV operationalisation, confounds and controls, and a replicable procedure.</p>
+        <div class="lchips"><span class="lchip">// 70 min</span><span class="lchip">IV · DV · Controls · Procedure</span><span class="lchip">Devil's Advocate peer review</span></div>
+      </div>
+
+      <div class="phases l3">
+
+        <div class="pc open">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lpine)">⚠️</div><div class="pm"><div class="ptit">Hook — What Could Go Wrong?</div><div class="ptim">0–10 min · Design flaw identification</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Identify the design flaw in each of these real research errors. Click the flaw type you think it is:</p>
+            <div style="display:flex;flex-direction:column;gap:8px;margin:10px 0">
+              <div class="flaw-card"><div class="flaw-num">Flaw 1</div>Researcher surveyed students about stress immediately after exam results were released.
+                <textarea data-field-id="l3-flaw1" data-field-label="Design flaw 1: surveying after results" data-lesson="3" style="min-height:48px;margin-top:8px" placeholder="The problem here is..."></textarea>
+              </div>
+              <div class="flaw-card"><div class="flaw-num">Flaw 2</div>The high-sleep group averaged 9.2 hours per night — implausibly high for Year 10 students.
+                <textarea data-field-id="l3-flaw2" data-field-label="Design flaw 2: implausibly high self-reported sleep" data-lesson="3" style="min-height:48px;margin-top:8px" placeholder="The problem here is..."></textarea>
+              </div>
+              <div class="flaw-card"><div class="flaw-num">Flaw 3</div>Exercise group recruited from school sports teams; control group from a maths enrichment program.
+                <textarea data-field-id="l3-flaw3" data-field-label="Design flaw 3: selection bias in group recruitment" data-lesson="3" style="min-height:48px;margin-top:8px" placeholder="The problem here is..."></textarea>
+              </div>
+              <div class="flaw-card"><div class="flaw-num">Flaw 4</div>Academic performance measured using assignment grades from different teachers with different grading scales.
+                <textarea data-field-id="l3-flaw4" data-field-label="Design flaw 4: unstandardised DV measurement" data-lesson="3" style="min-height:48px;margin-top:8px" placeholder="The problem here is..."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lpine)">🗺</div><div class="pm"><div class="ptit">Direct Instruction — Components of a Valid Design</div><div class="ptim">10–27 min · Notes · Resource Sheet 18</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <div style="display:flex;flex-direction:column;gap:8px;margin:12px 0">
+              <div class="ib ib-g"><strong>Design type:</strong> Most Year 10 investigations will be <strong>correlational</strong> (measuring naturally-occurring variables, no manipulation) or <strong>quasi-experimental</strong> (comparing pre-existing groups). Neither can establish causation — but both can establish meaningful relationships.</div>
+              <div class="ib ib-p"><strong>Operationalisation:</strong> "Academic performance" is not measurable. "Self-reported academic alertness on a 1–10 scale measured the morning after each diary entry" is. Every variable needs an instrument, a scale, and a timing.</div>
+              <div class="ib ib-b"><strong>Confounds:</strong> What else could explain a change in your DV, independent of your IV? You need at least 3. Identifying them is not a weakness — it is methodological sophistication.</div>
+              <div class="ib ib-n"><strong>The alignment check:</strong> The single most important design question — <em>does my method actually answer my research question?</em> If the IV in the method doesn't match the IV in the hypothesis, the study cannot answer what it claims to investigate.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lpine)">📝</div><div class="pm"><div class="ptit">Guided Practice — Method Planning Template</div><div class="ptim">27–47 min · Individual · Resource Sheet 18</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Work through each section below. Your teacher will conference with you individually. Complete on Resource Sheet 18 for the full version.</p>
+
+            <div class="method-section">
+              <div class="ms-head" style="background:var(--lpine);color:var(--pine)">SECTION 1 — Research Design Type</div>
+              <div class="ms-body">
+                <div class="ms-field"><label>My design type is:</label><div class="hint">Correlational / Quasi-experimental / Experimental — and why this is appropriate for your question</div><textarea data-field-id="l3-design-type" data-field-label="Research design type and justification" data-lesson="3" style="min-height:72px" placeholder="My design is correlational because my IV (sleep duration) occurs naturally and I am not manipulating it..."></textarea></div>
+              </div>
+            </div>
+
+            <div class="method-section">
+              <div class="ms-head" style="background:var(--lplum);color:var(--plum)">SECTION 2 — Variables (Operationalised)</div>
+              <div class="ms-body">
+                <div class="ms-field"><label>IV — what it is, what the conditions are, and how it is measured:</label><textarea data-field-id="l3-iv" data-field-label="IV: operationalised definition and measurement" data-lesson="3" style="min-height:72px" placeholder="IV: nightly sleep duration, measured by self-report sleep diary over 7 nights. Condition A: ≥8 hours average. Condition B: <8 hours average."></textarea></div>
+                <div class="ms-field"><label>DV — what it is and how it is measured (instrument, scale, units):</label><textarea data-field-id="l3-dv" data-field-label="DV: operationalised definition and measurement instrument" data-lesson="3" style="min-height:72px" placeholder="DV: academic alertness, measured by a single 1–10 Likert scale item ('How alert do you feel for school today?') completed each morning during the diary period."></textarea></div>
+              </div>
+            </div>
+
+            <div class="method-section">
+              <div class="ms-head" style="background:var(--lburnt);color:var(--burnt)">SECTION 3 — Confounds and Controls (minimum 3)</div>
+              <div class="ms-body">
+                <div class="ms-field"><label>Confound 1 — what it is, why it threatens validity, how you will minimise it:</label><textarea data-field-id="l3-confound1" data-field-label="Confound 1: identification and control strategy" data-lesson="3" style="min-height:72px" placeholder="Caffeine consumption could independently affect alertness (DV). I will control this by asking participants to record caffeine use in the diary..."></textarea></div>
+                <div class="ms-field"><label>Confound 2:</label><textarea data-field-id="l3-confound2" data-field-label="Confound 2: identification and control strategy" data-lesson="3" style="min-height:72px" placeholder=""></textarea></div>
+                <div class="ms-field"><label>Confound 3:</label><textarea data-field-id="l3-confound3" data-field-label="Confound 3: identification and control strategy" data-lesson="3" style="min-height:72px" placeholder=""></textarea></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lpine)">⚔️</div><div class="pm"><div class="ptit">Devil's Advocate Peer Review</div><div class="ptim">47–58 min · Pairs</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Present your design to your partner in 2 minutes. Your partner's job is to attack it — find every weakness in 3 minutes. Record what they raised:</p>
+            <div style="display:flex;flex-direction:column;gap:8px;margin:12px 0">
+              <div style="padding:12px;background:var(--surf2);border-radius:8px;font-size:13px;color:var(--pine);font-style:italic">"How do you know participants are answering honestly?"</div>
+              <div style="padding:12px;background:var(--surf2);border-radius:8px;font-size:13px;color:var(--pine);font-style:italic">"What if a confound I haven't thought of affects your results?"</div>
+              <div style="padding:12px;background:var(--surf2);border-radius:8px;font-size:13px;color:var(--pine);font-style:italic">"Could someone else run this study exactly from your procedure?"</div>
+            </div>
+            <div class="rf">
+              <label>My partner's best challenges (take notes):</label>
+              <textarea data-field-id="l3-devils-advocate" data-field-label="Devil's Advocate: partner's challenges to my design" data-lesson="3" placeholder="They challenged: ... / My response — address in design: ... / Acknowledge as limitation: ..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="ph" onclick="tog(this)"><div class="pi" style="background:var(--lpine)">✅</div><div class="pm"><div class="ptit">Exit — Week 6 Three-Deliverable Checklist</div><div class="ptim">58–70 min · Final check</div></div><div class="ptog">▼</div></div>
+          <div class="pb">
+            <p>Before you submit your Investigation Proposal, confirm all three deliverables are present and complete:</p>
+            <div class="checklist">
+              <div class="cl-item" onclick="checkItem(this)"><div class="cl-box"></div><div class="cl-text"><strong>Research Question</strong> — Version 2+, FINER-evaluated, with 3-sentence rationale</div></div>
+              <div class="cl-item" onclick="checkItem(this)"><div class="cl-box"></div><div class="cl-text"><strong>Directional Hypothesis</strong> — all five components present, evidential warrant cites at least one study</div></div>
+              <div class="cl-item" onclick="checkItem(this)"><div class="cl-box"></div><div class="cl-text"><strong>Draft Method Plan</strong> — design type, participants, IV/DV operationalised, minimum 3 confounds, procedure outlined</div></div>
+            </div>
+            <div class="rf" style="margin-top:14px">
+              <label>🔗 Alignment check — in one sentence, explain how your method will answer your research question:</label>
+              <textarea data-field-id="l3-alignment" data-field-label="Alignment check: how method answers research question" data-lesson="3" placeholder="My method answers my research question because the IV in my design (measured by ___) directly corresponds to the IV in my hypothesis, and the DV (measured by ___) will capture the outcome predicted..."></textarea>
+            </div>
+            <div class="ib ib-g" style="margin-top:12px"><strong>Week 7 preview:</strong> Ethics, participant recruitment, and refining your data collection instrument. Start finding 2–3 research references for your evidential warrant if you haven't already — you'll need them for an annotated bibliography next week.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rw"><h3>Resources</h3>
+        <a class="rl" href="https://www.qcaa.qld.edu.au/p-10/aciq/version-9" target="_blank"><div class="ri" style="background:var(--lpine)">📋</div><div class="rm"><div class="rt">QCAA — AC v9 Science Resources</div><div class="rs">qcaa.qld.edu.au</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="rl" href="https://www.aihw.gov.au/mental-health" target="_blank"><div class="ri" style="background:var(--lburnt)">📊</div><div class="rm"><div class="rt">AIHW — Australian Mental Health Data</div><div class="rs">aihw.gov.au</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="rl" href="https://scholar.google.com" target="_blank"><div class="ri" style="background:var(--lplum)">🔍</div><div class="rm"><div class="rt">Google Scholar — literature search</div><div class="rs">scholar.google.com</div></div><span style="color:var(--muted)">↗</span></a>
+      </div>
+      <button class="db" id="btn-3" onclick="done(3)">Mark Lesson 3 Complete ✓</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const completed={1:false,2:false,3:false};
+function go(n){if(event)event.preventDefault();document.querySelectorAll('.lesson-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.ni').forEach(i=>i.classList.remove('active'));document.getElementById('panel-'+n).classList.add('active');const cls=['nl1','nl2','nl3'];document.querySelectorAll('.ni')[n-1].classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+function tog(h){h.closest('.pc').classList.toggle('open');}
+function done(n){
+  completed[n]=true;
+  document.getElementById('btn-'+n).textContent='✅ Lesson '+n+' Complete!';
+  document.getElementById('btn-'+n).classList.add('marked');
+  document.getElementById('c'+n).classList.add('done');
+  document.getElementById('c'+n).innerHTML='<svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  // update milestone dots
+  const dots=['ms1','ms2','ms3'];const texts=['mst1','mst2','mst3'];
+  document.getElementById(dots[n-1]).classList.add('done');
+  document.getElementById(texts[n-1]).className='ms-text done';
+  if(n<3){document.getElementById(dots[n]).classList.add('active');document.getElementById(texts[n]).className='ms-text active';}
+  updateProg();
+  if(n<3)setTimeout(()=>go(n+1),500);
+}
+function updateProg(){const c=Object.values(completed).filter(Boolean).length;document.getElementById('pf').style.width=(c/3*100)+'%';document.getElementById('pp').textContent=c+' / 3 complete';}
+function evalQ(btn,type){const card=btn.closest('.qe-item');card.querySelectorAll('.qe-btn').forEach(b=>b.className='qe-btn');btn.classList.add('sel-'+type);}
+function finer(btn,type){const row=btn.closest('.finer-row');row.querySelectorAll('.fb-btn').forEach(b=>b.className='fb-btn');btn.classList.add('sel-'+type);}
+function tick(el){el.classList.toggle('checked');el.innerHTML=el.classList.contains('checked')?'<svg width="10" height="10" viewBox="0 0 10 10"><path d="M1.5 5l2.5 2.5 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>':'';}
+function checkItem(el){el.classList.toggle('checked');const box=el.querySelector('.cl-box');box.innerHTML=el.classList.contains('checked')?'<svg width="10" height="10" viewBox="0 0 10 10"><path d="M1.5 5l2.5 2.5 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>':'';}
+function chk(btn,correct,feedback){const card=btn.closest('.qc');const sel=card.querySelector('input[type=radio]:checked');const fb=card.querySelector('.qfb');if(!sel){fb.textContent='Please select an answer.';fb.className='qfb show err';return;}const opts=['a','b','c'];const idx=Array.from(card.querySelectorAll('.qopt')).findIndex(o=>o.querySelector('input')===sel);if(opts[idx]===correct){fb.textContent='✅ '+feedback;fb.className='qfb show ok';card.querySelectorAll('.qopt').forEach((o,i)=>{if(opts[i]===correct)o.classList.add('correct');});}else{fb.textContent='❌ Think about what makes a DV measurable — it needs a specific instrument, scale, and timing.';fb.className='qfb show err';sel.closest('.qopt').classList.add('wrong');}}
+updateProg();
+</script>
+
+<script>
+// BCC Data Collection Module
+// ═══════════════════════════════════════════════════════════════════════════
+// BCC Psychology Portal — Data Collection Module v1.0
+// Embed this <script> block in every student portal.
+// Replace APPS_SCRIPT_URL with your deployed Web App URL.
+// ═══════════════════════════════════════════════════════════════════════════
+
+window.BCC_COLLECTOR = (function () {
+
+  // ── CONFIG — replace this URL after deploying your Apps Script ─────────────
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw0dfsGJx23m_ERybkYgtk_mLcpLiZuvp49wnoCWYeZJYhMv9KBs4iIyas3lVo1r7hz/exec";
+
+  // ── State ──────────────────────────────────────────────────────────────────
+  let studentName = "";
+  let studentClass = "";
+  let identityConfirmed = false;
+
+  // ── Public API ─────────────────────────────────────────────────────────────
+  function init(weekNum, lessonData) {
+    // weekNum: integer (1, 2, 3…)
+    // lessonData: array of { lesson, title } objects
+    window._BCC_WEEK = weekNum;
+    window._BCC_LESSONS = lessonData;
+
+    injectStyles();
+    injectIdentityBar();
+    injectSubmitButtons(lessonData);
+    restoreIdentity();
+  }
+
+  // Collect all textarea values for a given lesson panel
+  function collectResponses(lessonNum) {
+    const panel = document.getElementById("panel-" + lessonNum);
+    if (!panel) return {};
+
+    const responses = {};
+    const textareas = panel.querySelectorAll("textarea[data-field-id]");
+
+    textareas.forEach(function (ta) {
+      const val = ta.value.trim();
+      if (val) {
+        responses[ta.dataset.fieldId] = {
+          label: ta.dataset.fieldLabel || ta.placeholder || "Response",
+          value: val
+        };
+      }
+    });
+
+    return responses;
+  }
+
+  // Submit a lesson's responses to Google Sheets
+  function submit(lessonNum) {
+    if (!identityConfirmed) {
+      showIdentityError();
+      return;
+    }
+
+    const lessonInfo = (window._BCC_LESSONS || []).find(function (l) {
+      return l.lesson === lessonNum;
+    }) || {};
+
+    const responses = collectResponses(lessonNum);
+    const responseCount = Object.keys(responses).length;
+
+    if (responseCount === 0) {
+      showToast("No responses found for Lesson " + lessonNum + ". Try typing in some fields first.", "warn");
+      return;
+    }
+
+    const payload = {
+      studentName: studentName,
+      class: studentClass,
+      week: window._BCC_WEEK,
+      lesson: lessonNum,
+      lessonTitle: lessonInfo.title || "",
+      submittedAt: new Date().toISOString(),
+      responses: responses
+    };
+
+    const btn = document.getElementById("submit-btn-" + lessonNum);
+    setButtonState(btn, "loading");
+
+    fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",     // Apps Script doesn't return CORS headers on redirect
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(payload)
+    })
+    .then(function () {
+      // no-cors means we can't read the response body — treat any completion as success
+      setButtonState(btn, "done");
+      markLessonSubmitted(lessonNum);
+      showToast("Lesson " + lessonNum + " submitted! " + responseCount + " response" + (responseCount !== 1 ? "s" : "") + " saved to your teacher's spreadsheet.", "ok");
+      saveLocalBackup(payload);
+    })
+    .catch(function (err) {
+      setButtonState(btn, "error");
+      showToast("Submission failed — check your internet connection and try again. Your responses are still saved locally.", "error");
+      saveLocalBackup(payload);
+      console.error("BCC submit error:", err);
+    });
+  }
+
+  // ── Identity bar ───────────────────────────────────────────────────────────
+  function injectIdentityBar() {
+    const bar = document.createElement("div");
+    bar.id = "bcc-identity-bar";
+    bar.innerHTML = `
+      <div class="bcc-id-inner">
+        <div class="bcc-id-icon">👤</div>
+        <input id="bcc-name" type="text" placeholder="Your full name" autocomplete="name" spellcheck="false">
+        <input id="bcc-class" type="text" placeholder="Class (e.g. 10A)" autocomplete="off" spellcheck="false">
+        <button id="bcc-confirm-btn" onclick="BCC_COLLECTOR.confirmIdentity()">Confirm</button>
+        <div id="bcc-id-status" class="bcc-id-status"></div>
+      </div>
+    `;
+    document.body.insertBefore(bar, document.body.firstChild);
+
+    // Allow Enter key to confirm
+    bar.querySelectorAll("input").forEach(function (inp) {
+      inp.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") confirmIdentity();
+      });
+    });
+  }
+
+  function confirmIdentity() {
+    const nameEl  = document.getElementById("bcc-name");
+    const classEl = document.getElementById("bcc-class");
+    const status  = document.getElementById("bcc-id-status");
+    const btn     = document.getElementById("bcc-confirm-btn");
+
+    const name  = nameEl.value.trim();
+    const cls   = classEl.value.trim();
+
+    if (!name || !cls) {
+      status.textContent = "Please enter both your name and class.";
+      status.className = "bcc-id-status error";
+      return;
+    }
+
+    studentName     = name;
+    studentClass    = cls;
+    identityConfirmed = true;
+
+    nameEl.disabled  = true;
+    classEl.disabled = true;
+    btn.textContent  = "✓ Confirmed";
+    btn.disabled     = true;
+    btn.style.background = "#22c55e";
+
+    status.textContent = "Responses will be submitted as " + name + " · " + cls;
+    status.className   = "bcc-id-status ok";
+
+    // Persist for the session
+    try {
+      sessionStorage.setItem("bcc_name",  name);
+      sessionStorage.setItem("bcc_class", cls);
+    } catch (e) {}
+
+    showToast("Identity confirmed. Fill in your responses and submit each lesson when you're done.", "ok");
+  }
+
+  function restoreIdentity() {
+    try {
+      const savedName  = sessionStorage.getItem("bcc_name");
+      const savedClass = sessionStorage.getItem("bcc_class");
+      if (savedName && savedClass) {
+        document.getElementById("bcc-name").value  = savedName;
+        document.getElementById("bcc-class").value = savedClass;
+        confirmIdentity();
+      }
+    } catch (e) {}
+  }
+
+  function showIdentityError() {
+    const bar = document.getElementById("bcc-identity-bar");
+    bar.style.borderColor = "#ef4444";
+    bar.style.boxShadow   = "0 0 0 3px rgba(239,68,68,0.2)";
+    setTimeout(function () {
+      bar.style.borderColor = "";
+      bar.style.boxShadow   = "";
+    }, 2000);
+    showToast("Please enter your name and class at the top of the page first.", "error");
+    document.getElementById("bcc-name").focus();
+  }
+
+  // ── Submit buttons ─────────────────────────────────────────────────────────
+  function injectSubmitButtons(lessonData) {
+    lessonData.forEach(function (l) {
+      const doneBtn = document.getElementById("btn-" + l.lesson);
+      if (!doneBtn) return;
+
+      // Create submit button and insert before the existing "mark complete" button
+      const submitBtn = document.createElement("button");
+      submitBtn.id        = "submit-btn-" + l.lesson;
+      submitBtn.className = "bcc-submit-btn";
+      submitBtn.setAttribute("data-lesson", l.lesson);
+      submitBtn.innerHTML = "📤 Submit Lesson " + l.lesson + " to Teacher";
+      submitBtn.addEventListener("click", function () {
+        submit(l.lesson);
+      });
+
+      doneBtn.parentNode.insertBefore(submitBtn, doneBtn);
+    });
+  }
+
+  function setButtonState(btn, state) {
+    if (!btn) return;
+    btn.disabled = (state === "loading" || state === "done");
+    if (state === "loading") {
+      btn.innerHTML = '<span class="bcc-spinner"></span> Submitting…';
+      btn.className = "bcc-submit-btn loading";
+    } else if (state === "done") {
+      btn.innerHTML = "✅ Submitted to Teacher";
+      btn.className = "bcc-submit-btn submitted";
+    } else if (state === "error") {
+      btn.innerHTML = "⚠️ Try Again";
+      btn.className = "bcc-submit-btn error";
+      btn.disabled  = false;
+    }
+  }
+
+  function markLessonSubmitted(lessonNum) {
+    // Update the existing "mark complete" button too
+    const doneBtn = document.getElementById("btn-" + lessonNum);
+    if (doneBtn && !doneBtn.classList.contains("done") && !doneBtn.classList.contains("marked")) {
+      // Trigger the existing markDone / done function if it exists
+      if (typeof markDone === "function") markDone(lessonNum);
+      else if (typeof done === "function") done(lessonNum);
+    }
+  }
+
+  // ── Local backup (survives page refresh within same browser) ───────────────
+  function saveLocalBackup(payload) {
+    try {
+      const key = "bcc_backup_w" + payload.week + "l" + payload.lesson + "_" + normalise(payload.studentName);
+      sessionStorage.setItem(key, JSON.stringify({
+        savedAt: new Date().toISOString(),
+        payload: payload
+      }));
+    } catch (e) {}
+  }
+
+  // ── Toast notifications ────────────────────────────────────────────────────
+  function showToast(message, type) {
+    const existing = document.getElementById("bcc-toast");
+    if (existing) existing.remove();
+
+    const toast = document.createElement("div");
+    toast.id = "bcc-toast";
+    toast.className = "bcc-toast bcc-toast-" + (type || "ok");
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // Animate in
+    requestAnimationFrame(function () {
+      toast.style.opacity  = "1";
+      toast.style.transform = "translateY(0)";
+    });
+
+    // Auto dismiss
+    setTimeout(function () {
+      toast.style.opacity   = "0";
+      toast.style.transform = "translateY(8px)";
+      setTimeout(function () { toast.remove(); }, 300);
+    }, type === "error" ? 6000 : 4000);
+  }
+
+  // ── Styles ─────────────────────────────────────────────────────────────────
+  function injectStyles() {
+    const style = document.createElement("style");
+    style.textContent = `
+      /* Identity bar */
+      #bcc-identity-bar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: #0f172a;
+        border-bottom: 2px solid #334155;
+        padding: 10px 32px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+      .bcc-id-inner {
+        max-width: 1120px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .bcc-id-icon { font-size: 16px; flex-shrink: 0; }
+      #bcc-name, #bcc-class {
+        padding: 7px 12px;
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        color: #e2e8f0;
+        font-family: inherit;
+        font-size: 14px;
+        transition: border-color 0.2s;
+      }
+      #bcc-name { width: 200px; }
+      #bcc-class { width: 100px; }
+      #bcc-name:focus, #bcc-class:focus {
+        outline: none;
+        border-color: #6366f1;
+      }
+      #bcc-name:disabled, #bcc-class:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      #bcc-confirm-btn {
+        padding: 7px 18px;
+        background: #6366f1;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        flex-shrink: 0;
+      }
+      #bcc-confirm-btn:hover:not(:disabled) { background: #4f46e5; }
+      #bcc-confirm-btn:disabled { cursor: not-allowed; }
+      .bcc-id-status {
+        font-size: 12px;
+        color: #94a3b8;
+        flex: 1;
+        min-width: 200px;
+      }
+      .bcc-id-status.ok    { color: #4ade80; }
+      .bcc-id-status.error { color: #f87171; }
+
+      /* Submit button */
+      .bcc-submit-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 15px;
+        background: #1e3a5f;
+        border: 2px solid #2563eb;
+        border-radius: 12px;
+        color: #93c5fd;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-bottom: 10px;
+      }
+      .bcc-submit-btn:hover:not(:disabled) {
+        background: #1e40af;
+        border-color: #60a5fa;
+        color: #fff;
+      }
+      .bcc-submit-btn.loading {
+        background: #1e293b;
+        border-color: #475569;
+        color: #94a3b8;
+        cursor: wait;
+      }
+      .bcc-submit-btn.submitted {
+        background: #052e16;
+        border-color: #16a34a;
+        color: #86efac;
+        cursor: default;
+      }
+      .bcc-submit-btn.error {
+        background: #450a0a;
+        border-color: #dc2626;
+        color: #fca5a5;
+      }
+
+      /* Spinner */
+      .bcc-spinner {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border: 2px solid rgba(255,255,255,0.2);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: bcc-spin 0.7s linear infinite;
+        flex-shrink: 0;
+      }
+      @keyframes bcc-spin { to { transform: rotate(360deg); } }
+
+      /* Toast */
+      .bcc-toast {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(8px);
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        max-width: 560px;
+        text-align: center;
+        z-index: 9999;
+        opacity: 0;
+        transition: opacity 0.25s, transform 0.25s;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+        pointer-events: none;
+        font-family: inherit;
+      }
+      .bcc-toast-ok    { background: #052e16; color: #86efac; border: 1px solid #16a34a; }
+      .bcc-toast-warn  { background: #451a03; color: #fcd34d; border: 1px solid #d97706; }
+      .bcc-toast-error { background: #450a0a; color: #fca5a5; border: 1px solid #dc2626; }
+
+      /* Response count badge on textareas */
+      textarea.bcc-has-content {
+        border-color: #22c55e !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // ── Helpers ────────────────────────────────────────────────────────────────
+  function normalise(str) {
+    return String(str || "").trim().toLowerCase().replace(/\s+/g, "_");
+  }
+
+  // ── Textarea watcher — tags textareas that have content ───────────────────
+  function watchTextareas() {
+    document.querySelectorAll("textarea[data-field-id]").forEach(function (ta) {
+      ta.addEventListener("input", function () {
+        if (ta.value.trim()) {
+          ta.classList.add("bcc-has-content");
+        } else {
+          ta.classList.remove("bcc-has-content");
+        }
+      });
+    });
+  }
+
+  // Expose confirmIdentity so the inline onclick in the injected HTML works
+  return {
+    init: init,
+    submit: submit,
+    confirmIdentity: confirmIdentity,
+    watchTextareas: watchTextareas,
+    _getState: function () { return { studentName, studentClass, identityConfirmed }; }
+  };
+})();
+
+document.addEventListener('DOMContentLoaded',function(){
+  BCC_COLLECTOR.init(6,[{"lesson": 1, "title": "Research Questions \u2014 The Art of Asking Well"}, {"lesson": 2, "title": "Hypothesis Development \u2014 Committing to a Prediction"}, {"lesson": 3, "title": "Research Design \u2014 From Question to Method"}]);
+  BCC_COLLECTOR.watchTextareas();
+});
+</script>
+</body>
+</html>
