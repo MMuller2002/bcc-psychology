@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Year 10 Psychology — Week 4: The Adolescent Brain</title>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:     #fafaf8;
+  --surf:   #ffffff;
+  --surf2:  #f4f4f0;
+  --border: #e4e4dc;
+  --text:   #1a1a14;
+  --muted:  #6b7280;
+  --navy:   #1e3a5f;
+  --cyan:   #0e7490;   --lcyan:  #cffafe;
+  --sblue:  #1d4ed8;   --lsblue: #dbeafe;
+  --burg:   #9f1239;   --lburg:  #ffe4e6;
+  --green:  #15803d;   --lgreen: #dcfce7;
+  --amber:  #b45309;   --lamber: #fef3c7;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* ── HERO ─────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(160deg,#1e3a5f 0%,#0e4f6b 50%,#1d4ed8 100%);
+  position:relative;overflow:hidden;
+}
+.hero-pattern{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 50%),
+                   radial-gradient(circle at 80% 20%, rgba(255,255,255,0.03) 0%, transparent 50%);
+}
+/* subtle neuron dots */
+.hero-dots{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(255,255,255,0.12) 1px,transparent 1px);
+  background-size:28px 28px;
+  opacity:0.4;
+}
+.hero-inner{
+  position:relative;max-width:1120px;margin:0 auto;
+  padding:56px 32px 0;
+  display:grid;grid-template-columns:1fr 220px;gap:40px;align-items:end;
+}
+.w-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+  border-radius:6px;padding:4px 14px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;
+  color:rgba(255,255,255,0.7);margin-bottom:16px;
+}
+.hero h1{
+  font-family:'Bitter',serif;font-size:clamp(28px,4vw,50px);
+  font-weight:700;color:#fff;line-height:1.1;margin-bottom:12px;
+}
+.hero h1 em{font-style:italic;color:#93c5fd;}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:520px;margin-bottom:24px;font-weight:300}
+.hero-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.hchip{
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);
+  border-radius:6px;padding:5px 12px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.8);
+}
+
+/* brain visual */
+.brain-vis{
+  display:flex;flex-direction:column;align-items:center;
+  gap:8px;padding-bottom:24px;
+}
+.brain-icon{font-size:90px;line-height:1;filter:drop-shadow(0 0 20px rgba(147,197,253,0.3))}
+.brain-labels{display:flex;flex-direction:column;gap:4px;width:100%}
+.brain-lbl{
+  display:flex;align-items:center;gap:8px;
+  padding:5px 10px;background:rgba(255,255,255,0.08);border-radius:6px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.7);
+}
+.brain-lbl .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* ── BIG Q ──────────────────────────────────────────── */
+.bq{
+  background:rgba(0,0,0,0.15);border-top:1px solid rgba(255,255,255,0.08);
+  padding:18px 32px;display:flex;align-items:center;gap:16px;justify-content:center;
+}
+.bq-l{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#93c5fd;white-space:nowrap;flex-shrink:0}
+.bq-t{font-family:'Bitter',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,0.8)}
+
+/* ── PROGRESS ──────────────────────────────────────── */
+.prog-wrap{max-width:1120px;margin:0 auto;padding:24px 32px 0}
+.prog-row{display:flex;justify-content:space-between;margin-bottom:6px}
+.prog-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
+.prog-pct{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan)}
+.prog-track{height:5px;background:var(--border);border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--sblue),var(--burg));border-radius:99px;width:0%;transition:width 0.9s cubic-bezier(0.34,1.56,0.64,1)}
+
+/* ── LAYOUT ─────────────────────────────────────────── */
+.main{max-width:1120px;margin:0 auto;padding:28px 32px 80px;display:grid;grid-template-columns:252px 1fr;gap:28px;align-items:start}
+
+/* ── SIDEBAR ────────────────────────────────────────── */
+.sidebar{position:sticky;top:20px}
+.scard{background:var(--surf);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:14px}
+.scard-head{padding:10px 16px;background:var(--navy);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:#64748b}
+.nav-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;text-decoration:none;color:inherit}
+.nav-item:last-child{border-bottom:none}
+.nav-item:hover{background:var(--surf2)}
+.nav-l1.active{background:var(--lcyan);border-left:3px solid var(--cyan)}
+.nav-l2.active{background:var(--lsblue);border-left:3px solid var(--sblue)}
+.nav-l3.active{background:var(--lburg);border-left:3px solid var(--burg)}
+.nav-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;flex-shrink:0}
+.nav-l1 .nav-num{background:var(--lcyan);color:var(--cyan)}
+.nav-l2 .nav-num{background:var(--lsblue);color:var(--sblue)}
+.nav-l3 .nav-num{background:var(--lburg);color:var(--burg)}
+.nav-l1.active .nav-num{background:var(--cyan);color:#fff}
+.nav-l2.active .nav-num{background:var(--sblue);color:#fff}
+.nav-l3.active .nav-num{background:var(--burg);color:#fff}
+.nav-t .nt{font-size:13px;font-weight:600}
+.nav-t .ns{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px}
+.nav-chk{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto}
+.nav-chk.done{background:#22c55e;border-color:#22c55e}
+
+.vocab-wrap{padding:14px 16px}
+.v-entry{margin-bottom:12px}
+.v-term{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:var(--cyan);text-transform:uppercase;letter-spacing:0.05em}
+.v-def{font-size:12px;color:#6b7280;line-height:1.55;margin-top:3px}
+
+/* ── LESSON PANELS ──────────────────────────────────── */
+.lesson-panel{display:none}
+.lesson-panel.active{display:block;animation:fu 0.3s ease}
+@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.l-hdr{border-radius:16px;padding:36px;margin-bottom:22px;position:relative;overflow:hidden;border:1px solid transparent}
+.l1-hdr{background:linear-gradient(135deg,#0c4a6e 0%,#0e7490 100%)}
+.l2-hdr{background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 100%)}
+.l3-hdr{background:linear-gradient(135deg,#4c0519 0%,#9f1239 100%)}
+.l-hdr::after{content:attr(data-icon);position:absolute;right:20px;top:10px;font-size:100px;opacity:0.07;pointer-events:none;line-height:1}
+.l-tag{display:inline-block;background:rgba(255,255,255,0.12);border-radius:4px;padding:3px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.7);margin-bottom:10px}
+.l-hdr h2{font-family:'Bitter',serif;font-size:26px;font-weight:700;color:#fff;line-height:1.15;margin-bottom:10px}
+.l-goal{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7;max-width:560px;margin-bottom:16px}
+.l-chips{display:flex;gap:8px;flex-wrap:wrap}
+.l-chip{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:6px;padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.85)}
+
+/* ── PHASE ACCORDION ────────────────────────────────── */
+.phases{display:flex;flex-direction:column;gap:12px;margin-bottom:22px}
+.pcard{background:var(--surf);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s}
+.pcard:hover{box-shadow:0 2px 16px rgba(0,0,0,0.07)}
+.pcard.open{border-color:rgba(0,0,0,0.12)}
+.phead{display:flex;align-items:center;gap:14px;padding:14px 20px;cursor:pointer;user-select:none}
+.picon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.pmeta{flex:1}
+.ptitle{font-size:14px;font-weight:600}
+.ptime{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px}
+.ptog{width:22px;height:22px;border-radius:50%;background:var(--surf2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);transition:transform 0.25s;flex-shrink:0}
+.pcard.open .ptog{transform:rotate(180deg)}
+.pbody{display:none;padding:0 20px 20px;border-top:1px solid var(--border)}
+.pcard.open .pbody{display:block}
+.pbody p{font-size:14px;line-height:1.75;color:#374151;margin-bottom:10px}
+.pbody strong{color:var(--text)}
+.l1 .ptitle{color:var(--cyan)}
+.l2 .ptitle{color:var(--sblue)}
+.l3 .ptitle{color:var(--burg)}
+
+/* PZ Routine box */
+.pz-box{border-radius:12px;overflow:hidden;margin:12px 0;border:1px solid var(--border)}
+.pz-header{padding:10px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.pz-grid{display:grid;gap:0}
+.pz-step{padding:14px 16px;border-top:1px solid var(--border)}
+.pz-step-label{font-family:'Bitter',serif;font-size:16px;font-weight:600;margin-bottom:6px}
+.pz-step-prompt{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+
+/* Info / highlight box */
+.ibox{padding:14px 18px;border-radius:10px;margin:12px 0;border-left:4px solid;font-size:14px;line-height:1.7}
+.ibox-cyan{background:var(--lcyan);border-color:var(--cyan);color:#164e63}
+.ibox-blue{background:var(--lsblue);border-color:var(--sblue);color:#1e3a8a}
+.ibox-amber{background:var(--lamber);border-color:var(--amber);color:#78350f}
+.ibox-burg{background:var(--lburg);border-color:var(--burg);color:#4c0519}
+
+/* Behaviour list */
+.beh-list{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.beh-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:var(--surf2);border:1px solid var(--border);border-radius:10px}
+.beh-text{flex:1;font-size:13px;line-height:1.6}
+.beh-tags{display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0}
+.beh-tag{padding:3px 10px;border-radius:6px;font-size:11px;font-family:'JetBrains Mono',monospace;cursor:pointer;border:1.5px solid var(--border);background:var(--surf);transition:all 0.15s}
+.beh-tag:hover{border-color:var(--cyan);color:var(--cyan)}
+.beh-tag.sel-pfc{background:var(--lsblue);border-color:var(--sblue);color:var(--sblue)}
+.beh-tag.sel-limbic{background:var(--lburg);border-color:var(--burg);color:var(--burg)}
+.beh-tag.sel-pruning{background:var(--lgreen);border-color:var(--green);color:var(--green)}
+.beh-tag.sel-myelin{background:var(--lamber);border-color:var(--amber);color:var(--amber)}
+
+/* Stats cards */
+.stats-grid{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.stat-card{display:flex;align-items:center;gap:16px;padding:14px 18px;border-radius:10px;background:var(--surf2);border:1px solid var(--border)}
+.stat-num{font-family:'Bitter',serif;font-size:24px;font-weight:700;color:var(--sblue);flex-shrink:0;min-width:80px;text-align:center}
+.stat-text{font-size:13px;color:#374151;line-height:1.6}
+
+/* Stigma spectrum */
+.spectrum-item{margin-bottom:16px;padding:14px;background:var(--surf);border:1px solid var(--border);border-radius:10px}
+.spectrum-statement{font-size:14px;font-weight:600;margin-bottom:12px}
+.spectrum-track{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.spec-lbl{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--muted);flex-shrink:0;width:90px}
+.spec-lbl.right{text-align:right}
+.spec-slider{flex:1;height:6px;background:linear-gradient(90deg,var(--burg),var(--sblue));border-radius:99px;position:relative;cursor:pointer}
+.spec-dot{position:absolute;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--navy);box-shadow:0 1px 4px rgba(0,0,0,0.15);cursor:grab;left:50%}
+
+/* CSI cards */
+.csi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+.csi-card{padding:16px;border-radius:12px;border:2px solid var(--border)}
+.csi-icon{font-size:32px;display:block;margin-bottom:8px}
+.csi-label{font-family:'Bitter',serif;font-size:16px;font-weight:600;margin-bottom:6px}
+.csi-prompt{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+
+/* textarea */
+textarea{width:100%;background:var(--surf);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:88px;transition:border-color 0.2s}
+textarea:focus{outline:none;border-color:var(--cyan)}
+textarea.bcc-has-content{border-color:#22c55e!important}
+.reflect{margin-top:14px}
+.reflect label{font-size:13px;font-weight:600;display:block;margin-bottom:6px;color:#374151}
+
+/* quiz */
+.qcard{background:var(--surf);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:14px}
+.qq{font-size:15px;font-weight:600;margin-bottom:12px}
+.qopts{display:flex;flex-direction:column;gap:8px}
+.qopt{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-size:14px;transition:all 0.15s;background:var(--surf2)}
+.qopt:hover{background:var(--lcyan);border-color:var(--cyan)}
+.qopt.correct{background:var(--lgreen);border-color:var(--green);color:var(--green)}
+.qopt.wrong{background:var(--lburg);border-color:var(--burg);color:var(--burg)}
+.qfb{font-size:13px;margin-top:10px;padding:10px 14px;border-radius:8px;display:none;line-height:1.6}
+.qfb.show{display:block}
+.qfb.ok{background:var(--lgreen);color:var(--green)}
+.qfb.err{background:var(--lburg);color:var(--burg)}
+
+/* resources */
+.res-wrap{background:var(--surf);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:18px}
+.res-wrap h3{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.res-link{display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);margin-bottom:8px;transition:all 0.15s}
+.res-link:hover{background:var(--lcyan);border-color:var(--cyan)}
+.res-link:last-child{margin-bottom:0}
+.rl-icon{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.rl-m{flex:1}
+.rl-m .rlt{font-size:13px;font-weight:600}
+.rl-m .rls{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:1px}
+
+/* done btn */
+.done-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;border:2px solid var(--border);border-radius:10px;background:var(--surf);cursor:pointer;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:var(--muted);transition:all 0.2s;margin-bottom:12px}
+.done-btn:hover{background:var(--lcyan);border-color:var(--cyan);color:var(--cyan)}
+.done-btn.marked{background:var(--lgreen);border-color:var(--green);color:var(--green)}
+
+/* wellbeing banner */
+.wellbeing-banner{background:var(--lamber);border:1px solid var(--amber);border-radius:10px;padding:14px 18px;margin-bottom:20px;font-size:13px;color:#78350f;line-height:1.7}
+
+@media(max-width:768px){
+  .main{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .hero-inner{grid-template-columns:1fr}
+  .brain-vis{display:none}
+  .csi-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="w-tag">Year 10 Psychology · Unit 2 · Week 4</div>
+      <h1>The <em>Adolescent Brain</em> —<br>Development, Mental Health &amp; Society</h1>
+      <p class="hero-sub">Three lessons exploring why teenage behaviour makes biological sense, what influences adolescent mental health, and how society's response shapes outcomes for young people.</p>
+      <div class="hero-chips">
+        <div class="hchip">⏱ 3 × 70 min</div>
+        <div class="hchip">AC9S10H03 · H04</div>
+        <div class="hchip">Explain · Analyse · Evaluate</div>
+        <div class="hchip">PZ Thinking Routines</div>
+      </div>
+    </div>
+    <div class="brain-vis">
+      <div class="brain-icon">🧠</div>
+      <div class="brain-labels">
+        <div class="brain-lbl"><div class="dot" style="background:#93c5fd"></div>Prefrontal Cortex</div>
+        <div class="brain-lbl"><div class="dot" style="background:#fca5a5"></div>Limbic System</div>
+        <div class="brain-lbl"><div class="dot" style="background:#86efac"></div>Synaptic Pruning</div>
+        <div class="brain-lbl"><div class="dot" style="background:#fde68a"></div>Myelination</div>
+      </div>
+    </div>
+  </div>
+  <div class="bq">
+    <span class="bq-l">🔍 Big Question</span>
+    <span class="bq-t">Why does teenage behaviour make sense when you understand the brain behind it?</span>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="prog-wrap">
+  <div class="prog-row">
+    <span class="prog-lbl">Week 4 Progress</span>
+    <span class="prog-pct" id="prog-pct">0 / 3 complete</span>
+  </div>
+  <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="scard">
+      <div class="scard-head">This Week</div>
+      <a class="nav-item nav-l1 active" onclick="go(1)" href="#">
+        <div class="nav-num">1</div>
+        <div class="nav-t"><div class="nt">The Adolescent Brain</div><div class="ns">Explain · 70 min</div></div>
+        <div class="nav-chk" id="chk-1"></div>
+      </a>
+      <a class="nav-item nav-l2" onclick="go(2)" href="#">
+        <div class="nav-num">2</div>
+        <div class="nav-t"><div class="nt">Adolescent Mental Health</div><div class="ns">Analyse · 70 min</div></div>
+        <div class="nav-chk" id="chk-2"></div>
+      </a>
+      <a class="nav-item nav-l3" onclick="go(3)" href="#">
+        <div class="nav-num">3</div>
+        <div class="nav-t"><div class="nt">Mental Health in Society</div><div class="ns">Evaluate · 70 min</div></div>
+        <div class="nav-chk" id="chk-3"></div>
+      </a>
+    </div>
+
+    <div class="scard">
+      <div class="scard-head">Key Terms</div>
+      <div class="vocab-wrap">
+        <div class="v-entry"><div class="v-term">Prefrontal Cortex</div><div class="v-def">The brain's "CEO" — responsible for impulse control, planning, and emotional regulation. Fully mature around age 25.</div></div>
+        <div class="v-entry"><div class="v-term">Limbic System</div><div class="v-def">The brain's emotional and reward centre — matures earlier than the PFC, creating the adolescent developmental mismatch.</div></div>
+        <div class="v-entry"><div class="v-term">Synaptic Pruning</div><div class="v-def">The brain's "use it or lose it" process — removing unused neural connections to strengthen frequently used ones.</div></div>
+        <div class="v-entry"><div class="v-term">Myelination</div><div class="v-def">The fatty sheath around axons that speeds neural transmission. PFC-limbic myelination is incomplete in adolescence.</div></div>
+        <div class="v-entry"><div class="v-term">Dual Systems Model</div><div class="v-def">A fully accelerated limbic system + underdeveloped PFC = developmental mismatch explaining adolescent risk-taking.</div></div>
+        <div class="v-entry"><div class="v-term">Self-Stigma</div><div class="v-def">When a person internalises society's negative stereotypes about mental illness — "I should be able to handle this."</div></div>
+        <div class="v-entry"><div class="v-term">SEWB Framework</div><div class="v-def">Social and Emotional Wellbeing — the First Nations holistic model integrating connection to country, community, culture, spirit, and body.</div></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="scard-head">PZ Routines This Week</div>
+      <div class="vocab-wrap">
+        <div class="v-entry"><div class="v-term">See-Think-Wonder</div><div class="v-def">L1 hook — observe, interpret, question.</div></div>
+        <div class="v-entry"><div class="v-term">Claim-Support-Question</div><div class="v-def">L2 case studies — distinguish interpretation from evidence.</div></div>
+        <div class="v-entry"><div class="v-term">CSI: Colour-Symbol-Image</div><div class="v-def">L3 synthesis — externalise understanding non-verbally.</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- PANELS -->
+  <div>
+
+    <!-- ══ LESSON 1 ══ -->
+    <div class="lesson-panel l1 active" id="panel-1">
+      <div class="l-hdr l1-hdr" data-icon="🧠">
+        <div class="l-tag">Lesson 1 · AC9S10H03 · Explain</div>
+        <h2>The Adolescent Brain —<br>Under Construction</h2>
+        <p class="l-goal">By the end of this lesson you'll be able to <strong>explain</strong> the four key developmental processes in the adolescent brain — PFC development, synaptic pruning, limbic hyperactivity, and myelination — and connect each to real adolescent behaviour.</p>
+        <div class="l-chips">
+          <span class="l-chip">⏱ 70 min</span><span class="l-chip">🧠 PFC · Limbic · Pruning · Myelin</span><span class="l-chip">PZ: See-Think-Wonder</span>
+        </div>
+      </div>
+
+      <div class="phases l1">
+
+        <div class="pcard open">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lcyan)">👁</div>
+            <div class="pmeta"><div class="ptitle">Hook — See-Think-Wonder (PZ Routine)</div><div class="ptime">0–12 min · Whole class</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Your teacher will display two brain scans side by side — one adolescent brain, one adult brain — both performing the same task. Observe for 60 seconds in silence. Then complete the routine:</p>
+            <div class="pz-box" style="border-color:var(--cyan)">
+              <div class="pz-header" style="background:var(--lcyan);color:var(--cyan)">👁 SEE — THINK — WONDER &nbsp;|&nbsp; Project Zero Thinking Routine</div>
+              <div class="pz-step">
+                <div class="pz-step-label" style="color:var(--cyan)">👁 SEE</div>
+                <div class="pz-step-prompt">What do you literally observe? Describe without interpreting — colours, activation areas, brightness, differences.</div>
+                <textarea data-field-id="l1-stw-see" data-field-label="See-Think-Wonder: SEE — literal observations of brain scans" data-lesson="1" placeholder="I notice..."></textarea>
+              </div>
+              <div class="pz-step">
+                <div class="pz-step-label" style="color:var(--sblue)">💭 THINK</div>
+                <div class="pz-step-prompt">What interpretation or theory does this suggest? What might explain what you see?</div>
+                <textarea data-field-id="l1-stw-think" data-field-label="See-Think-Wonder: THINK — interpretation of brain scans" data-lesson="1" placeholder="I think this means..."></textarea>
+              </div>
+              <div class="pz-step">
+                <div class="pz-step-label" style="color:var(--burg)">❓ WONDER</div>
+                <div class="pz-step-prompt">What questions does this raise? What do you want to know more about?</div>
+                <textarea data-field-id="l1-stw-wonder" data-field-label="See-Think-Wonder: WONDER — questions raised" data-lesson="1" placeholder="I wonder..."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lcyan)">🔬</div>
+            <div class="pmeta"><div class="ptitle">Direct Instruction — Four Key Brain Processes</div><div class="ptime">12–30 min · Notes · Resource Sheet 10</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <p>The adolescent brain is not broken or immature — it is in a specific developmental phase with distinct characteristics. Take notes on Resource Sheet 10 as your teacher explains each process.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0">
+              <div class="ibox ibox-cyan">
+                <strong>Prefrontal Cortex (PFC)</strong><br>
+                Last region to mature (~age 25). Controls impulse regulation, planning, risk assessment, emotional regulation. In adolescence: structurally present but <em>functionally underconnected</em>.
+              </div>
+              <div class="ibox ibox-burg">
+                <strong>Limbic System</strong><br>
+                Matures <em>earlier</em> than the PFC. Fully online emotional and reward systems — before the regulatory systems that govern them. Peer presence activates reward circuits more strongly in adolescence than any other age.
+              </div>
+              <div class="ibox ibox-blue">
+                <strong>Synaptic Pruning</strong><br>
+                Peak synaptic density ~age 11–12, then aggressive pruning. "Use it or lose it." Makes adolescence a <em>critical sensitive period</em> — habits, skills and thinking patterns reinforced now will persist.
+              </div>
+              <div style="padding:14px;border-radius:10px;background:var(--lamber);border:1px solid var(--amber);font-size:14px;line-height:1.7;color:#78350f">
+                <strong>Myelination</strong><br>
+                Myelin sheaths axons to speed neural transmission. PFC-limbic connection is <em>not fully myelinated</em> in adolescence — the "know better" signal doesn't override the "feels good" signal fast enough.
+              </div>
+            </div>
+            <div class="ibox ibox-amber">
+              <strong>The Dual Systems Mismatch:</strong> A fully accelerated limbic system + an underdeveloped PFC = the adolescent profile. This is not a character flaw. It is a predictable developmental stage.
+            </div>
+            <div class="reflect">
+              <label>📝 The orange region in the front of the scans is the PFC. What did you predict it was before the reveal? How close were you?</label>
+              <textarea data-field-id="l1-pfc-predict" data-field-label="Reflection: PFC prediction before reveal" data-lesson="1" placeholder="I predicted it was... / Now I understand it's actually..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lcyan)">🔗</div>
+            <div class="pmeta"><div class="ptitle">Guided Practice — "Why Does This Make Sense?"</div><div class="ptime">30–48 min · Individual · Resource Sheet 10</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <p>For each behaviour, select the brain process(es) that best explain it. Then write the neurological explanation on Resource Sheet 10 — be specific, use structure names.</p>
+            <div class="beh-list">
+              <div class="beh-item"><div class="beh-text">Taking risks when friends are watching</div><div class="beh-tags"><button class="beh-tag" onclick="tagBeh(this,'pfc')">PFC</button><button class="beh-tag" onclick="tagBeh(this,'limbic')">Limbic</button><button class="beh-tag" onclick="tagBeh(this,'pruning')">Pruning</button><button class="beh-tag" onclick="tagBeh(this,'myelin')">Myelin</button></div></div>
+              <div class="beh-item"><div class="beh-text">Emotional overreaction to small setbacks</div><div class="beh-tags"><button class="beh-tag" onclick="tagBeh(this,'pfc')">PFC</button><button class="beh-tag" onclick="tagBeh(this,'limbic')">Limbic</button><button class="beh-tag" onclick="tagBeh(this,'pruning')">Pruning</button><button class="beh-tag" onclick="tagBeh(this,'myelin')">Myelin</button></div></div>
+              <div class="beh-item"><div class="beh-text">Difficulty planning for long-term consequences</div><div class="beh-tags"><button class="beh-tag" onclick="tagBeh(this,'pfc')">PFC</button><button class="beh-tag" onclick="tagBeh(this,'limbic')">Limbic</button><button class="beh-tag" onclick="tagBeh(this,'pruning')">Pruning</button><button class="beh-tag" onclick="tagBeh(this,'myelin')">Myelin</button></div></div>
+              <div class="beh-item"><div class="beh-text">Knowing something is risky but doing it anyway</div><div class="beh-tags"><button class="beh-tag" onclick="tagBeh(this,'pfc')">PFC</button><button class="beh-tag" onclick="tagBeh(this,'limbic')">Limbic</button><button class="beh-tag" onclick="tagBeh(this,'pruning')">Pruning</button><button class="beh-tag" onclick="tagBeh(this,'myelin')">Myelin</button></div></div>
+              <div class="beh-item"><div class="beh-text">Learning new skills unusually quickly</div><div class="beh-tags"><button class="beh-tag" onclick="tagBeh(this,'pfc')">PFC</button><button class="beh-tag" onclick="tagBeh(this,'limbic')">Limbic</button><button class="beh-tag" onclick="tagBeh(this,'pruning')">Pruning</button><button class="beh-tag" onclick="tagBeh(this,'myelin')">Myelin</button></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lcyan)">⚖️</div>
+            <div class="pmeta"><div class="ptitle">Discussion — When Does Science Change How We Treat Teenagers?</div><div class="ptime">48–58 min · Class</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Three real-world cases where adolescent brain science has — or hasn't — changed policy:</p>
+            <div style="display:flex;flex-direction:column;gap:10px;margin:12px 0">
+              <div style="padding:14px;background:var(--surf2);border-left:4px solid var(--cyan);border-radius:0 8px 8px 0;font-size:13px;line-height:1.7"><strong>Legal:</strong> In 2005, the US Supreme Court ruled that executing people for crimes committed under 18 was unconstitutional — citing brain development research. Neuroscience literally changed law.</div>
+              <div style="padding:14px;background:var(--surf2);border-left:4px solid var(--sblue);border-radius:0 8px 8px 0;font-size:13px;line-height:1.7"><strong>Education:</strong> Despite strong evidence for later school start times, most Australian secondary schools still begin at 8:30–9:00am. What stops the science from being adopted?</div>
+              <div style="padding:14px;background:var(--surf2);border-left:4px solid var(--burg);border-radius:0 8px 8px 0;font-size:13px;line-height:1.7"><strong>Technology:</strong> The neuroscience of adolescent reward sensitivity and social comparison is well established. Legislation on social media age limits still lags significantly behind the evidence.</div>
+            </div>
+            <div class="reflect">
+              <label>🔗 AC9S10H03 link: What determines whether society actually acts on brain science? What factors compete with the evidence?</label>
+              <textarea data-field-id="l1-society-science" data-field-label="Discussion: What determines whether society acts on brain science?" data-lesson="1" placeholder="Society acts on science when... / What competes with the evidence includes... / The school start time example shows that..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lcyan)">✏️</div>
+            <div class="pmeta"><div class="ptitle">Exit — Explain Paragraph</div><div class="ptime">58–70 min · Written · Peer reviewed</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <p><strong>Prompt:</strong> <em>Explain why an adolescent who understands that something is risky may still choose to do it. Refer to the PFC, limbic system, and myelination.</em></p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0">
+              <div style="padding:10px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px">☐ PFC function + developmental status</div>
+              <div style="padding:10px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px">☐ Limbic system's role in reward/emotion</div>
+              <div style="padding:10px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px">☐ Myelination explaining the speed gap</div>
+              <div style="padding:10px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px">☐ A real-world example</div>
+            </div>
+            <textarea data-field-id="l1-exit-explain" data-field-label="Exit paragraph: Explain risk-taking using PFC, limbic system, and myelination" data-lesson="1" placeholder="The prefrontal cortex is responsible for..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="res-wrap">
+        <h3>Resources</h3>
+        <a class="res-link" href="https://www.nimh.nih.gov/health/publications/the-teen-brain-7-things-to-know" target="_blank"><div class="rl-icon" style="background:var(--lcyan)">🏛</div><div class="rl-m"><div class="rlt">NIMH — The Teen Brain: 7 Things to Know</div><div class="rls">nimh.nih.gov</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="res-link" href="https://pz.harvard.edu/resources/see-think-wonder" target="_blank"><div class="rl-icon" style="background:var(--lamber)">🎓</div><div class="rl-m"><div class="rlt">Project Zero — See-Think-Wonder Routine</div><div class="rls">pz.harvard.edu</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="res-link" href="https://www.khanacademy.org/test-prep/mcat/behavior/lifespan-development/a/adolescence" target="_blank"><div class="rl-icon" style="background:var(--lsblue)">🎥</div><div class="rl-m"><div class="rlt">Khan Academy — Adolescent Development</div><div class="rls">khanacademy.org</div></div><span style="color:var(--muted)">↗</span></a>
+      </div>
+      <button class="done-btn" id="btn-1" onclick="markDone(1)">Mark Lesson 1 Complete ✓</button>
+    </div>
+
+    <!-- ══ LESSON 2 ══ -->
+    <div class="lesson-panel l2" id="panel-2">
+      <div class="l-hdr l2-hdr" data-icon="💙">
+        <div class="l-tag">Lesson 2 · AC9S10H04 · Analyse</div>
+        <h2>Adolescent Mental Health —<br>Risk, Resilience and the Brain</h2>
+        <p class="l-goal">By the end of this lesson you'll be able to <strong>analyse</strong> the biological, psychological, and social risk and protective factors influencing adolescent mental health — and connect them to the societal values that shape research priorities.</p>
+        <div class="l-chips">
+          <span class="l-chip">⏱ 70 min</span><span class="l-chip">Risk · Protective · AC9S10H04</span><span class="l-chip">PZ: Claim-Support-Question</span>
+        </div>
+      </div>
+
+      <div class="wellbeing-banner">⚠️ This lesson covers mental health content. If anything you encounter feels personally relevant and you'd like to talk to someone, your school counsellor is available and that is always okay.</div>
+
+      <div class="phases l2">
+
+        <div class="pcard open">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lsblue)">📊</div>
+            <div class="pmeta"><div class="ptitle">Hook — Data Provocation</div><div class="ptime">0–10 min · Class discussion</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Your teacher will reveal these statistics one at a time. For each, note your reaction:</p>
+            <div class="stats-grid">
+              <div class="stat-card"><div class="stat-num">1 in 4</div><div class="stat-text">Young Australians (16–24) experience a mental health condition each year</div></div>
+              <div class="stat-card"><div class="stat-num">75%</div><div class="stat-text">Of all mental health conditions emerge before age 25</div></div>
+              <div class="stat-card"><div class="stat-num">8–10 yrs</div><div class="stat-text">Average time between symptom onset and first treatment</div></div>
+              <div class="stat-card"><div class="stat-num">#1</div><div class="stat-text">Suicide is the leading cause of death for Australians aged 15–44</div></div>
+              <div class="stat-card"><div class="stat-num">35%</div><div class="stat-text">Of young people with a mental health condition seek professional help</div></div>
+            </div>
+            <div class="reflect">
+              <label>Which statistic surprised you most? What does the 8–10 year gap between onset and treatment tell us about how society responds to adolescent mental health?</label>
+              <textarea data-field-id="l2-data-react" data-field-label="Data provocation: Most surprising statistic and reflection on treatment gap" data-lesson="2" placeholder="The most surprising was... / The 8-10 year gap suggests..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lsblue)">📋</div>
+            <div class="pmeta"><div class="ptitle">Direct Instruction — Risk and Protective Factors</div><div class="ptime">10–27 min · Notes · Resource Sheet 11</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Complete the risk and protective factors grid on Resource Sheet 11 as your teacher explains each. The key framework: <strong>biopsychosocial model applied to mental health</strong> — no single cause, no single solution.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0">
+              <div class="ibox ibox-blue"><strong>Biological risk:</strong> Genetic predisposition, PFC-limbic imbalance, hormonal changes, chronic sleep deprivation (↑cortisol, ↓PFC regulation)</div>
+              <div class="ibox ibox-burg"><strong>Psychological risk:</strong> Rumination/catastrophising, trauma history, poor emotional regulation, perfectionism and achievement pressure</div>
+              <div class="ibox" style="background:var(--lamber);border-color:var(--amber);color:#78350f"><strong>Social risk:</strong> Peer rejection, family conflict, bullying (strongest mental health impact in adolescence), socioeconomic disadvantage</div>
+              <div class="ibox ibox-cyan"><strong>Protective factors:</strong> One trusted stable adult (single strongest predictor), sense of belonging, adequate sleep, emotional literacy, cultural identity and connection</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lsblue)">🗂</div>
+            <div class="pmeta"><div class="ptitle">Guided Practice — Case Studies: Claim-Support-Question (PZ Routine)</div><div class="ptime">27–46 min · Individual then pairs · Resource Sheet 11</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Your teacher will share four case studies. For each, complete the Claim-Support-Question routine. A <strong>Claim</strong> is a debatable interpretation. <strong>Support</strong> is evidence from the case AND from research. <strong>Question</strong> is what you still don't know.</p>
+            <div class="pz-box" style="border-color:var(--sblue)">
+              <div class="pz-header" style="background:var(--lsblue);color:var(--sblue)">💬 CLAIM — SUPPORT — QUESTION &nbsp;|&nbsp; Project Zero Thinking Routine</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr)">
+                <div class="pz-step"><div class="pz-step-label" style="color:var(--sblue)">💬 CLAIM</div><div class="pz-step-prompt">I think the most significant risk factor is... (make a specific, debatable interpretation)</div></div>
+                <div class="pz-step" style="border-left:1px solid var(--border)"><div class="pz-step-label" style="color:var(--navy)">📋 SUPPORT</div><div class="pz-step-prompt">Evidence from the case is... / Research that backs this up is... (distinguish case evidence from research)</div></div>
+                <div class="pz-step" style="border-left:1px solid var(--border)"><div class="pz-step-label" style="color:var(--burg)">❓ QUESTION</div><div class="pz-step-prompt">A question I still have is... (what don't we know? What would change your claim?)</div></div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;margin:12px 0">
+              <div style="padding:12px 14px;background:var(--lsblue);border-radius:8px;font-size:13px;line-height:1.65"><strong style="color:var(--sblue)">Case A — Jordan, 15:</strong> High-achieving, perfectionist, withdrawing from friends, sleeping 4–5 hours, grades still good, says she "feels nothing"</div>
+              <div style="padding:12px 14px;background:var(--lburg);border-radius:8px;font-size:13px;line-height:1.65"><strong style="color:var(--burg)">Case B — Marcus, 16:</strong> Parents separated, moved schools, three physical altercations, labelled "disruptive", first-generation immigrant family</div>
+              <div style="padding:12px 14px;background:var(--lcyan);border-radius:8px;font-size:13px;line-height:1.65"><strong style="color:var(--cyan)">Case C — Anika, 17:</strong> Openly gay in a conservative community, excellent grades, close friend group, persistent anxiety around family gatherings</div>
+              <div style="padding:12px 14px;background:var(--lamber);border-radius:8px;font-size:13px;line-height:1.65"><strong style="color:var(--amber)">Case D — Tyler, 15:</strong> Games 8+ hrs daily, limited face-to-face contact, technically gifted, parents work long hours, no family history of mental illness</div>
+            </div>
+            <div class="reflect">
+              <label>After completing all four cases: Which case had the most disagreement in your pair? What made it harder to identify the "most significant" factor?</label>
+              <textarea data-field-id="l2-case-disagree" data-field-label="Case study discussion: Which case caused most disagreement and why" data-lesson="2" placeholder="We disagreed most about Case ___ because... / The challenge was distinguishing..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lsblue)">💰</div>
+            <div class="pmeta"><div class="ptitle">Critical Thinking — Who Decides What Gets Researched?</div><div class="ptime">46–58 min · Discussion</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <div style="display:flex;flex-direction:column;gap:10px;margin:12px 0">
+              <div style="padding:14px;background:var(--surf2);border:1px solid var(--border);border-radius:10px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sblue);text-transform:uppercase;margin-bottom:5px">Fact 1 — Pharmaceutical funding</div>
+                <p style="font-size:13px;line-height:1.65">58% of psychiatry research in top journals (2020) had pharmaceutical industry funding. <em>What types of interventions are likely to be over-represented in the evidence base?</em></p>
+              </div>
+              <div style="padding:14px;background:var(--surf2);border:1px solid var(--border);border-radius:10px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan);text-transform:uppercase;margin-bottom:5px">Fact 2 — Cultural representation</div>
+                <p style="font-size:13px;line-height:1.65">Community-based, culturally-specific, and non-Western approaches to mental health are significantly under-researched. <em>Whose values and worldview are embedded in "evidence-based practice"?</em></p>
+              </div>
+              <div style="padding:14px;background:var(--surf2);border:1px solid var(--border);border-radius:10px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--burg);text-transform:uppercase;margin-bottom:5px">Fact 3 — Australian funding gap</div>
+                <p style="font-size:13px;line-height:1.65">Mental health research receives &lt;5% of the total Australian health research budget, despite representing 12% of the burden of disease. <em>What does this tell us about how society values mental health?</em></p>
+              </div>
+            </div>
+            <div class="reflect">
+              <label>If you were deciding what mental health research to fund next year, what would you prioritise? What values would drive that decision?</label>
+              <textarea data-field-id="l2-funding-values" data-field-label="Critical thinking: What mental health research would you fund and why?" data-lesson="2" placeholder="I would prioritise funding... / The values driving that decision are..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lsblue)">✏️</div>
+            <div class="pmeta"><div class="ptitle">Exit — Analyse Paragraph</div><div class="ptime">58–70 min · Written</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <p><strong>Prompt:</strong> <em>Analyse the risk and protective factors that influence adolescent mental health. Connect at least ONE biological, ONE psychological, and ONE social factor, and identify a relationship between two of them.</em></p>
+            <div class="ibox ibox-blue">A "relationship" means showing how one factor affects or interacts with another — not just listing them separately. e.g. "Sleep deprivation [biological] increases cortisol which impairs PFC function, making negative cognitive styles [psychological] harder to regulate."</div>
+            <textarea data-field-id="l2-exit-analyse" data-field-label="Exit: Analyse paragraph — risk and protective factors with a relationship between two" data-lesson="2" style="margin-top:12px" placeholder="My analyse paragraph..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="res-wrap">
+        <h3>Resources</h3>
+        <a class="res-link" href="https://headspace.com.au/young-people/" target="_blank"><div class="rl-icon" style="background:var(--lgreen)">💚</div><div class="rl-m"><div class="rlt">headspace — For Young People</div><div class="rls">headspace.com.au</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="res-link" href="https://www.beyondblue.org.au/mental-health" target="_blank"><div class="rl-icon" style="background:var(--lsblue)">💙</div><div class="rl-m"><div class="rlt">Beyond Blue — Mental Health</div><div class="rls">beyondblue.org.au</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="res-link" href="https://pz.harvard.edu/resources/claim-support-question" target="_blank"><div class="rl-icon" style="background:var(--lamber)">🎓</div><div class="rl-m"><div class="rlt">Project Zero — Claim-Support-Question</div><div class="rls">pz.harvard.edu</div></div><span style="color:var(--muted)">↗</span></a>
+      </div>
+      <button class="done-btn" id="btn-2" onclick="markDone(2)">Mark Lesson 2 Complete ✓</button>
+    </div>
+
+    <!-- ══ LESSON 3 ══ -->
+    <div class="lesson-panel l3" id="panel-3">
+      <div class="l-hdr l3-hdr" data-icon="🌏">
+        <div class="l-tag">Lesson 3 · AC9S10H04 · Evaluate</div>
+        <h2>Mental Health in Society —<br>Stigma, Systems and Responsibility</h2>
+        <p class="l-goal">By the end of this lesson you'll be able to <strong>evaluate</strong> societal and cultural influences on mental health — including stigma, systemic barriers, and community protective factors — and produce a reasoned judgement weighing both sides.</p>
+        <div class="l-chips">
+          <span class="l-chip">⏱ 70 min</span><span class="l-chip">Stigma · Barriers · Evaluate</span><span class="l-chip">PZ: CSI Colour-Symbol-Image</span>
+        </div>
+      </div>
+
+      <div class="wellbeing-banner">💙 This lesson touches on help-seeking and stigma. If you're personally finding things difficult, please know that support is available and reaching out is a sign of strength, not weakness.</div>
+
+      <div class="phases l3">
+
+        <div class="pcard open">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lburg)">🗳</div>
+            <div class="pmeta"><div class="ptitle">Hook — Would You? Anonymous Survey</div><div class="ptime">0–10 min · Anonymous</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Complete the anonymous slip provided by your teacher. After results are read out, reflect below:</p>
+            <div style="display:flex;flex-direction:column;gap:8px;margin:12px 0">
+              <div style="padding:12px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px">Would you tell your <strong>teacher</strong> if you were struggling with anxiety? Yes / No / Maybe</div>
+              <div style="padding:12px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px">Would you tell your <strong>best friend</strong>? Yes / No / Maybe</div>
+              <div style="padding:12px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px">Would you see a <strong>school counsellor</strong> if it was fully confidential? Yes / No / Maybe</div>
+              <div style="padding:12px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;font-size:13px">Would you be comfortable if <strong>classmates knew</strong> you saw a psychologist? Yes / No / Maybe</div>
+            </div>
+            <div class="reflect">
+              <label>What changes between scenarios 1–4? What does this pattern reveal about where stigma operates most strongly?</label>
+              <textarea data-field-id="l3-survey-reflect" data-field-label="Survey reflection: What changes across the 4 scenarios and what it reveals about stigma" data-lesson="3" placeholder="Between scenarios 1 and 4 I notice... / The pattern suggests stigma is strongest when..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lburg)">🏗</div>
+            <div class="pmeta"><div class="ptitle">Direct Instruction — Three Layers of Societal Influence</div><div class="ptime">10–26 min · Notes · Resource Sheet 12</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0">
+              <div class="ibox ibox-burg">
+                <strong>Layer 1: Stigma</strong><br>
+                <em>Public stigma:</em> society's stereotypes<br>
+                <em>Self-stigma:</em> internalised stereotypes<br>
+                <em>Structural stigma:</em> discriminatory systems<br>
+                Stigma is the primary barrier to help-seeking for young people
+              </div>
+              <div class="ibox ibox-blue">
+                <strong>Layer 2: Systemic Barriers</strong><br>
+                Cost: ~$100–160 out-of-pocket per session<br>
+                Wait times: 3–6 months for public services<br>
+                Geographic: rural/remote access gaps<br>
+                Cultural safety: mainstream services not universally accessible
+              </div>
+              <div class="ibox ibox-cyan">
+                <strong>Layer 3: Protective Community Factors</strong><br>
+                Belonging reduces risk independently<br>
+                Faith communities (when supportive) show protective effects<br>
+                First Nations SEWB framework: holistic wellbeing model<br>
+                Community is a health intervention
+              </div>
+            </div>
+            <div class="reflect">
+              <label>📝 The gap between needing help and seeking it is described as a "cultural and structural problem." In your own words — what is the difference between a cultural and a structural barrier?</label>
+              <textarea data-field-id="l3-barriers-explain" data-field-label="Reflection: Difference between cultural and structural barriers to help-seeking" data-lesson="3" placeholder="A cultural barrier is... / A structural barrier is... / The difference matters because..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lburg)">⚖️</div>
+            <div class="pmeta"><div class="ptitle">Guided Practice — Stigma Spectrum</div><div class="ptime">26–46 min · Individual then group · Resource Sheet 12</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <p>For each statement, place it on the spectrum and justify your position. Then write a counter-argument.</p>
+            <div style="display:flex;justify-content:space-between;margin:12px 0 6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">
+              <span>← INDIVIDUAL RESPONSIBILITY</span><span>SYSTEMIC RESPONSIBILITY →</span>
+            </div>
+            <div id="spectrum-items" style="display:flex;flex-direction:column;gap:10px">
+              <div class="spectrum-item"><div class="spectrum-statement">"Poor mental health is a sign of personal weakness"</div><div class="spectrum-track"><span class="spec-lbl">Individual</span><div class="spec-slider" onclick="moveSlider(this,event)"><div class="spec-dot"></div></div><span class="spec-lbl right">Systemic</span></div><textarea data-field-id="l3-spec-1" data-field-label="Stigma spectrum: Poor mental health is weakness" data-lesson="3" style="min-height:56px" placeholder="Justification: ... / Counter-argument: ..."></textarea></div>
+              <div class="spectrum-item"><div class="spectrum-statement">"Young people today just need to toughen up"</div><div class="spectrum-track"><span class="spec-lbl">Individual</span><div class="spec-slider" onclick="moveSlider(this,event)"><div class="spec-dot"></div></div><span class="spec-lbl right">Systemic</span></div><textarea data-field-id="l3-spec-2" data-field-label="Stigma spectrum: Young people need to toughen up" data-lesson="3" style="min-height:56px" placeholder="Justification: ... / Counter-argument: ..."></textarea></div>
+              <div class="spectrum-item"><div class="spectrum-statement">"Mental health services are too expensive to access"</div><div class="spectrum-track"><span class="spec-lbl">Individual</span><div class="spec-slider" onclick="moveSlider(this,event)"><div class="spec-dot"></div></div><span class="spec-lbl right">Systemic</span></div><textarea data-field-id="l3-spec-3" data-field-label="Stigma spectrum: Services too expensive" data-lesson="3" style="min-height:56px" placeholder="Justification: ... / Counter-argument: ..."></textarea></div>
+              <div class="spectrum-item"><div class="spectrum-statement">"Social media companies have a responsibility to protect users' mental health"</div><div class="spectrum-track"><span class="spec-lbl">Individual</span><div class="spec-slider" onclick="moveSlider(this,event)"><div class="spec-dot"></div></div><span class="spec-lbl right">Systemic</span></div><textarea data-field-id="l3-spec-4" data-field-label="Stigma spectrum: Social media companies responsible" data-lesson="3" style="min-height:56px" placeholder="Justification: ... / Counter-argument: ..."></textarea></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lburg)">🎨</div>
+            <div class="pmeta"><div class="ptitle">Synthesis — CSI: Colour, Symbol, Image (PZ Routine)</div><div class="ptime">46–57 min · Creative · A4 card</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <p>Using the A4 card your teacher provides, synthesise everything from <strong>this whole week</strong> — the brain, mental health risk factors, and society — using the CSI routine. There are no wrong answers. Use colour or drawing or written description.</p>
+            <div class="csi-grid">
+              <div class="csi-card" style="background:var(--lcyan);border-color:var(--cyan)"><span class="csi-icon">🎨</span><div class="csi-label" style="color:var(--cyan)">Colour</div><div class="csi-prompt">Choose a colour representing your understanding of adolescent mental health this week. Explain why.</div><textarea data-field-id="l3-csi-colour" data-field-label="CSI: Colour representing understanding of adolescent mental health" data-lesson="3" style="min-height:72px;background:white" placeholder="I chose ___ because..."></textarea></div>
+              <div class="csi-card" style="background:var(--lsblue);border-color:var(--sblue)"><span class="csi-icon">🔷</span><div class="csi-label" style="color:var(--sblue)">Symbol</div><div class="csi-prompt">Draw a simple symbol capturing the key insight from the week. What does it represent?</div><textarea data-field-id="l3-csi-symbol" data-field-label="CSI: Symbol for the week's key insight" data-lesson="3" style="min-height:72px;background:white" placeholder="My symbol is ___ because it represents..."></textarea></div>
+              <div class="csi-card" style="background:var(--lburg);border-color:var(--burg)"><span class="csi-icon">🖼</span><div class="csi-label" style="color:var(--burg)">Image</div><div class="csi-prompt">Describe a scene that captures the relationship between the adolescent brain, mental health risk, and society's response.</div><textarea data-field-id="l3-csi-image" data-field-label="CSI: Image capturing brain, mental health, and society's response" data-lesson="3" style="min-height:72px;background:white" placeholder="My image shows..."></textarea></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="phead" onclick="tog(this)">
+            <div class="picon" style="background:var(--lburg)">✏️</div>
+            <div class="pmeta"><div class="ptitle">Exit — Evaluate Paragraph (Week 4 Culminating Task)</div><div class="ptime">57–70 min · Written</div></div>
+            <div class="ptog">▼</div>
+          </div>
+          <div class="pbody">
+            <p><strong>Prompt:</strong> <em>Evaluate the claim that mental health outcomes for adolescents are primarily determined by individual factors rather than societal ones. Use evidence from across this week's lessons.</em></p>
+            <div class="ibox ibox-burg"><strong>"Evaluate" requires three things:</strong> (1) Acknowledge the strengths of the claim, (2) Identify limitations or counter-evidence, (3) Reach a reasoned judgement that weighs both sides. Simply arguing one position is not evaluation.</div>
+            <div style="display:flex;flex-direction:column;gap:2px;margin:14px 0">
+              <div style="display:flex;gap:0"><div style="background:var(--sblue);color:#fff;width:36px;border-radius:8px 0 0 0;display:flex;align-items:center;justify-content:center;font-family:Bitter,serif;font-size:18px;font-weight:700;flex-shrink:0">👍</div><div style="background:var(--lsblue);padding:10px 14px;flex:1;border-radius:0 8px 0 0"><div style="font-size:12px;color:var(--sblue);font-family:JetBrains Mono,monospace;margin-bottom:4px">Strengths of the claim — individual factors that DO influence outcomes:</div><textarea data-field-id="l3-eval-strengths" data-field-label="Evaluate: Strengths of the individual factors claim" data-lesson="3" style="min-height:64px;background:white" placeholder="Individual factors such as..."></textarea></div></div>
+              <div style="display:flex;gap:0"><div style="background:var(--burg);color:#fff;width:36px;display:flex;align-items:center;justify-content:center;font-family:Bitter,serif;font-size:18px;font-weight:700;flex-shrink:0">👎</div><div style="background:var(--lburg);padding:10px 14px;flex:1"><div style="font-size:12px;color:var(--burg);font-family:JetBrains Mono,monospace;margin-bottom:4px">Limitations — systemic and societal factors that limit what individuals can achieve alone:</div><textarea data-field-id="l3-eval-limits" data-field-label="Evaluate: Limitations of the claim, societal counter-evidence" data-lesson="3" style="min-height:72px;background:white" placeholder="However, evidence shows that systemic factors including..."></textarea></div></div>
+              <div style="display:flex;gap:0"><div style="background:var(--navy);color:#fff;width:36px;border-radius:0 0 0 8px;display:flex;align-items:center;justify-content:center;font-family:Bitter,serif;font-size:18px;font-weight:700;flex-shrink:0">⚖️</div><div style="background:var(--surf2);padding:10px 14px;flex:1;border-radius:0 0 8px 0"><div style="font-size:12px;color:var(--navy);font-family:JetBrains Mono,monospace;margin-bottom:4px">Reasoned judgement — weigh both sides:</div><textarea data-field-id="l3-eval-judgement" data-field-label="Evaluate: Final reasoned judgement" data-lesson="3" style="min-height:64px;background:white" placeholder="Therefore, the claim is [accurate / partially accurate / inaccurate] because..."></textarea></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="res-wrap">
+        <h3>Resources</h3>
+        <a class="res-link" href="https://www.beyondblue.org.au/mental-health/mental-health-conditions" target="_blank"><div class="rl-icon" style="background:var(--lsblue)">💙</div><div class="rl-m"><div class="rlt">Beyond Blue — Mental Health Conditions</div><div class="rls">beyondblue.org.au</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="res-link" href="https://headspace.com.au/young-people/getting-help-when-youre-not-ok/" target="_blank"><div class="rl-icon" style="background:var(--lgreen)">💚</div><div class="rl-m"><div class="rlt">headspace — Getting Help When You're Not OK</div><div class="rls">headspace.com.au</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="res-link" href="https://pz.harvard.edu/resources/csi-color-symbol-image" target="_blank"><div class="rl-icon" style="background:var(--lamber)">🎓</div><div class="rl-m"><div class="rlt">Project Zero — CSI Colour-Symbol-Image</div><div class="rls">pz.harvard.edu</div></div><span style="color:var(--muted)">↗</span></a>
+        <a class="res-link" href="https://www.aihw.gov.au/mental-health" target="_blank"><div class="rl-icon" style="background:var(--lcyan)">📊</div><div class="rl-m"><div class="rlt">AIHW — Mental Health in Australia</div><div class="rls">aihw.gov.au</div></div><span style="color:var(--muted)">↗</span></a>
+      </div>
+      <button class="done-btn" id="btn-3" onclick="markDone(3)">Mark Lesson 3 Complete ✓</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const completed={1:false,2:false,3:false};
+function go(n){if(event)event.preventDefault();document.querySelectorAll('.lesson-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));document.getElementById('panel-'+n).classList.add('active');document.querySelectorAll('.nav-item')[n-1].classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+function tog(h){h.closest('.pcard').classList.toggle('open');}
+function markDone(n){completed[n]=true;const btn=document.getElementById('btn-'+n);btn.textContent='✅ Lesson '+n+' Complete!';btn.classList.add('marked');const chk=document.getElementById('chk-'+n);chk.classList.add('done');chk.innerHTML='<svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';updateProg();if(n<3)setTimeout(()=>go(n+1),500);}
+function updateProg(){const c=Object.values(completed).filter(Boolean).length;document.getElementById('prog-fill').style.width=(c/3*100)+'%';document.getElementById('prog-pct').textContent=c+' / 3 complete';}
+function tagBeh(btn,type){const card=btn.closest('.beh-item');card.querySelectorAll('.beh-tag').forEach(b=>{if(b!==btn)b.classList.remove('sel-pfc','sel-limbic','sel-pruning','sel-myelin');});btn.classList.toggle('sel-'+type);}
+function moveSlider(track,e){const rect=track.getBoundingClientRect();const x=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));track.querySelector('.spec-dot').style.left=(x*100)+'%';}
+updateProg();
+</script>
+
+
+<script>
+// BCC Data Collection Module
+// ═══════════════════════════════════════════════════════════════════════════
+// BCC Psychology Portal — Data Collection Module v1.0
+// Embed this <script> block in every student portal.
+// Replace APPS_SCRIPT_URL with your deployed Web App URL.
+// ═══════════════════════════════════════════════════════════════════════════
+
+window.BCC_COLLECTOR = (function () {
+
+  // ── CONFIG — replace this URL after deploying your Apps Script ─────────────
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw0dfsGJx23m_ERybkYgtk_mLcpLiZuvp49wnoCWYeZJYhMv9KBs4iIyas3lVo1r7hz/exec";
+
+  // ── State ──────────────────────────────────────────────────────────────────
+  let studentName = "";
+  let studentClass = "";
+  let identityConfirmed = false;
+
+  // ── Public API ─────────────────────────────────────────────────────────────
+  function init(weekNum, lessonData) {
+    // weekNum: integer (1, 2, 3…)
+    // lessonData: array of { lesson, title } objects
+    window._BCC_WEEK = weekNum;
+    window._BCC_LESSONS = lessonData;
+
+    injectStyles();
+    injectIdentityBar();
+    injectSubmitButtons(lessonData);
+    restoreIdentity();
+  }
+
+  // Collect all textarea values for a given lesson panel
+  function collectResponses(lessonNum) {
+    const panel = document.getElementById("panel-" + lessonNum);
+    if (!panel) return {};
+
+    const responses = {};
+    const textareas = panel.querySelectorAll("textarea[data-field-id]");
+
+    textareas.forEach(function (ta) {
+      const val = ta.value.trim();
+      if (val) {
+        responses[ta.dataset.fieldId] = {
+          label: ta.dataset.fieldLabel || ta.placeholder || "Response",
+          value: val
+        };
+      }
+    });
+
+    return responses;
+  }
+
+  // Submit a lesson's responses to Google Sheets
+  function submit(lessonNum) {
+    if (!identityConfirmed) {
+      showIdentityError();
+      return;
+    }
+
+    const lessonInfo = (window._BCC_LESSONS || []).find(function (l) {
+      return l.lesson === lessonNum;
+    }) || {};
+
+    const responses = collectResponses(lessonNum);
+    const responseCount = Object.keys(responses).length;
+
+    if (responseCount === 0) {
+      showToast("No responses found for Lesson " + lessonNum + ". Try typing in some fields first.", "warn");
+      return;
+    }
+
+    const payload = {
+      studentName: studentName,
+      class: studentClass,
+      week: window._BCC_WEEK,
+      lesson: lessonNum,
+      lessonTitle: lessonInfo.title || "",
+      submittedAt: new Date().toISOString(),
+      responses: responses
+    };
+
+    const btn = document.getElementById("submit-btn-" + lessonNum);
+    setButtonState(btn, "loading");
+
+    fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",     // Apps Script doesn't return CORS headers on redirect
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(payload)
+    })
+    .then(function () {
+      // no-cors means we can't read the response body — treat any completion as success
+      setButtonState(btn, "done");
+      markLessonSubmitted(lessonNum);
+      showToast("Lesson " + lessonNum + " submitted! " + responseCount + " response" + (responseCount !== 1 ? "s" : "") + " saved to your teacher's spreadsheet.", "ok");
+      saveLocalBackup(payload);
+    })
+    .catch(function (err) {
+      setButtonState(btn, "error");
+      showToast("Submission failed — check your internet connection and try again. Your responses are still saved locally.", "error");
+      saveLocalBackup(payload);
+      console.error("BCC submit error:", err);
+    });
+  }
+
+  // ── Identity bar ───────────────────────────────────────────────────────────
+  function injectIdentityBar() {
+    const bar = document.createElement("div");
+    bar.id = "bcc-identity-bar";
+    bar.innerHTML = `
+      <div class="bcc-id-inner">
+        <div class="bcc-id-icon">👤</div>
+        <input id="bcc-name" type="text" placeholder="Your full name" autocomplete="name" spellcheck="false">
+        <input id="bcc-class" type="text" placeholder="Class (e.g. 10A)" autocomplete="off" spellcheck="false">
+        <button id="bcc-confirm-btn" onclick="BCC_COLLECTOR.confirmIdentity()">Confirm</button>
+        <div id="bcc-id-status" class="bcc-id-status"></div>
+      </div>
+    `;
+    document.body.insertBefore(bar, document.body.firstChild);
+
+    // Allow Enter key to confirm
+    bar.querySelectorAll("input").forEach(function (inp) {
+      inp.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") confirmIdentity();
+      });
+    });
+  }
+
+  function confirmIdentity() {
+    const nameEl  = document.getElementById("bcc-name");
+    const classEl = document.getElementById("bcc-class");
+    const status  = document.getElementById("bcc-id-status");
+    const btn     = document.getElementById("bcc-confirm-btn");
+
+    const name  = nameEl.value.trim();
+    const cls   = classEl.value.trim();
+
+    if (!name || !cls) {
+      status.textContent = "Please enter both your name and class.";
+      status.className = "bcc-id-status error";
+      return;
+    }
+
+    studentName     = name;
+    studentClass    = cls;
+    identityConfirmed = true;
+
+    nameEl.disabled  = true;
+    classEl.disabled = true;
+    btn.textContent  = "✓ Confirmed";
+    btn.disabled     = true;
+    btn.style.background = "#22c55e";
+
+    status.textContent = "Responses will be submitted as " + name + " · " + cls;
+    status.className   = "bcc-id-status ok";
+
+    // Persist for the session
+    try {
+      sessionStorage.setItem("bcc_name",  name);
+      sessionStorage.setItem("bcc_class", cls);
+    } catch (e) {}
+
+    showToast("Identity confirmed. Fill in your responses and submit each lesson when you're done.", "ok");
+  }
+
+  function restoreIdentity() {
+    try {
+      const savedName  = sessionStorage.getItem("bcc_name");
+      const savedClass = sessionStorage.getItem("bcc_class");
+      if (savedName && savedClass) {
+        document.getElementById("bcc-name").value  = savedName;
+        document.getElementById("bcc-class").value = savedClass;
+        confirmIdentity();
+      }
+    } catch (e) {}
+  }
+
+  function showIdentityError() {
+    const bar = document.getElementById("bcc-identity-bar");
+    bar.style.borderColor = "#ef4444";
+    bar.style.boxShadow   = "0 0 0 3px rgba(239,68,68,0.2)";
+    setTimeout(function () {
+      bar.style.borderColor = "";
+      bar.style.boxShadow   = "";
+    }, 2000);
+    showToast("Please enter your name and class at the top of the page first.", "error");
+    document.getElementById("bcc-name").focus();
+  }
+
+  // ── Submit buttons ─────────────────────────────────────────────────────────
+  function injectSubmitButtons(lessonData) {
+    lessonData.forEach(function (l) {
+      const doneBtn = document.getElementById("btn-" + l.lesson);
+      if (!doneBtn) return;
+
+      // Create submit button and insert before the existing "mark complete" button
+      const submitBtn = document.createElement("button");
+      submitBtn.id        = "submit-btn-" + l.lesson;
+      submitBtn.className = "bcc-submit-btn";
+      submitBtn.setAttribute("data-lesson", l.lesson);
+      submitBtn.innerHTML = "📤 Submit Lesson " + l.lesson + " to Teacher";
+      submitBtn.addEventListener("click", function () {
+        submit(l.lesson);
+      });
+
+      doneBtn.parentNode.insertBefore(submitBtn, doneBtn);
+    });
+  }
+
+  function setButtonState(btn, state) {
+    if (!btn) return;
+    btn.disabled = (state === "loading" || state === "done");
+    if (state === "loading") {
+      btn.innerHTML = '<span class="bcc-spinner"></span> Submitting…';
+      btn.className = "bcc-submit-btn loading";
+    } else if (state === "done") {
+      btn.innerHTML = "✅ Submitted to Teacher";
+      btn.className = "bcc-submit-btn submitted";
+    } else if (state === "error") {
+      btn.innerHTML = "⚠️ Try Again";
+      btn.className = "bcc-submit-btn error";
+      btn.disabled  = false;
+    }
+  }
+
+  function markLessonSubmitted(lessonNum) {
+    // Update the existing "mark complete" button too
+    const doneBtn = document.getElementById("btn-" + lessonNum);
+    if (doneBtn && !doneBtn.classList.contains("done") && !doneBtn.classList.contains("marked")) {
+      // Trigger the existing markDone / done function if it exists
+      if (typeof markDone === "function") markDone(lessonNum);
+      else if (typeof done === "function") done(lessonNum);
+    }
+  }
+
+  // ── Local backup (survives page refresh within same browser) ───────────────
+  function saveLocalBackup(payload) {
+    try {
+      const key = "bcc_backup_w" + payload.week + "l" + payload.lesson + "_" + normalise(payload.studentName);
+      sessionStorage.setItem(key, JSON.stringify({
+        savedAt: new Date().toISOString(),
+        payload: payload
+      }));
+    } catch (e) {}
+  }
+
+  // ── Toast notifications ────────────────────────────────────────────────────
+  function showToast(message, type) {
+    const existing = document.getElementById("bcc-toast");
+    if (existing) existing.remove();
+
+    const toast = document.createElement("div");
+    toast.id = "bcc-toast";
+    toast.className = "bcc-toast bcc-toast-" + (type || "ok");
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // Animate in
+    requestAnimationFrame(function () {
+      toast.style.opacity  = "1";
+      toast.style.transform = "translateY(0)";
+    });
+
+    // Auto dismiss
+    setTimeout(function () {
+      toast.style.opacity   = "0";
+      toast.style.transform = "translateY(8px)";
+      setTimeout(function () { toast.remove(); }, 300);
+    }, type === "error" ? 6000 : 4000);
+  }
+
+  // ── Styles ─────────────────────────────────────────────────────────────────
+  function injectStyles() {
+    const style = document.createElement("style");
+    style.textContent = `
+      /* Identity bar */
+      #bcc-identity-bar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: #0f172a;
+        border-bottom: 2px solid #334155;
+        padding: 10px 32px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+      .bcc-id-inner {
+        max-width: 1120px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .bcc-id-icon { font-size: 16px; flex-shrink: 0; }
+      #bcc-name, #bcc-class {
+        padding: 7px 12px;
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        color: #e2e8f0;
+        font-family: inherit;
+        font-size: 14px;
+        transition: border-color 0.2s;
+      }
+      #bcc-name { width: 200px; }
+      #bcc-class { width: 100px; }
+      #bcc-name:focus, #bcc-class:focus {
+        outline: none;
+        border-color: #6366f1;
+      }
+      #bcc-name:disabled, #bcc-class:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      #bcc-confirm-btn {
+        padding: 7px 18px;
+        background: #6366f1;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        flex-shrink: 0;
+      }
+      #bcc-confirm-btn:hover:not(:disabled) { background: #4f46e5; }
+      #bcc-confirm-btn:disabled { cursor: not-allowed; }
+      .bcc-id-status {
+        font-size: 12px;
+        color: #94a3b8;
+        flex: 1;
+        min-width: 200px;
+      }
+      .bcc-id-status.ok    { color: #4ade80; }
+      .bcc-id-status.error { color: #f87171; }
+
+      /* Submit button */
+      .bcc-submit-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 15px;
+        background: #1e3a5f;
+        border: 2px solid #2563eb;
+        border-radius: 12px;
+        color: #93c5fd;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-bottom: 10px;
+      }
+      .bcc-submit-btn:hover:not(:disabled) {
+        background: #1e40af;
+        border-color: #60a5fa;
+        color: #fff;
+      }
+      .bcc-submit-btn.loading {
+        background: #1e293b;
+        border-color: #475569;
+        color: #94a3b8;
+        cursor: wait;
+      }
+      .bcc-submit-btn.submitted {
+        background: #052e16;
+        border-color: #16a34a;
+        color: #86efac;
+        cursor: default;
+      }
+      .bcc-submit-btn.error {
+        background: #450a0a;
+        border-color: #dc2626;
+        color: #fca5a5;
+      }
+
+      /* Spinner */
+      .bcc-spinner {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border: 2px solid rgba(255,255,255,0.2);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: bcc-spin 0.7s linear infinite;
+        flex-shrink: 0;
+      }
+      @keyframes bcc-spin { to { transform: rotate(360deg); } }
+
+      /* Toast */
+      .bcc-toast {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(8px);
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        max-width: 560px;
+        text-align: center;
+        z-index: 9999;
+        opacity: 0;
+        transition: opacity 0.25s, transform 0.25s;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+        pointer-events: none;
+        font-family: inherit;
+      }
+      .bcc-toast-ok    { background: #052e16; color: #86efac; border: 1px solid #16a34a; }
+      .bcc-toast-warn  { background: #451a03; color: #fcd34d; border: 1px solid #d97706; }
+      .bcc-toast-error { background: #450a0a; color: #fca5a5; border: 1px solid #dc2626; }
+
+      /* Response count badge on textareas */
+      textarea.bcc-has-content {
+        border-color: #22c55e !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // ── Helpers ────────────────────────────────────────────────────────────────
+  function normalise(str) {
+    return String(str || "").trim().toLowerCase().replace(/\s+/g, "_");
+  }
+
+  // ── Textarea watcher — tags textareas that have content ───────────────────
+  function watchTextareas() {
+    document.querySelectorAll("textarea[data-field-id]").forEach(function (ta) {
+      ta.addEventListener("input", function () {
+        if (ta.value.trim()) {
+          ta.classList.add("bcc-has-content");
+        } else {
+          ta.classList.remove("bcc-has-content");
+        }
+      });
+    });
+  }
+
+  // Expose confirmIdentity so the inline onclick in the injected HTML works
+  return {
+    init: init,
+    submit: submit,
+    confirmIdentity: confirmIdentity,
+    watchTextareas: watchTextareas,
+    _getState: function () { return { studentName, studentClass, identityConfirmed }; }
+  };
+})();
+
+document.addEventListener('DOMContentLoaded', function() {
+  BCC_COLLECTOR.init(4, [{"lesson": 1, "title": "The Adolescent Brain \u2014 Under Construction"}, {"lesson": 2, "title": "Adolescent Mental Health \u2014 Risk, Resilience and the Brain"}, {"lesson": 3, "title": "Mental Health in Society \u2014 Stigma, Systems and Responsibility"}]);
+  BCC_COLLECTOR.watchTextareas();
+});
+</script>
+
+</body>
+</html>
